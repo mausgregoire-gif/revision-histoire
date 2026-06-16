@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>👑 Les 18 — Augustus, de eerste keizer</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:#0f0e17;color:#fffffe;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+button{font-family:inherit;}
+#root{background:#0f0e17;min-height:100vh;color:#fffffe;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+var _React = React,
+  useState = _React.useState,
+  useEffect = _React.useEffect,
+  useRef = _React.useRef;
+var COLORS = {
+  bg: "#0f0e17",
+  card: "#1a1828",
+  cardLight: "#242236",
+  gold: "#f5c842",
+  blue: "#4fc3f7",
+  purple: "#b388ff",
+  green: "#69f0ae",
+  red: "#ff5252",
+  orange: "#ffab40",
+  pink: "#f48fb1",
+  teal: "#26c6da",
+  crimson: "#e53935",
+  text: "#fffffe",
+  textMuted: "#a7a9be",
+  accent: "#7F77DD"
+};
+var PHASES = ["🎬 Verhaal", "📚 Lees & Markeer", "📘 Woordenschat", "⚡ Grote Quiz"];
+
+// ─── VERHAAL DATA ────────────────────────────────────────────────
+var verhaalChapters = [{
+  id: 1,
+  emoji: "🎭",
+  title: "De grootste acteur van Rome",
+  color: COLORS.gold,
+  text: ["🎭 Rome, 27 v.C. Je bent de geheime adviseur van Octavianus. Hij fluistert je iets toe: 'Vandaag ga ik de senaat bedriegen. En niemand zal het merken.'", "Hij stapt de senaatszaal binnen. Toga keurig, blik bescheiden. 'Senatoren,' zegt hij, 'ik geef u alles terug. De republiek is hersteld.'", "De senatoren applaudisseren. Ze geloven hem. Maar jij weet wat er in werkelijkheid gebeurt: Octavianus neemt ALLE macht. Consul. Volkstribuun. Opperpriester. Opperbevelhebber. Allemaal tegelijk.", "'Princeps,' noemen ze hem — 'eerste man'. 'Augustus' — 'verhevene'. En hij noemt zichzelf ook 'caesar', naar zijn geadopteerde vader Julius Caesar.", "De senaat geeft hem zelfs nog een titel: 'pater patriae' — vader des vaderlands. 😏 De acteur heeft gewonnen. Het keizerrijk is geboren. Maar niemand durft het hardop te zeggen."]
+}, {
+  id: 2,
+  emoji: "🍞",
+  title: "Brood, spelen en stille controle",
+  color: COLORS.orange,
+  text: ["🍞 'Hoe win je het volk?' vraag jij aan Augustus. Hij glimlacht. 'Simpel. Geef hen wat ze nodig hebben. En wat ze willen.'", "Elke week: GRATIS graan voor de gewone Romein. Geen honger = geen opstand. Slim.", "🎪 En dan de spelen! Gladiatorengevechten, wagenrennen, theater — gratis, voor iedereen. Het volk juicht. Augustus lacht. Ze kijken naar de arena. Niet naar hem.", "Tegelijk controleert hij alles in de schaduw. De belastingen? Voortaan rechtstreeks door de staat geïnd — geen tussenpersonen meer. Het geld stroomt naar hem.", "👨‍👩‍👧 Hij wil zelfs zijn opvolging regelen. Hij dwingt zijn dochter Julia te trouwen met zijn stiefzoon Tiberius. Liefde telt niet. Macht wel. Uiteindelijk wordt Tiberius de volgende keizer."]
+}, {
+  id: 3,
+  emoji: "🗺️",
+  title: "De grenzen als schild",
+  color: COLORS.teal,
+  text: ["🗺️ Augustus spreidt een grote kaart uit voor je. 'Kijk,' zegt hij. 'Rome is enorm. Hoe verdedigen we dat?'", "Hij wijst: In het westen — de Atlantische Oceaan. In het zuiden — de Sahara-woestijnen. In het noorden — de Rijn en de Donau. In het oosten — de Eufraat. Natuurlijke grenzen. Geen muren nodig.", "⚔️ Maar grenzen alleen zijn niet genoeg. Legioenen staan overal opgesteld — aan de grenzen, in rebelse provincies. En op de Middellandse Zee patrouilleert een vloot.", "'Gewapende vrede,' zeg jij. Hij knikt. 'Precies. Vrede. Maar wel met een zwaard in de hand.'", "🎯 En het slimste? Augustus bestuurt ZELF de gevaarlijkste grensprovincies. Zo zijn de legioenen altijd onder zijn commando. Geen enkele generaal kan in opstand komen. Geniaal — of gevaarlijk? Dat hangt af van wie je het vraagt... 😶"]
+}];
+
+// ─── LEES & MARKEER DATA ─────────────────────────────────────────
+var leesData = [{
+  title: "1️⃣ Octavianus wordt Augustus",
+  color: COLORS.gold,
+  paragraphs: [{
+    text: "Na de burgeroorlogen grijpt Octavianus de macht met grote sluwheid. Hij wint het vertrouwen van de senaat door de republiek schijnbaar te behouden en de meeste instellingen en ambten te laten bestaan.",
+    keywords: ["burgeroorlogen", "sluwheid", "republiek", "instellingen"]
+  }, {
+    text: "De senatoren geven hem de titels 'princeps' (eerste man), 'Augustus' (verhevene) en hij noemt zichzelf 'caesar'. Later krijgt hij ook de titel 'pater patriae' (vader des vaderlands).",
+    keywords: ["princeps", "Augustus", "caesar", "pater patriae"]
+  }, {
+    text: "Augustus wordt populair bij het volk door gratis graan uit te delen, de werkloosheid te verminderen en gratis spelen te organiseren. Hij brengt orde, rust en welvaart.",
+    keywords: ["graan", "werkloosheid", "spelen", "welvaart"]
+  }, {
+    text: "In werkelijkheid neemt Augustus alle macht: hij is tegelijk imperator, consul, volkstribuun en pontifex maximus. De magistraten behouden schijnbaar hun macht, maar in werkelijkheid beslist Augustus.",
+    keywords: ["imperator", "consul", "volkstribuun", "pontifex maximus"]
+  }]
+}, {
+  title: "2️⃣ Natuurlijke grenzen & gewapende vrede",
+  color: COLORS.teal,
+  paragraphs: [{
+    text: "Augustus kiest voor natuurlijke grenzen: de Atlantische Oceaan (westen), de woestijnen (zuiden), de Rijn en de Donau (noorden) en de Eufraat (oosten).",
+    keywords: ["Atlantische Oceaan", "woestijnen", "Rijn", "Donau", "Eufraat"]
+  }, {
+    text: "Legioenen verdedigen de grenzen tegen invallers. In rebelse provincies zijn ook legioenen aanwezig. Een vloot bewaakt de Middellandse Zee. Dit noemt men een gewapende vrede.",
+    keywords: ["legioenen", "provincies", "vloot", "gewapende vrede"]
+  }, {
+    text: "Augustus bestuurt zelf de onrustige grensprovincies. Zo behoudt hij het bevel over de legioenen en kan geen andere generaal een staatsgreep plegen.",
+    keywords: ["grensprovincies", "staatsgreep"]
+  }]
+}, {
+  title: "3️⃣ Beeldvorming doorheen de tijd",
+  color: COLORS.purple,
+  paragraphs: [{
+    text: "Augustus wordt soms positief beoordeeld: hij bracht vrede, orde en welvaart (staatsmanschap). Maar soms ook negatief: hij vestigde een gewapende vrede en een dictatuur.",
+    keywords: ["positief", "negatief", "dictatuur", "staatsmanschap"]
+  }, {
+    text: "Christenen verbinden zijn vredesperiode met de opkomst van het christendom (positief). Jonathan Swift verwijt hem de republiek te hebben vernietigd (negatief). Mussolini neemt hem als voorbeeld voor zijn dictatuur (positief voor Mussolini).",
+    keywords: ["christendom", "Swift", "Mussolini"]
+  }, {
+    text: "Het standpunt van de auteur beïnvloedt altijd de beeldvorming. Wie voorstander is van democratie, ziet Augustus als dictator. Wie orde boven alles stelt, ziet hem als een grote staatsman.",
+    keywords: ["beeldvorming", "standpunt", "democratie"]
+  }]
+}];
+
+// ─── WOORDENSCHAT DATA ───────────────────────────────────────────
+var woordenschat = [{
+  nl: "Princeps",
+  fr: "Eerste man / voornaamste"
+}, {
+  nl: "Augustus",
+  fr: "Verhevene (eretitel)"
+}, {
+  nl: "Caesar",
+  fr: "Titel naar adoptievader Julius"
+}, {
+  nl: "Pater patriae",
+  fr: "Vader des vaderlands"
+}, {
+  nl: "Imperator",
+  fr: "Opperbevelhebber / keizer"
+}, {
+  nl: "Pontifex maximus",
+  fr: "Hogepriester van Rome"
+}, {
+  nl: "Gewapende vrede",
+  fr: "Vrede gegarandeerd door legioenen"
+}, {
+  nl: "Legioen",
+  fr: "Romeinse legerafdeling (~5000 man)"
+}, {
+  nl: "Provincie",
+  fr: "Gebied buiten Italië onder Roms gezag"
+}, {
+  nl: "Beeldvorming",
+  fr: "Hoe iemand wordt gezien doorheen de tijd"
+}];
+
+// ─── QUIZ DATA ────────────────────────────────────────────────────
+var quizQuestions = [{
+  type: "mc",
+  question: "Welke titel betekent 'vader des vaderlands'? 👑",
+  options: ["Princeps", "Augustus", "Pater patriae", "Imperator"],
+  answer: 2,
+  uitleg: "'Pater patriae' betekent 'vader des vaderlands'. De senaat gaf deze titel aan Augustus uit dankbaarheid voor rust, orde en welvaart."
+}, {
+  type: "tf",
+  question: "Augustus herstelde de republiek écht en gaf alle macht terug aan de senaat. 🏛️",
+  answer: false,
+  uitleg: "Fout! Het herstel was SCHIJN. In werkelijkheid trok Augustus alle macht naar zich toe: consul, volkstribuun, imperator, pontifex maximus tegelijk."
+}, {
+  type: "mc",
+  question: "Waarom noemde Octavianus zichzelf ook 'caesar'? 🗡️",
+  options: ["Omdat hij in Gallië geboren was", "Naar zijn geadopteerde vader Julius Caesar", "Omdat caesar 'keizer' betekent in het Latijn", "Omdat de senaat hem die titel gaf"],
+  answer: 1,
+  uitleg: "Octavianus was de geadopteerde zoon van Julius Caesar. Door zichzelf 'caesar' te noemen, toonde hij zijn link met de beroemde veldheer."
+}, {
+  type: "mc",
+  question: "Op welke DRIE manieren won Augustus het vertrouwen van de senaat? 🤝",
+  options: ["Graan uitdelen, spelen organiseren, geld geven", "Republiek behouden, ambten laten bestaan, senaat taken teruggeven", "Legioenen sturen, grenzen verdedigen, belastingen verlagen", "Titels geven, feesten organiseren, vijanden verbannen"],
+  answer: 1,
+  uitleg: "De senaat: republiek schijnbaar behouden + meeste ambten laten bestaan + senaat zijn taken teruggeven. Het volk kreeg graan en spelen."
+}, {
+  type: "tf",
+  question: "Augustus deelde gratis graan uit aan het gewone volk. 🌾",
+  answer: true,
+  uitleg: "Juist! Gratis graan (+ werkloosheid verminderen + gratis spelen) maakten hem populair bij de gewone bevolking."
+}, {
+  type: "mc",
+  question: "Wat is een 'gewapende vrede'? ⚔️",
+  options: ["Een vrede gesloten na een oorlog", "Een vrede die gegarandeerd wordt door de aanwezigheid van legioenen", "Een vrede waarbij alle wapens worden vernietigd", "Een tijdelijk staakt-het-vuren tussen twee legers"],
+  answer: 1,
+  uitleg: "Gewapende vrede = er is vrede, MAAR die vrede wordt in stand gehouden door legioenen aan de grenzen en in rebelse provincies."
+}, {
+  type: "order",
+  question: "Zet de drie periodes van Rome in de juiste volgorde (oudste eerst): 📅",
+  items: ["Het Keizerrijk", "Het Koninkrijk", "De Republiek"],
+  answer: [1, 2, 0],
+  uitleg: "Koninkrijk (tot 509 v.C.) → Republiek (509–27 v.C.) → Keizerrijk (vanaf 27 v.C. met Augustus)."
+}, {
+  type: "mc",
+  question: "Welke grens lag in het NOORDEN van het Romeinse Rijk? 🗺️",
+  options: ["De Eufraat", "De Atlantische Oceaan", "De Rijn en de Donau", "De Sahara-woestijn"],
+  answer: 2,
+  uitleg: "Noorden: de Rijn en de Donau. Westen: Atlantische Oceaan. Zuiden: woestijnen. Oosten: Eufraat."
+}, {
+  type: "tf",
+  question: "Augustus liet andere generaals de grensprovincies besturen om zichzelf te ontlasten. 🏕️",
+  answer: false,
+  uitleg: "Fout! Augustus bestuurde ZELF de gevaarlijke grensprovincies — zo hield hij het bevel over de legioenen en kon geen generaal een staatsgreep plegen."
+}, {
+  type: "mc",
+  question: "Wie werd uiteindelijk de opvolger van Augustus? 👑",
+  options: ["Julia, zijn dochter", "Romulus, zijn neef", "Tiberius, zoon van Livia", "Brutus, zijn vriend"],
+  answer: 2,
+  uitleg: "Tiberius, de zoon van Livia (Augustus' vrouw), werd de volgende keizer. Augustus had hem geadopteerd om de troonopvolging te verzekeren."
+}, {
+  type: "mc",
+  question: "Wat deed Jonathan Swift met zijn beeld van Augustus? ✍️",
+  options: ["Hij prees Augustus als grote vredesstichter", "Hij gebruikte Augustus als voorbeeld van perfecte democratie", "Hij verweet Augustus de republiek te hebben vernietigd en tirannie te hebben gevestigd", "Hij schreef dat Augustus een goede christen was"],
+  answer: 2,
+  uitleg: "Swift (1667–1745) verdedigde de grondwettelijke monarchie en zag Augustus als een tiran die de republiek vernietigde — een NEGATIEF beeld."
+}, {
+  type: "tf",
+  question: "Mussolini gebruikte het beeld van Augustus als negatief voorbeeld te vermijden. 🇮🇹",
+  answer: false,
+  uitleg: "Fout! Mussolini nam Augustus als POSITIEF voorbeeld — hij bewonderde de dictatuur en het machtige bestuur."
+}, {
+  type: "mc",
+  question: "Welke functie had Augustus NIET? 🏛️",
+  options: ["Consul", "Volkstribuun", "Pontifex maximus", "Dictator"],
+  answer: 3,
+  uitleg: "Augustus noemde zichzelf GEEN dictator — dat woord was te negatief. Hij stapelde andere titels: consul, volkstribuun, imperator, pontifex maximus."
+}, {
+  type: "mc",
+  question: "Waarom bewaakt een vloot de Middellandse Zee? 🌊",
+  options: ["Om vis te vangen voor het gratis voedselprogramma", "Om handel te stimuleren en piraten te bestrijden", "Voor veiligheid en controle als deel van de gewapende vrede", "Om Egypte te veroveren"],
+  answer: 2,
+  uitleg: "De vloot op de Middellandse Zee maakt deel uit van de gewapende vrede: vrede én veiligheid worden actief gegarandeerd door militaire aanwezigheid."
+}, {
+  type: "tf",
+  question: "Het beeld van Augustus is doorheen de geschiedenis altijd hetzelfde gebleven. 🖼️",
+  answer: false,
+  uitleg: "Fout! De beeldvorming verandert: soms positief (vrede, staatsmanschap), soms negatief (dictatuur, gewapende vrede). Afhankelijk van het standpunt van de auteur."
+}, {
+  type: "mc",
+  question: "Wat betekent 'pontifex maximus'? ⛪",
+  options: ["Opperbevelhebber van de legioenen", "Hogepriester van Rome", "Eerste man van de senaat", "Vader des vaderlands"],
+  answer: 1,
+  uitleg: "Pontifex maximus = hogepriester. Door ook deze functie te bekleden, controleerde Augustus niet alleen de politiek en het leger, maar ook de religie."
+}, {
+  type: "order",
+  question: "Rangschik: hoe maakte Augustus zich populair? (senaat eerst, dan volk) 🏛️",
+  items: ["Gratis graan uitdelen", "Republiek schijnbaar behouden", "Gratis spelen organiseren"],
+  answer: [1, 0, 2],
+  uitleg: "Senaat: republiek schijnbaar behouden. Volk: graan uitdelen + gratis spelen organiseren."
+}];
+
+// ─── SHUFFLE ─────────────────────────────────────────────────────
+function shuffle(arr) {
+  var a = _toConsumableArray(arr);
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [a[j], a[i]];
+    a[i] = _ref[0];
+    a[j] = _ref[1];
+  }
+  return a;
+}
+
+// ════════════════════════════════════════════════════════════════
+// MAIN APP
+// ════════════════════════════════════════════════════════════════
+function App() {
+  var _useState = useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    phase = _useState2[0],
+    setPhase = _useState2[1];
+  var _useState3 = useState([true, false, false, false]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    unlocked = _useState4[0],
+    setUnlocked = _useState4[1];
+  function unlock(idx) {
+    setUnlocked(function (u) {
+      var n = _toConsumableArray(u);
+      n[idx] = true;
+      return n;
+    });
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.bg,
+      minHeight: "100vh",
+      fontFamily: "'Segoe UI', sans-serif",
+      color: COLORS.text
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "linear-gradient(135deg, #13121f 0%, #1e1a2e 100%)",
+      padding: "14px 16px 12px",
+      borderBottom: "2px solid ".concat(COLORS.gold, "40")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.gold,
+      fontWeight: 700,
+      letterSpacing: 2,
+      textTransform: "uppercase"
+    }
+  }, "\uD83C\uDFDB\uFE0F Les 18 \u2014 Geschiedenis"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 20,
+      fontWeight: 900,
+      marginTop: 2,
+      color: COLORS.text
+    }
+  }, "Augustus, de eerste keizer"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textMuted,
+      marginTop: 2
+    }
+  }, "\uD83C\uDFAD Politiek theater in het oude Rome")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 4,
+      padding: "10px 10px 0",
+      overflowX: "auto"
+    }
+  }, PHASES.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return unlocked[i] && setPhase(i);
+      },
+      style: {
+        flex: "0 0 auto",
+        padding: "8px 12px",
+        borderRadius: 10,
+        border: "none",
+        fontWeight: 700,
+        fontSize: 12,
+        cursor: unlocked[i] ? "pointer" : "not-allowed",
+        background: phase === i ? COLORS.gold : unlocked[i] ? COLORS.cardLight : "#1a1828",
+        color: phase === i ? COLORS.bg : unlocked[i] ? COLORS.text : COLORS.textMuted,
+        opacity: unlocked[i] ? 1 : 0.45,
+        transition: "all 0.2s",
+        whiteSpace: "nowrap"
+      }
+    }, p);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "12px 12px 60px"
+    }
+  }, phase === 0 && /*#__PURE__*/React.createElement(VerhaalPhase, {
+    onComplete: function onComplete() {
+      unlock(1);
+      setPhase(1);
+    }
+  }), phase === 1 && /*#__PURE__*/React.createElement(LeesPhase, {
+    onComplete: function onComplete() {
+      unlock(2);
+      setPhase(2);
+    }
+  }), phase === 2 && /*#__PURE__*/React.createElement(WoordenschatPhase, {
+    onComplete: function onComplete() {
+      unlock(3);
+      setPhase(3);
+    }
+  }), phase === 3 && /*#__PURE__*/React.createElement(QuizPhase, null)));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 1 — VERHAAL
+// ════════════════════════════════════════════════════════════════
+function VerhaalPhase(_ref2) {
+  var onComplete = _ref2.onComplete;
+  var _useState5 = useState(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    chapter = _useState6[0],
+    setChapter = _useState6[1];
+  var _useState7 = useState(0),
+    _useState8 = _slicedToArray(_useState7, 2),
+    lineIdx = _useState8[0],
+    setLineIdx = _useState8[1];
+  var _useState9 = useState(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    done = _useState0[0],
+    setDone = _useState0[1];
+  var ch = verhaalChapters[chapter];
+  var lines = ch.text;
+  function next() {
+    if (lineIdx < lines.length - 1) {
+      setLineIdx(lineIdx + 1);
+    } else if (chapter < verhaalChapters.length - 1) {
+      setChapter(chapter + 1);
+      setLineIdx(0);
+    } else {
+      setDone(true);
+    }
+  }
+  function goToChapter(i) {
+    setChapter(i);
+    setLineIdx(0);
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDFC6"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.gold,
+        marginTop: 12
+      }
+    }, "Verhaal klaar!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px",
+        fontSize: 14
+      }
+    }, "Je kent de context. Klaar voor de echte theorie?"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.green,
+      onClick: onComplete
+    }, "\uD83D\uDCDA Naar Lees & Markeer \u2192"));
+  }
+  var totalLines = verhaalChapters.reduce(function (s, c) {
+    return s + c.text.length;
+  }, 0);
+  var doneLines = verhaalChapters.slice(0, chapter).reduce(function (s, c) {
+    return s + c.text.length;
+  }, 0) + lineIdx + 1;
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 8,
+      marginBottom: 16
+    }
+  }, verhaalChapters.map(function (c, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return goToChapter(i);
+      },
+      style: {
+        flex: 1,
+        padding: "10px 4px",
+        borderRadius: 12,
+        border: "2px solid ".concat(i <= chapter ? c.color : "#333"),
+        background: i === chapter ? c.color + "22" : "transparent",
+        color: i <= chapter ? c.color : COLORS.textMuted,
+        fontSize: 20,
+        cursor: "pointer",
+        transition: "all 0.2s"
+      }
+    }, c.emoji);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: ch.color + "14",
+      border: "2px solid ".concat(ch.color),
+      borderRadius: 18,
+      padding: 18,
+      marginBottom: 16,
+      minHeight: 220
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: ch.color,
+      fontWeight: 800,
+      fontSize: 15,
+      marginBottom: 14
+    }
+  }, ch.emoji, " Hoofdstuk ", chapter + 1, ": ", ch.title), lines.slice(0, lineIdx + 1).map(function (line, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        color: i === lineIdx ? COLORS.text : COLORS.textMuted,
+        fontSize: i === lineIdx ? 15 : 13,
+        marginBottom: 10,
+        lineHeight: 1.6,
+        transition: "all 0.3s",
+        borderLeft: i === lineIdx ? "3px solid ".concat(ch.color) : "3px solid transparent",
+        paddingLeft: 10
+      }
+    }, line);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Hoofdstuk ", chapter + 1, "/3"), /*#__PURE__*/React.createElement("span", null, doneLines, "/", totalLines)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "linear-gradient(90deg, ".concat(ch.color, ", ").concat(ch.color, "aa)"),
+      height: 6,
+      borderRadius: 99,
+      width: "".concat(doneLines / totalLines * 100, "%"),
+      transition: "width 0.3s"
+    }
+  }))), /*#__PURE__*/React.createElement(Btn, {
+    color: ch.color,
+    onClick: next
+  }, lineIdx < lines.length - 1 ? "Volgende ›" : chapter < verhaalChapters.length - 1 ? "Volgend hoofdstuk ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 2 — LEES & MARKEER
+// ════════════════════════════════════════════════════════════════
+function LeesPhase(_ref3) {
+  var onComplete = _ref3.onComplete;
+  var _useState1 = useState(0),
+    _useState10 = _slicedToArray(_useState1, 2),
+    section = _useState10[0],
+    setSection = _useState10[1];
+  var _useState11 = useState({}),
+    _useState12 = _slicedToArray(_useState11, 2),
+    marked = _useState12[0],
+    setMarked = _useState12[1];
+  var _useState13 = useState(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    done = _useState14[0],
+    setDone = _useState14[1];
+  var sec = leesData[section];
+  var allKeywords = sec.paragraphs.flatMap(function (p) {
+    return p.keywords;
+  });
+  var markedCount = allKeywords.filter(function (k) {
+    return marked["".concat(section, "-").concat(k)];
+  }).length;
+  function toggleMark(key) {
+    setMarked(function (m) {
+      return _objectSpread(_objectSpread({}, m), {}, _defineProperty({}, key, !m[key]));
+    });
+  }
+  function nextSection() {
+    if (section < leesData.length - 1) {
+      setSection(section + 1);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.blue,
+        marginTop: 12
+      }
+    }, "Theorie bekeken!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px",
+        fontSize: 14
+      }
+    }, "Nu de woordenschat instuderen!"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.purple,
+      onClick: onComplete
+    }, "\uD83D\uDCD8 Naar Woordenschat \u2192"));
+  }
+  var tabLabels = ["Augustus", "Grenzen", "Beeldvorming"];
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 14
+    }
+  }, leesData.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return setSection(i);
+      },
+      style: {
+        flex: 1,
+        padding: "8px 4px",
+        borderRadius: 10,
+        border: "2px solid ".concat(i <= section ? s.color : "#333"),
+        background: i === section ? s.color + "22" : "transparent",
+        color: i === section ? s.color : COLORS.textMuted,
+        fontSize: 11,
+        fontWeight: 700,
+        cursor: "pointer"
+      }
+    }, tabLabels[i]);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: sec.color + "14",
+      border: "2px solid ".concat(sec.color),
+      borderRadius: 18,
+      padding: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: sec.color,
+      fontWeight: 800,
+      fontSize: 16,
+      marginBottom: 14
+    }
+  }, sec.title), sec.paragraphs.map(function (para, pIdx) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: pIdx,
+      style: {
+        marginBottom: 18
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14,
+        lineHeight: 1.8,
+        color: COLORS.text
+      }
+    }, para.text.split(new RegExp("(".concat(para.keywords.map(function (k) {
+      return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join("|"), ")"), "gi")).map(function (part, i) {
+      var matchedKw = para.keywords.find(function (k) {
+        return k.toLowerCase() === part.toLowerCase();
+      });
+      if (matchedKw) {
+        var key = "".concat(section, "-").concat(matchedKw);
+        var isMarked = marked[key];
+        return /*#__PURE__*/React.createElement("span", {
+          key: i,
+          onClick: function onClick() {
+            return toggleMark(key);
+          },
+          style: {
+            background: isMarked ? sec.color : sec.color + "30",
+            color: isMarked ? COLORS.bg : sec.color,
+            borderRadius: 4,
+            padding: "1px 6px",
+            cursor: "pointer",
+            fontWeight: 700,
+            fontSize: 14,
+            transition: "all 0.2s",
+            border: "1px solid ".concat(sec.color)
+          }
+        }, part);
+      }
+      return /*#__PURE__*/React.createElement("span", {
+        key: i
+      }, part);
+    })));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: sec.color,
+      marginTop: 4
+    }
+  }, "\uD83D\uDC46 Tik op de gekleurde woorden! (", markedCount, "/", allKeywords.length, " gemarkeerd)")), /*#__PURE__*/React.createElement(Btn, {
+    color: sec.color,
+    onClick: nextSection
+  }, section < leesData.length - 1 ? "Volgende sectie ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 3 — WOORDENSCHAT MEMORY
+// ════════════════════════════════════════════════════════════════
+function WoordenschatPhase(_ref4) {
+  var onComplete = _ref4.onComplete;
+  var _useState15 = useState(function () {
+      var pairs = woordenschat.map(function (w, i) {
+        return [{
+          id: "nl-".concat(i),
+          text: w.nl,
+          pairId: i,
+          type: "nl"
+        }, {
+          id: "fr-".concat(i),
+          text: w.fr,
+          pairId: i,
+          type: "fr"
+        }];
+      }).flat();
+      return shuffle(pairs);
+    }),
+    _useState16 = _slicedToArray(_useState15, 1),
+    cards = _useState16[0];
+  var _useState17 = useState([]),
+    _useState18 = _slicedToArray(_useState17, 2),
+    selected = _useState18[0],
+    setSelected = _useState18[1];
+  var _useState19 = useState([]),
+    _useState20 = _slicedToArray(_useState19, 2),
+    matched = _useState20[0],
+    setMatched = _useState20[1];
+  var _useState21 = useState([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    wrong = _useState22[0],
+    setWrong = _useState22[1];
+  var _useState23 = useState(0),
+    _useState24 = _slicedToArray(_useState23, 2),
+    score = _useState24[0],
+    setScore = _useState24[1];
+  var _useState25 = useState(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    done = _useState26[0],
+    setDone = _useState26[1];
+  function selectCard(card) {
+    if (matched.includes(card.pairId)) return;
+    if (selected.find(function (c) {
+      return c.id === card.id;
+    })) return;
+    if (wrong.length > 0) {
+      setWrong([]);
+      setSelected([]);
+      return;
+    }
+    if (selected.length === 1) {
+      var first = selected[0];
+      if (first.pairId === card.pairId && first.type !== card.type) {
+        var newMatched = [].concat(_toConsumableArray(matched), [card.pairId]);
+        setMatched(newMatched);
+        setScore(function (s) {
+          return s + 1;
+        });
+        setSelected([]);
+        if (newMatched.length === woordenschat.length) setDone(true);
+      } else {
+        setWrong([first.id, card.id]);
+        setSelected([first, card]);
+        setTimeout(function () {
+          setWrong([]);
+          setSelected([]);
+        }, 900);
+      }
+    } else {
+      setSelected([card]);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDF89"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.purple,
+        marginTop: 12
+      }
+    }, "Alle woorden gevonden!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Score: ", score, "/", woordenschat.length, " \u2728"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: onComplete
+    }, "\u26A1 Naar de Grote Quiz \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: COLORS.purple,
+      fontSize: 16
+    }
+  }, "\uD83D\uDCD8 Memory Match"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: COLORS.gold,
+      fontWeight: 700
+    }
+  }, matched.length, "/", woordenschat.length, " \u2713")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 14
+    }
+  }, "Koppel elk woord aan zijn betekenis!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 5,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.purple,
+      height: 5,
+      borderRadius: 99,
+      width: "".concat(matched.length / woordenschat.length * 100, "%"),
+      transition: "width 0.3s"
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 8
+    }
+  }, cards.map(function (card) {
+    var isMatched = matched.includes(card.pairId);
+    var isSelected = !!selected.find(function (c) {
+      return c.id === card.id;
+    });
+    var isWrong = wrong.includes(card.id);
+    var color = card.type === "nl" ? COLORS.gold : COLORS.teal;
+    return /*#__PURE__*/React.createElement("button", {
+      key: card.id,
+      onClick: function onClick() {
+        return selectCard(card);
+      },
+      style: {
+        padding: "12px 8px",
+        borderRadius: 12,
+        border: "2px solid ".concat(isWrong ? COLORS.red : isMatched ? COLORS.green : isSelected ? color : color + "44"),
+        background: isWrong ? COLORS.red + "22" : isMatched ? COLORS.green + "22" : isSelected ? color + "22" : COLORS.card,
+        color: isMatched ? COLORS.green : isWrong ? COLORS.red : isSelected ? color : COLORS.text,
+        cursor: isMatched ? "default" : "pointer",
+        fontWeight: 700,
+        fontSize: 12,
+        textAlign: "center",
+        lineHeight: 1.3,
+        minHeight: 58,
+        transition: "all 0.15s",
+        opacity: isMatched ? 0.55 : 1
+      }
+    }, isMatched ? "✓ " : "", card.text);
+  })));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 4 — GROTE QUIZ
+// ════════════════════════════════════════════════════════════════
+function QuizPhase() {
+  var _useState27 = useState(function () {
+      return shuffle(quizQuestions);
+    }),
+    _useState28 = _slicedToArray(_useState27, 1),
+    questions = _useState28[0];
+  var _useState29 = useState(0),
+    _useState30 = _slicedToArray(_useState29, 2),
+    idx = _useState30[0],
+    setIdx = _useState30[1];
+  var _useState31 = useState(null),
+    _useState32 = _slicedToArray(_useState31, 2),
+    answered = _useState32[0],
+    setAnswered = _useState32[1];
+  var _useState33 = useState(0),
+    _useState34 = _slicedToArray(_useState33, 2),
+    score = _useState34[0],
+    setScore = _useState34[1];
+  var _useState35 = useState(false),
+    _useState36 = _slicedToArray(_useState35, 2),
+    done = _useState36[0],
+    setDone = _useState36[1];
+  var _useState37 = useState(null),
+    _useState38 = _slicedToArray(_useState37, 2),
+    orderItems = _useState38[0],
+    setOrderItems = _useState38[1];
+  var q = questions[idx];
+  useEffect(function () {
+    if ((q === null || q === void 0 ? void 0 : q.type) === "order") {
+      setOrderItems(shuffle(_toConsumableArray(q.items)));
+    }
+  }, [idx]);
+  function checkMC(optIdx) {
+    if (answered !== null) return;
+    var correct = optIdx === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkTF(val) {
+    if (answered !== null) return;
+    var correct = val === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkOrder() {
+    if (answered !== null) return;
+    var correct = q.answer.every(function (a, i) {
+      return q.items[a] === orderItems[i];
+    });
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function moveItem(from, to) {
+    if (answered !== null) return;
+    var items = _toConsumableArray(orderItems);
+    var _items$splice = items.splice(from, 1),
+      _items$splice2 = _slicedToArray(_items$splice, 1),
+      item = _items$splice2[0];
+    items.splice(to, 0, item);
+    setOrderItems(items);
+  }
+  function next() {
+    if (idx < questions.length - 1) {
+      setIdx(idx + 1);
+      setAnswered(null);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    var pct = Math.round(score / questions.length * 100);
+    var medal = pct >= 90 ? "🥇" : pct >= 70 ? "🥈" : pct >= 50 ? "🥉" : "📚";
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 30
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 70
+      }
+    }, medal), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 28,
+        fontWeight: 900,
+        color: COLORS.gold,
+        marginTop: 8
+      }
+    }, score, "/", questions.length), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 16,
+        color: COLORS.textMuted,
+        marginTop: 6
+      }
+    }, pct, "%"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 16,
+        fontSize: 15,
+        lineHeight: 1.5,
+        color: pct >= 70 ? COLORS.green : COLORS.orange,
+        padding: "0 10px"
+      }
+    }, pct >= 90 ? "🔥 Indrukwekkend! Augustus zelf zou onder de indruk zijn!" : pct >= 70 ? "👍 Goed gedaan! Nog een kleine herhaling en je bent er!" : pct >= 50 ? "💪 Niet slecht! Bekijk de theorie nog eens." : "📖 Herhaal de lessen en probeer opnieuw!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 24
+      }
+    }, /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: function onClick() {
+        setIdx(0);
+        setAnswered(null);
+        setScore(0);
+        setDone(false);
+      }
+    }, "\uD83D\uDD04 Opnieuw spelen")));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Vraag ", idx + 1, "/", questions.length), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: COLORS.gold
+    }
+  }, "\u2B50 ", score, " punten")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "linear-gradient(90deg, ".concat(COLORS.gold, ", ").concat(COLORS.orange, ")"),
+      height: 6,
+      borderRadius: 99,
+      width: "".concat(idx / questions.length * 100, "%"),
+      transition: "width 0.3s"
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 14,
+      border: "2px solid #2a2840"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      textTransform: "uppercase",
+      letterSpacing: 1
+    }
+  }, q.type === "mc" ? "Meerkeuze" : q.type === "tf" ? "Juist / Fout" : "Volgorde"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      lineHeight: 1.45
+    }
+  }, q.question)), q.type === "mc" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gap: 8,
+      marginBottom: 14
+    }
+  }, q.options.map(function (opt, i) {
+    var isCorrect = i === q.answer;
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return checkMC(i);
+      },
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        border: "2px solid ".concat(answered !== null ? isCorrect ? COLORS.green : COLORS.red + "44" : COLORS.blue + "44"),
+        background: answered !== null && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: answered !== null ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        textAlign: "left",
+        cursor: answered === null ? "pointer" : "default",
+        fontWeight: 600,
+        fontSize: 14,
+        transition: "all 0.2s"
+      }
+    }, answered !== null && isCorrect ? "✓ " : "", opt);
+  })), q.type === "tf" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 10,
+      marginBottom: 14
+    }
+  }, [true, false].map(function (val) {
+    var isCorrect = val === q.answer;
+    var chosen = answered !== null;
+    return /*#__PURE__*/React.createElement("button", {
+      key: String(val),
+      onClick: function onClick() {
+        return checkTF(val);
+      },
+      style: {
+        padding: "20px",
+        borderRadius: 14,
+        border: "2px solid ".concat(chosen ? isCorrect ? COLORS.green : COLORS.red : val ? COLORS.green + "55" : COLORS.red + "55"),
+        background: chosen && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: chosen ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        fontSize: 18,
+        fontWeight: 800,
+        cursor: chosen ? "default" : "pointer",
+        transition: "all 0.2s"
+      }
+    }, val ? "✅ JUIST" : "❌ FOUT");
+  })), q.type === "order" && orderItems && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 8
+    }
+  }, "Zet in de juiste volgorde met de pijltjes:"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 8
+    }
+  }, orderItems.map(function (item, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: item,
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        background: answered === "correct" ? COLORS.green + "22" : answered === "wrong" ? COLORS.red + "22" : COLORS.cardLight,
+        border: "2px solid ".concat(answered === "correct" ? COLORS.green : answered === "wrong" ? COLORS.red : COLORS.purple + "55"),
+        color: COLORS.text,
+        fontWeight: 700,
+        display: "flex",
+        alignItems: "center",
+        gap: 10
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: COLORS.purple,
+        fontWeight: 900,
+        fontSize: 18
+      }
+    }, i + 1, "."), /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 1,
+        fontSize: 14
+      }
+    }, item), answered === null && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 4
+      }
+    }, i > 0 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i - 1);
+      },
+      style: {
+        background: COLORS.purple + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.purple,
+        padding: "4px 10px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25B2"), i < orderItems.length - 1 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i + 1);
+      },
+      style: {
+        background: COLORS.purple + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.purple,
+        padding: "4px 10px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25BC")));
+  })), answered === null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10
+    }
+  }, /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.purple,
+    onClick: checkOrder
+  }, "\u2713 Controleer volgorde"))), answered !== null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: answered === "correct" ? COLORS.green + "22" : COLORS.red + "22",
+      border: "2px solid ".concat(answered === "correct" ? COLORS.green : COLORS.red),
+      borderRadius: 12,
+      padding: 14,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: answered === "correct" ? COLORS.green : COLORS.red,
+      marginBottom: 6,
+      fontSize: 15
+    }
+  }, answered === "correct" ? "✅ Correct! +1 punt" : "❌ Fout!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: COLORS.text,
+      lineHeight: 1.5
+    }
+  }, q.uitleg)), answered !== null && /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.gold,
+    onClick: next
+  }, idx < questions.length - 1 ? "Volgende vraag ›" : "Bekijk resultaat 🏆"));
+}
+
+// ─── BUTTON COMPONENT ────────────────────────────────────────────
+function Btn(_ref5) {
+  var color = _ref5.color,
+    onClick = _ref5.onClick,
+    children = _ref5.children;
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    style: {
+      width: "100%",
+      padding: "16px",
+      borderRadius: 14,
+      border: "none",
+      background: color,
+      color: "#0f0e17",
+      fontWeight: 900,
+      fontSize: 16,
+      cursor: "pointer",
+      transition: "opacity 0.2s"
+    },
+    onMouseDown: function onMouseDown(e) {
+      return e.currentTarget.style.opacity = "0.8";
+    },
+    onMouseUp: function onMouseUp(e) {
+      return e.currentTarget.style.opacity = "1";
+    }
+  }, children);
+}
+var root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>

@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🎨 Les 11 — De Griekse Kunst</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:#0f0e17;color:#fffffe;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+button{font-family:inherit;}
+#root{background:#0f0e17;min-height:100vh;color:#fffffe;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+var _React = React,
+  useState = _React.useState,
+  useEffect = _React.useEffect,
+  useRef = _React.useRef;
+var COLORS = {
+  bg: "#0f0e17",
+  card: "#1a1828",
+  cardLight: "#242236",
+  gold: "#f5c842",
+  blue: "#4fc3f7",
+  purple: "#b388ff",
+  green: "#69f0ae",
+  red: "#ff5252",
+  orange: "#ffab40",
+  pink: "#f48fb1",
+  text: "#fffffe",
+  textMuted: "#a7a9be"
+};
+var PHASES = ["🎬 Verhaal", "📚 Lees & Markeer", "📘 Woordenschat", "⚡ Grote Quiz"];
+
+// ─── VERHAAL DATA ───────────────────────────────────────────────
+var verhaalChapters = [{
+  id: 1,
+  emoji: "🏛️",
+  title: "De tijdmachine landt op de Akropolis",
+  color: COLORS.gold,
+  text: ["⚡ BOEM. De tijdmachine stopt. Het jaar is 432 v.C. Athene.", "Voor jou: een gigantische rots. Bovenop: arbeiders die schreeuwen, stof dat opstijgt, hamers die klinken.", "Je klimt omhoog via de Propyleeën 🚪 — de indrukwekkende poort die de hele stad bewaakt.", "Eenmaal boven sla je adem in. Het Parthenon verrijst voor je ogen: 72 meter lang, 36 meter breed, puur wit marmer… maar wacht.", "🎨 Niet wit. KLEURRIJK. Rode en blauwe verfsporen op de fries, gouden details op het fronton.", "Een man met een beitel draait zich om. Hij grijnst: 'Ik ben Phidias. Welkom op de Akropolis.'"]
+}, {
+  id: 2,
+  emoji: "🗿",
+  title: "Phidias en zijn stenen mensen",
+  color: COLORS.purple,
+  text: ["Phidias leidt je langs drie grote beelden. 'Kijk,' zegt hij, 'dit is onze geschiedenis in steen.'", "🧍 Het eerste beeld: een stijve jongeman, armen langs het lijf, dezelfde glimlach op zijn lippen. 'Archaïsch,' zegt Phidias. 'Oud. Statisch. Bijna Egyptisch.'", "⚡ Het tweede beeld: een man die een discus gooit, bevroren in beweging. Elke spier perfect. 'Klassiek,' fluistert hij. 'De ideale mens. Mooi. Krachtig. Maar… geen echte emoties.'", "😱 Het derde beeld maakt je bang: twee mannen en een jongen, vertrokken van pijn, kronkelend in de greep van een slang. 'Hellenistisch. Realisme. GEVOELENS.'", "'Zie je de evolutie?' vraagt Phidias. Je knikt. Van stijf naar levend."]
+}, {
+  id: 3,
+  emoji: "🏺",
+  title: "De markt en de sprekende vazen",
+  color: COLORS.orange,
+  text: ["Jullie dalen af naar de Agora 🏛️ — de grote markt waar iedereen samenkomt: kooplui, filosofen, gewone mensen.", "Een pottenbakker roept je: 'Kijk naar mijn vazen! Ze vertellen verhalen!'", "🖤 Hij houdt er één omhoog: zwarte figuren op een rode achtergrond. 'Zwartfigurige stijl. De oudste.'", "❤️ Dan een tweede: rode figuren op een zwarte achtergrond. 'Roodfigurige stijl. Nieuwer. Meer details!'", "Op de vazen: goden, helden, feesten, sportwedstrijden. Alles wat de Grieken belangrijk vonden.", "Phidias legt zijn hand op je schouder: 'Over 2500 jaar studeren mensen dit nog steeds.' Hij knipoogt. '...Zoals jij, nu.' 😄"]
+}];
+
+// ─── LEES & MARKEER DATA ─────────────────────────────────────────
+var leesData = [{
+  title: "1️⃣ De Griekse bouwkunst",
+  color: COLORS.gold,
+  paragraphs: [{
+    text: "De Griekse bouwkunst is openbaar en monumentaal. De meeste gebouwen worden gebouwd in opdracht van de polis.",
+    keywords: ["openbaar", "monumentaal", "polis"]
+  }, {
+    text: "Een Griekse tempel heeft altijd: treden, zuilen, een fries, een kroonlijst en een fronton. De tempel was NIET wit — er waren overal kleuren!",
+    keywords: ["treden", "zuilen", "fries", "fronton", "kleuren"]
+  }, {
+    text: "Er zijn drie bouwstijlen: Dorisch (zwaar, eenvoudig kapiteel), Ionisch (slank, krullen), Korinthisch (bladmotief, meest versierd).",
+    keywords: ["Dorisch", "Ionisch", "Korinthisch", "kapiteel"]
+  }, {
+    text: "Op de Akropolis staan: het Parthenon (tempel voor Athena), de Propyleeën (toegangspoort), de Nikètempel en het Erechtheum.",
+    keywords: ["Parthenon", "Propyleeën", "Nikètempel", "Erechtheum"]
+  }]
+}, {
+  title: "2️⃣ De Griekse beeldhouwkunst",
+  color: COLORS.purple,
+  paragraphs: [{
+    text: "De archaïsche periode (ca. 680–490 v.C.): de Kouros (naakte jongeman) en Korè (geklede vrouw). Statisch, symmetrisch, weinig emoties. Lijkt op Egyptische beelden.",
+    keywords: ["Kouros", "Korè", "statisch", "symmetrisch", "archaïsch"]
+  }, {
+    text: "De klassieke periode (ca. 490–330 v.C.): ideale, mooie mens. Meer beweging, juiste anatomie, maar nog weinig echte emoties. Momentopname.",
+    keywords: ["klassiek", "ideaal", "anatomie", "beweging"]
+  }, {
+    text: "De hellenistische periode (ca. 330–30 v.C.): gewone mens, realisme, HEEL veel emoties en beweging. Praalzucht vervangt soberheid.",
+    keywords: ["hellenistisch", "realisme", "emoties", "praalzucht"]
+  }]
+}, {
+  title: "3️⃣ De Griekse schilderkunst",
+  color: COLORS.orange,
+  paragraphs: [{
+    text: "Griekse schilderkunst vind je op keramiek: amforen, bekers, kruiken. Ze tonen mythologische taferelen en scènes uit het dagelijks leven.",
+    keywords: ["keramiek", "amforen", "mythologisch"]
+  }, {
+    text: "Twee stijlen: zwartfigurige stijl (zwarte figuren op rode achtergrond) en roodfigurige stijl (rode figuren op zwarte achtergrond).",
+    keywords: ["zwartfigurig", "roodfigurig"]
+  }, {
+    text: "Deze vazen zijn een waardevolle bron voor historici: ze tonen hoe de Grieken leefden.",
+    keywords: ["bron", "historici"]
+  }]
+}];
+
+// ─── WOORDENSCHAT DATA ───────────────────────────────────────────
+var woordenschat = [{
+  nl: "Tempel",
+  fr: "Lieu de culte des dieux"
+}, {
+  nl: "Zuil",
+  fr: "Colonne"
+}, {
+  nl: "Fries",
+  fr: "Frise (bande sculptée)"
+}, {
+  nl: "Fronton",
+  fr: "Fronton (triangle au sommet)"
+}, {
+  nl: "Kapiteel",
+  fr: "Chapiteau (sommet de la colonne)"
+}, {
+  nl: "Kouros",
+  fr: "Statue de jeune homme nu"
+}, {
+  nl: "Korè",
+  fr: "Statue de jeune femme"
+}, {
+  nl: "Reliëf",
+  fr: "Sculpture en relief"
+}, {
+  nl: "Keramiek",
+  fr: "Céramique / aardewerk"
+}, {
+  nl: "Agora",
+  fr: "Place du marché / lieu de rencontre"
+}];
+
+// ─── QUIZ DATA ───────────────────────────────────────────────────
+var quizQuestions = [{
+  type: "mc",
+  question: "Welke bouwstijl heeft een kapiteel met een bladmotief? 🌿",
+  options: ["Dorisch", "Ionisch", "Korinthisch", "Myceens"],
+  answer: 2,
+  uitleg: "Het Korinthische kapiteel is het meest versierd — met acanthusbladeren!"
+}, {
+  type: "tf",
+  question: "De Griekse tempel was altijd helemaal wit. ⬜",
+  answer: false,
+  uitleg: "Fout! Tempels en beelden waren KLEURRIJK geschilderd. Wit is een mythe!"
+}, {
+  type: "mc",
+  question: "Wat is de functie van het Parthenon? 🏛️",
+  options: ["Toegangspoort", "Sportstadion", "Tempel voor Athena", "Marktplaats"],
+  answer: 2,
+  uitleg: "Het Parthenon is de tempel ter ere van de godin Athena, op de Akropolis."
+}, {
+  type: "order",
+  question: "Zet de drie periodes van de Griekse beeldhouwkunst in de juiste volgorde (oudste eerst): 📅",
+  items: ["Hellenistisch", "Archaïsch", "Klassiek"],
+  answer: [1, 2, 0],
+  uitleg: "Archaïsch (680–490) → Klassiek (490–330) → Hellenistisch (330–30 v.C.)"
+}, {
+  type: "tf",
+  question: "De Kouros toont veel emoties op zijn gezicht. 😐",
+  answer: false,
+  uitleg: "Fout! De Kouros heeft weinig emoties — hij is statisch en symmetrisch."
+}, {
+  type: "mc",
+  question: "Wat stelt de Kouros voor? 🗿",
+  options: ["Een oude wijze man", "Een naakte jongeman", "Een geklede vrouw", "Een Griekse god"],
+  answer: 1,
+  uitleg: "Kouros = naakte jongeman. Korè is het vrouwelijke equivalent (gekleed)."
+}, {
+  type: "mc",
+  question: "In welke periode worden mensen 'ideaal en mooi' afgebeeld? ✨",
+  options: ["Archaïsch", "Klassiek", "Hellenistisch", "Egyptisch"],
+  answer: 1,
+  uitleg: "De klassieke periode streeft naar de ideale, perfecte mens — bijna als een god."
+}, {
+  type: "tf",
+  question: "Hellenistische beelden zijn statisch en tonen weinig beweging. 🧊",
+  answer: false,
+  uitleg: "Fout! Hellenistische beelden zijn vol beweging en expressieve emoties!"
+}, {
+  type: "mc",
+  question: "Zwartfigurige stijl = ? 🏺",
+  options: ["Rode figuren op zwarte achtergrond", "Zwarte figuren op rode achtergrond", "Witte figuren op zwarte achtergrond", "Blauwe figuren op witte achtergrond"],
+  answer: 1,
+  uitleg: "Zwartfigurig = zwarte figuren op rode achtergrond. Roodfigurig is het omgekeerde."
+}, {
+  type: "mc",
+  question: "Wat is een agora? 🏟️",
+  options: ["Een Griekse god", "Een type kolom", "De marktplaats / ontmoetingsplaats", "Een soort vaas"],
+  answer: 2,
+  uitleg: "De agora is het hart van de Griekse stad: markt, ontmoetingsplaats, politiek debat."
+}, {
+  type: "tf",
+  question: "Het Erechtheum is een tempel voor de godin Athena alleen. 🏛️",
+  answer: false,
+  uitleg: "Fout! Het Erechtheum is gewijd aan verschillende goden én mythische koningen van Athene."
+}, {
+  type: "mc",
+  question: "Dorische zuilen zijn... 🏗️",
+  options: ["Licht en slank met krullen", "Zwaar en log zonder voetstuk", "Versierd met bladmotief", "Altijd de kleinste"],
+  answer: 1,
+  uitleg: "Dorisch = zwaar, log, eenvoudig kapiteel, GEEN voetstuk. De meest sobere stijl."
+}, {
+  type: "mc",
+  question: "De Discuswerper behoort tot welke periode? 🥏",
+  options: ["Archaïsch", "Klassiek", "Hellenistisch", "Myceens"],
+  answer: 1,
+  uitleg: "De Discuswerper (5e eeuw v.C.) is een klassiek meesterwerk: ideale mens, momentopname."
+}, {
+  type: "mc",
+  question: "Waarom zijn Griekse vazen belangrijk voor historici? 📚",
+  options: ["Ze zijn heel duur", "Ze tonen het dagelijks leven en mythologie", "Ze zijn gemaakt van goud", "Ze waren alleen voor de rijken"],
+  answer: 1,
+  uitleg: "Vazen tonen mythologische taferelen én scènes uit het dagelijks leven — een echte tijdcapsule!"
+}, {
+  type: "tf",
+  question: "In de hellenistische periode maakt soberheid plaats voor praalzucht. 💎",
+  answer: true,
+  uitleg: "Juist! De hellenistische kunst is vol overdaad, drama en decoratie."
+}, {
+  type: "mc",
+  question: "Welk gebouw is de toegangspoort tot de Akropolis? 🚪",
+  options: ["Parthenon", "Erechtheum", "Propyleeën", "Nikètempel"],
+  answer: 2,
+  uitleg: "De Propyleeën zijn de monumentale ingangspoort tot de Akropolis in Athene."
+}];
+
+// ─── SHUFFLE ────────────────────────────────────────────────────
+function shuffle(arr) {
+  var a = _toConsumableArray(arr);
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [a[j], a[i]];
+    a[i] = _ref[0];
+    a[j] = _ref[1];
+  }
+  return a;
+}
+
+// ════════════════════════════════════════════════════════════════
+// MAIN APP
+// ════════════════════════════════════════════════════════════════
+function App() {
+  var _useState = useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    phase = _useState2[0],
+    setPhase = _useState2[1];
+  var _useState3 = useState([true, false, false, false]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    unlocked = _useState4[0],
+    setUnlocked = _useState4[1];
+  function unlock(idx) {
+    setUnlocked(function (u) {
+      var n = _toConsumableArray(u);
+      n[idx] = true;
+      return n;
+    });
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.bg,
+      minHeight: "100vh",
+      fontFamily: "'Segoe UI', sans-serif",
+      color: COLORS.text
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#13121f",
+      padding: "12px 16px",
+      borderBottom: "2px solid ".concat(COLORS.gold, "30")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: COLORS.gold,
+      fontWeight: 700,
+      letterSpacing: 2,
+      textTransform: "uppercase"
+    }
+  }, "\uD83C\uDFDB\uFE0F Les 11 \u2014 Geschiedenis"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 20,
+      fontWeight: 900,
+      marginTop: 2
+    }
+  }, "De Griekse Kunst")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 4,
+      padding: "10px 10px 0",
+      overflowX: "auto"
+    }
+  }, PHASES.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return unlocked[i] && setPhase(i);
+      },
+      style: {
+        flex: "0 0 auto",
+        padding: "8px 12px",
+        borderRadius: 10,
+        border: "none",
+        fontWeight: 700,
+        fontSize: 12,
+        cursor: unlocked[i] ? "pointer" : "not-allowed",
+        background: phase === i ? COLORS.gold : unlocked[i] ? COLORS.cardLight : "#1a1828",
+        color: phase === i ? COLORS.bg : unlocked[i] ? COLORS.text : COLORS.textMuted,
+        opacity: unlocked[i] ? 1 : 0.5,
+        transition: "all 0.2s",
+        whiteSpace: "nowrap"
+      }
+    }, p);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "12px 12px 40px"
+    }
+  }, phase === 0 && /*#__PURE__*/React.createElement(VerhaalPhase, {
+    onComplete: function onComplete() {
+      unlock(1);
+      setPhase(1);
+    }
+  }), phase === 1 && /*#__PURE__*/React.createElement(LeesPhase, {
+    onComplete: function onComplete() {
+      unlock(2);
+      setPhase(2);
+    }
+  }), phase === 2 && /*#__PURE__*/React.createElement(WoordenschatPhase, {
+    onComplete: function onComplete() {
+      unlock(3);
+      setPhase(3);
+    }
+  }), phase === 3 && /*#__PURE__*/React.createElement(QuizPhase, null)));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 1 — VERHAAL
+// ════════════════════════════════════════════════════════════════
+function VerhaalPhase(_ref2) {
+  var onComplete = _ref2.onComplete;
+  var _useState5 = useState(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    chapter = _useState6[0],
+    setChapter = _useState6[1];
+  var _useState7 = useState(0),
+    _useState8 = _slicedToArray(_useState7, 2),
+    lineIdx = _useState8[0],
+    setLineIdx = _useState8[1];
+  var _useState9 = useState(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    done = _useState0[0],
+    setDone = _useState0[1];
+  var ch = verhaalChapters[chapter];
+  var lines = ch.text;
+  function next() {
+    if (lineIdx < lines.length - 1) {
+      setLineIdx(lineIdx + 1);
+    } else if (chapter < verhaalChapters.length - 1) {
+      setChapter(chapter + 1);
+      setLineIdx(0);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDFC6"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.gold,
+        marginTop: 12
+      }
+    }, "Verhaal klaar!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Je kent nu de context. Klaar voor de theorie?"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.green,
+      onClick: onComplete
+    }, "\uD83D\uDCDA Naar Lees & Markeer \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 8,
+      marginBottom: 16
+    }
+  }, verhaalChapters.map(function (c, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        setChapter(i);
+        setLineIdx(0);
+      },
+      style: {
+        flex: 1,
+        padding: "8px 4px",
+        borderRadius: 10,
+        border: "2px solid ".concat(i <= chapter ? c.color : "#333"),
+        background: i === chapter ? c.color + "22" : "transparent",
+        color: i <= chapter ? c.color : COLORS.textMuted,
+        fontSize: 18,
+        cursor: "pointer"
+      }
+    }, c.emoji);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: ch.color + "18",
+      border: "2px solid ".concat(ch.color),
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 16,
+      minHeight: 180
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: ch.color,
+      fontWeight: 800,
+      fontSize: 15,
+      marginBottom: 12
+    }
+  }, ch.emoji, " Hoofdstuk ", chapter + 1, ": ", ch.title), lines.slice(0, lineIdx + 1).map(function (line, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        color: i === lineIdx ? COLORS.text : COLORS.textMuted,
+        fontSize: i === lineIdx ? 16 : 14,
+        marginBottom: 8,
+        lineHeight: 1.5,
+        transition: "all 0.3s"
+      }
+    }, line);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Hoofdstuk ", chapter + 1, "/3"), /*#__PURE__*/React.createElement("span", null, lineIdx + 1, "/", lines.length)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: ch.color,
+      height: 6,
+      borderRadius: 99,
+      width: "".concat((chapter * 10 + lineIdx + 1) / (3 * 6) * 100, "%"),
+      transition: "width 0.3s"
+    }
+  }))), /*#__PURE__*/React.createElement(Btn, {
+    color: ch.color,
+    onClick: next
+  }, lineIdx < lines.length - 1 ? "Volgende ›" : chapter < 2 ? "Volgend hoofdstuk ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 2 — LEES & MARKEER
+// ════════════════════════════════════════════════════════════════
+function LeesPhase(_ref3) {
+  var onComplete = _ref3.onComplete;
+  var _useState1 = useState(0),
+    _useState10 = _slicedToArray(_useState1, 2),
+    section = _useState10[0],
+    setSection = _useState10[1];
+  var _useState11 = useState({}),
+    _useState12 = _slicedToArray(_useState11, 2),
+    marked = _useState12[0],
+    setMarked = _useState12[1];
+  var _useState13 = useState(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    done = _useState14[0],
+    setDone = _useState14[1];
+  var sec = leesData[section];
+  var allKeywords = sec.paragraphs.flatMap(function (p) {
+    return p.keywords;
+  });
+  var markedCount = allKeywords.filter(function (k) {
+    return marked["".concat(section, "-").concat(k)];
+  }).length;
+  var allMarked = markedCount === allKeywords.length;
+  function toggleMark(key) {
+    setMarked(function (m) {
+      return _objectSpread(_objectSpread({}, m), {}, _defineProperty({}, key, !m[key]));
+    });
+  }
+  function renderParagraph(para, sIdx) {
+    var words = para.text.split(/(\s+)/);
+    return para.keywords.reduce(function (text, kw) {
+      // highlight keyword in text
+      return text;
+    }, para.text);
+  }
+  function nextSection() {
+    if (section < leesData.length - 1) {
+      setSection(section + 1);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.blue,
+        marginTop: 12
+      }
+    }, "Theorie bekeken!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Nu de woordenschat instuderen!"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.purple,
+      onClick: onComplete
+    }, "\uD83D\uDCD8 Naar Woordenschat \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 14
+    }
+  }, leesData.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return setSection(i);
+      },
+      style: {
+        flex: 1,
+        padding: "8px 4px",
+        borderRadius: 10,
+        border: "2px solid ".concat(i <= section ? s.color : "#333"),
+        background: i === section ? s.color + "22" : "transparent",
+        color: i === section ? s.color : COLORS.textMuted,
+        fontSize: 11,
+        fontWeight: 700,
+        cursor: "pointer"
+      }
+    }, i === 0 ? "Bouw" : i === 1 ? "Beeld" : "Schilder");
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: sec.color + "18",
+      border: "2px solid ".concat(sec.color),
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: sec.color,
+      fontWeight: 800,
+      fontSize: 16,
+      marginBottom: 14
+    }
+  }, sec.title), sec.paragraphs.map(function (para, pIdx) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: pIdx,
+      style: {
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14,
+        lineHeight: 1.7,
+        color: COLORS.text,
+        marginBottom: 8
+      }
+    }, para.text.split(new RegExp("(".concat(para.keywords.join("|"), ")"), "gi")).map(function (part, i) {
+      var isKey = para.keywords.some(function (k) {
+        return k.toLowerCase() === part.toLowerCase();
+      });
+      var key = "".concat(section, "-").concat(part);
+      var isMarked = marked[key];
+      if (isKey) {
+        return /*#__PURE__*/React.createElement("span", {
+          key: i,
+          onClick: function onClick() {
+            return toggleMark("".concat(section, "-").concat(part));
+          },
+          style: {
+            background: isMarked ? sec.color : sec.color + "33",
+            color: isMarked ? COLORS.bg : sec.color,
+            borderRadius: 4,
+            padding: "1px 5px",
+            cursor: "pointer",
+            fontWeight: 700,
+            fontSize: 14,
+            transition: "all 0.2s",
+            border: "1px solid ".concat(sec.color)
+          }
+        }, part);
+      }
+      return /*#__PURE__*/React.createElement("span", {
+        key: i
+      }, part);
+    })));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: sec.color,
+      marginTop: 8
+    }
+  }, "\uD83D\uDC46 Tik op de gekleurde woorden om ze te markeren! (", markedCount, "/", allKeywords.length, ")")), /*#__PURE__*/React.createElement(Btn, {
+    color: sec.color,
+    onClick: nextSection
+  }, section < leesData.length - 1 ? "Volgende sectie ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 3 — WOORDENSCHAT MEMORY
+// ════════════════════════════════════════════════════════════════
+function WoordenschatPhase(_ref4) {
+  var onComplete = _ref4.onComplete;
+  var _useState15 = useState(function () {
+      var pairs = woordenschat.map(function (w, i) {
+        return [{
+          id: "nl-".concat(i),
+          text: w.nl,
+          pairId: i,
+          type: "nl"
+        }, {
+          id: "fr-".concat(i),
+          text: w.fr,
+          pairId: i,
+          type: "fr"
+        }];
+      }).flat();
+      return shuffle(pairs);
+    }),
+    _useState16 = _slicedToArray(_useState15, 2),
+    cards = _useState16[0],
+    setCards = _useState16[1];
+  var _useState17 = useState([]),
+    _useState18 = _slicedToArray(_useState17, 2),
+    selected = _useState18[0],
+    setSelected = _useState18[1];
+  var _useState19 = useState([]),
+    _useState20 = _slicedToArray(_useState19, 2),
+    matched = _useState20[0],
+    setMatched = _useState20[1];
+  var _useState21 = useState([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    wrong = _useState22[0],
+    setWrong = _useState22[1];
+  var _useState23 = useState(0),
+    _useState24 = _slicedToArray(_useState23, 2),
+    score = _useState24[0],
+    setScore = _useState24[1];
+  var _useState25 = useState(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    done = _useState26[0],
+    setDone = _useState26[1];
+  function selectCard(card) {
+    if (matched.includes(card.pairId)) return;
+    if (selected.find(function (c) {
+      return c.id === card.id;
+    })) return;
+    if (wrong.length > 0) {
+      setWrong([]);
+      setSelected([]);
+      return;
+    }
+    if (selected.length === 1) {
+      var first = selected[0];
+      if (first.pairId === card.pairId && first.type !== card.type) {
+        setMatched(function (m) {
+          return [].concat(_toConsumableArray(m), [card.pairId]);
+        });
+        setScore(function (s) {
+          return s + 1;
+        });
+        setSelected([]);
+        if (matched.length + 1 === woordenschat.length) setDone(true);
+      } else {
+        setWrong([first.id, card.id]);
+        setSelected([first, card]);
+        setTimeout(function () {
+          setWrong([]);
+          setSelected([]);
+        }, 900);
+      }
+    } else {
+      setSelected([card]);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDF89"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.purple,
+        marginTop: 12
+      }
+    }, "Alle woorden gevonden!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Score: ", score, "/", woordenschat.length, " \u2728"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: onComplete
+    }, "\u26A1 Naar de Grote Quiz \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: COLORS.purple,
+      fontSize: 16
+    }
+  }, "\uD83D\uDCD8 Memory Match"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: COLORS.gold,
+      fontWeight: 700
+    }
+  }, matched.length, "/", woordenschat.length, " \u2713")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 14
+    }
+  }, "Koppel elk Nederlands woord aan zijn betekenis!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 8
+    }
+  }, cards.map(function (card) {
+    var isMatched = matched.includes(card.pairId);
+    var isSelected = selected.find(function (c) {
+      return c.id === card.id;
+    });
+    var isWrong = wrong.includes(card.id);
+    var color = card.type === "nl" ? COLORS.blue : COLORS.pink;
+    return /*#__PURE__*/React.createElement("button", {
+      key: card.id,
+      onClick: function onClick() {
+        return selectCard(card);
+      },
+      style: {
+        padding: "12px 8px",
+        borderRadius: 12,
+        border: "2px solid ".concat(isWrong ? COLORS.red : isMatched ? COLORS.green : isSelected ? color : color + "44"),
+        background: isWrong ? COLORS.red + "22" : isMatched ? COLORS.green + "22" : isSelected ? color + "22" : COLORS.card,
+        color: isMatched ? COLORS.green : isWrong ? COLORS.red : isSelected ? color : COLORS.text,
+        cursor: isMatched ? "default" : "pointer",
+        fontWeight: 700,
+        fontSize: 12,
+        textAlign: "center",
+        lineHeight: 1.3,
+        minHeight: 60,
+        transition: "all 0.15s",
+        opacity: isMatched ? 0.6 : 1
+      }
+    }, isMatched ? "✓ " : "", card.text);
+  })));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 4 — GROTE QUIZ
+// ════════════════════════════════════════════════════════════════
+function QuizPhase() {
+  var _useState27 = useState(function () {
+      return shuffle(quizQuestions);
+    }),
+    _useState28 = _slicedToArray(_useState27, 1),
+    questions = _useState28[0];
+  var _useState29 = useState(0),
+    _useState30 = _slicedToArray(_useState29, 2),
+    idx = _useState30[0],
+    setIdx = _useState30[1];
+  var _useState31 = useState(null),
+    _useState32 = _slicedToArray(_useState31, 2),
+    answered = _useState32[0],
+    setAnswered = _useState32[1];
+  var _useState33 = useState(0),
+    _useState34 = _slicedToArray(_useState33, 2),
+    score = _useState34[0],
+    setScore = _useState34[1];
+  var _useState35 = useState(false),
+    _useState36 = _slicedToArray(_useState35, 2),
+    done = _useState36[0],
+    setDone = _useState36[1];
+  var _useState37 = useState(null),
+    _useState38 = _slicedToArray(_useState37, 2),
+    orderItems = _useState38[0],
+    setOrderItems = _useState38[1];
+  var _useState39 = useState(null),
+    _useState40 = _slicedToArray(_useState39, 2),
+    dragIdx = _useState40[0],
+    setDragIdx = _useState40[1];
+  var q = questions[idx];
+  useEffect(function () {
+    if ((q === null || q === void 0 ? void 0 : q.type) === "order") {
+      setOrderItems(shuffle(_toConsumableArray(q.items)));
+    }
+  }, [idx]);
+  function checkMC(optIdx) {
+    if (answered !== null) return;
+    var correct = optIdx === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkTF(val) {
+    if (answered !== null) return;
+    var correct = val === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkOrder() {
+    if (answered !== null) return;
+    var correct = q.answer.every(function (a, i) {
+      return q.items[a] === orderItems[i];
+    });
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function moveItem(from, to) {
+    if (answered !== null) return;
+    var items = _toConsumableArray(orderItems);
+    var _items$splice = items.splice(from, 1),
+      _items$splice2 = _slicedToArray(_items$splice, 1),
+      item = _items$splice2[0];
+    items.splice(to, 0, item);
+    setOrderItems(items);
+  }
+  function next() {
+    if (idx < questions.length - 1) {
+      setIdx(idx + 1);
+      setAnswered(null);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    var pct = Math.round(score / questions.length * 100);
+    var medal = pct >= 90 ? "🥇" : pct >= 70 ? "🥈" : pct >= 50 ? "🥉" : "📚";
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 30
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 70
+      }
+    }, medal), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 28,
+        fontWeight: 900,
+        color: COLORS.gold,
+        marginTop: 8
+      }
+    }, score, "/", questions.length), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 16,
+        color: COLORS.textMuted,
+        marginTop: 6
+      }
+    }, pct, "%"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 16,
+        fontSize: 16,
+        color: pct >= 70 ? COLORS.green : COLORS.orange
+      }
+    }, pct >= 90 ? "🔥 Uitstekend! Jij bent een echte Griekse kunstkenner!" : pct >= 70 ? "👍 Goed gedaan! Nog een beetje herhalen!" : pct >= 50 ? "💪 Niet slecht! Bekijk de theorie nog eens." : "📖 Herhaal de lessen en probeer opnieuw!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 24
+      }
+    }, /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: function onClick() {
+        setIdx(0);
+        setAnswered(null);
+        setScore(0);
+        setDone(false);
+      }
+    }, "\uD83D\uDD04 Opnieuw spelen")));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Vraag ", idx + 1, "/", questions.length), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: COLORS.gold
+    }
+  }, "\u2B50 ", score, " punten")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "linear-gradient(90deg, ".concat(COLORS.gold, ", ").concat(COLORS.orange, ")"),
+      height: 6,
+      borderRadius: 99,
+      width: "".concat(idx / questions.length * 100, "%"),
+      transition: "width 0.3s"
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 14,
+      border: "2px solid #2a2840"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      textTransform: "uppercase",
+      letterSpacing: 1
+    }
+  }, q.type === "mc" ? "Meerkeuze" : q.type === "tf" ? "Juist / Fout" : "Volgorde"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      lineHeight: 1.4
+    }
+  }, q.question)), q.type === "mc" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gap: 8,
+      marginBottom: 14
+    }
+  }, q.options.map(function (opt, i) {
+    var isCorrect = i === q.answer;
+    var color = answered === null ? COLORS.blue : isCorrect ? COLORS.green : answered && !isCorrect ? COLORS.red : COLORS.textMuted;
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return checkMC(i);
+      },
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        border: "2px solid ".concat(answered !== null ? isCorrect ? COLORS.green : COLORS.red + "44" : COLORS.blue + "44"),
+        background: answered !== null && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: answered !== null ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        textAlign: "left",
+        cursor: answered === null ? "pointer" : "default",
+        fontWeight: 600,
+        fontSize: 14,
+        transition: "all 0.2s"
+      }
+    }, answered !== null && isCorrect ? "✓ " : answered !== null ? "  " : "", opt);
+  })), q.type === "tf" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 10,
+      marginBottom: 14
+    }
+  }, [true, false].map(function (val) {
+    var isCorrect = val === q.answer;
+    var chosen = answered !== null;
+    return /*#__PURE__*/React.createElement("button", {
+      key: String(val),
+      onClick: function onClick() {
+        return checkTF(val);
+      },
+      style: {
+        padding: "20px",
+        borderRadius: 14,
+        border: "2px solid ".concat(chosen ? isCorrect ? COLORS.green : COLORS.red : val ? COLORS.green + "55" : COLORS.red + "55"),
+        background: chosen && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: chosen ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        fontSize: 18,
+        fontWeight: 800,
+        cursor: chosen ? "default" : "pointer",
+        transition: "all 0.2s"
+      }
+    }, val ? "✅ JUIST" : "❌ FOUT");
+  })), q.type === "order" && orderItems && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 8
+    }
+  }, "Versleep de blokken in de juiste volgorde:"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 8
+    }
+  }, orderItems.map(function (item, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: item,
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        background: answered === "correct" ? COLORS.green + "22" : answered === "wrong" ? COLORS.red + "22" : COLORS.cardLight,
+        border: "2px solid ".concat(answered === "correct" ? COLORS.green : answered === "wrong" ? COLORS.red : COLORS.purple + "55"),
+        color: COLORS.text,
+        fontWeight: 700,
+        display: "flex",
+        alignItems: "center",
+        gap: 10
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: COLORS.purple,
+        fontWeight: 900,
+        fontSize: 18
+      }
+    }, i + 1, "."), item, answered === null && /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginLeft: "auto",
+        display: "flex",
+        gap: 4
+      }
+    }, i > 0 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i - 1);
+      },
+      style: {
+        background: COLORS.purple + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.purple,
+        padding: "4px 8px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25B2"), i < orderItems.length - 1 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i + 1);
+      },
+      style: {
+        background: COLORS.purple + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.purple,
+        padding: "4px 8px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25BC")));
+  })), answered === null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10
+    }
+  }, /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.purple,
+    onClick: checkOrder
+  }, "\u2713 Controleer volgorde"))), answered !== null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: answered === "correct" ? COLORS.green + "22" : COLORS.red + "22",
+      border: "2px solid ".concat(answered === "correct" ? COLORS.green : COLORS.red),
+      borderRadius: 12,
+      padding: 14,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: answered === "correct" ? COLORS.green : COLORS.red,
+      marginBottom: 4
+    }
+  }, answered === "correct" ? "✅ Correct! +1 punt" : "❌ Fout!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: COLORS.text
+    }
+  }, q.uitleg)), answered !== null && /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.gold,
+    onClick: next
+  }, idx < questions.length - 1 ? "Volgende vraag ›" : "Bekijk resultaat 🏆"));
+}
+
+// ─── BUTTON COMPONENT ────────────────────────────────────────────
+function Btn(_ref5) {
+  var color = _ref5.color,
+    onClick = _ref5.onClick,
+    children = _ref5.children;
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    style: {
+      width: "100%",
+      padding: "16px",
+      borderRadius: 14,
+      border: "none",
+      background: color,
+      color: "#0f0e17",
+      fontWeight: 900,
+      fontSize: 16,
+      cursor: "pointer",
+      transition: "opacity 0.2s"
+    },
+    onMouseDown: function onMouseDown(e) {
+      return e.currentTarget.style.opacity = "0.8";
+    },
+    onMouseUp: function onMouseUp(e) {
+      return e.currentTarget.style.opacity = "1";
+    }
+  }, children);
+}
+var root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>

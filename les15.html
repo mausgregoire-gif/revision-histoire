@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>⚔️ Les 15 — Rome wordt machtig</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:#0f0e17;color:#fffffe;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+button{font-family:inherit;}
+#root{background:#0f0e17;min-height:100vh;color:#fffffe;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var _React = React,
+  useState = _React.useState,
+  useEffect = _React.useEffect,
+  useRef = _React.useRef;
+
+// ============================================================
+// DATA
+// ============================================================
+
+var STORY_CHAPTERS = [{
+  id: 1,
+  title: "De kleine stad die de wereld veroverde",
+  emoji: "🏛️",
+  text: "Het jaar is 390 voor Christus. Rome is nog maar een kleine stadstaat aan de rivier de Tiber. En dan... slaan de Kelten toe.\n\nEen woeste stam uit het noorden valt Rome aan en verovert de stad. De Romeinen lijden een vernederende nederlaag. Voor even lijkt alles voorbij.\n\nMaar de Romeinen zijn niet het soort mensen dat zich zomaar gewonnen geeft.\n\nZe herstellen zich. Ze herbouwen. Ze leren van hun fouten. En omstreeks 340 voor Christus is hun heerschappij over Latium \u2014 het gebied rond Rome \u2014 definitief. De inwoners van veroverde steden krijgen het Romeinse burgerrecht: dezelfde rechten \xE9n plichten als echte Romeinen. Slim, toch? Want waarom zou je in opstand komen als je z\xE9lf een Romein bent geworden?"
+}, {
+  id: 2,
+  title: "Rome verovert heel Italië",
+  emoji: "⚔️",
+  text: "De Romeinen stoppen niet bij Latium. Ze willen meer.\n\nStap voor stap breiden ze hun macht uit over het hele Italiaanse schiereiland:\n\nEerst verslaan ze de Etrusken in het noorden, de Samnieten in het midden, en de Umbri\xEBrs. Dan trekken ze verder naar het zuiden, waar Griekse kolonies liggen \u2014 rijke, bloeiende steden die zich graag verzetten. Maar Rome wint. Altijd.\n\nOmstreeks 270 voor Christus regeert Rome over heel Itali\xEB ten zuiden van de rivier de Po. Van een kleine stadstaat tot heerser over een heel schiereiland \u2014 in minder dan een eeuw.\n\nHoe doen ze dat? Met een slim systeem: niet alle veroverde volkeren worden hetzelfde behandeld. Trouwe steden krijgen meer rechten. Opstandige steden worden keihard aangepakt. Rome zaait verdeeldheid \u2014 zodat niemand sterk genoeg wordt om samen tegen Rome te vechten.\n\nZe noemen het zelf: Divide et impera. Verdeel en heers."
+}, {
+  id: 3,
+  title: "Hannibal — de man die Rome bijna vernietigde",
+  emoji: "🐘",
+  text: "Nu heeft Rome een nieuwe vijand. En deze keer is het een die hen echt bang maakt.\n\nZijn naam is Hannibal Barca. Carthaags generaal. Geniaal strateeg. En hij heeft een geheimwapen: oorlogsolifanten.\n\nIn 218 voor Christus doet Hannibal iets wat iedereen voor onmogelijk houdt: hij trekt met zijn leger \u2014 en zijn olifanten \u2014 over de Pyrenee\xEBn en de Alpen. In de winter. Duizenden soldaten en tientallen olifanten sterven in de bergen. Maar Hannibal geraakt erdoor.\n\nEenmaal in Itali\xEB is hij onstuitbaar. Bij het Trasimeense Meer verslaat hij de Romeinen. Bij Cannae \u2014 in 216 voor Christus \u2014 levert hij de Romeinen de grootste militaire ramp uit hun geschiedenis: in \xE9\xE9n enkele dag sneuvelen 50.000 Romeinse soldaten.\n\nVijftigduizend. Op \xE9\xE9n dag.\n\nRome lijkt verloren. Maar de bondgenoten in Midden-Itali\xEB blijven trouw aan Rome. Hannibal heeft geen versterkingen. Hij kan Rome niet innemen. En intussen stuurt Rome zijn eigen generaal \u2014 Scipio 'Africanus' \u2014 naar Spanje en daarna naar Afrika zelf.\n\nIn 202 voor Christus ontmoeten Hannibal en Scipio elkaar bij Zama. Hannibal verliest. Voor de eerste keer in zijn leven."
+}, {
+  id: 4,
+  title: "Carthago delenda est!",
+  emoji: "🔥",
+  text: "Na de Tweede Punische Oorlog is Rome de baas van het westelijke Middellandse Zeegebied. Maar \xE9\xE9n man is er nog niet tevreden mee.\n\nMarcus Porcius Cato \u2014 een rijke Romein die vreest voor de hernieuwde kracht van Carthago. De Carthaagse boeren concurreren met de Romeinse landheren. Dat pikt hij niet.\n\nElke toespraak in de senaat eindigt hij met dezelfde zin, wat het onderwerp ook is:\n\"Ceterum censeo Carthaginem esse delendam.\"\n\u2014 \"Overigens ben ik van mening dat Carthago verwoest moet worden.\"\n\nElke. Keer. Weer.\n\nEn uiteindelijk krijgt hij zijn zin.\n\nIn 149 voor Christus begint de Derde Punische Oorlog. Carthago is nu veel zwakker. In 146 voor Christus wordt de stad volledig verwoest. De Romeinen plegen de grond om. Ze maken er een Romeinse provincie van: Africa.\n\nDe Middellandse Zee is nu een Romeinse zee. Ze noemen het zelf: Mare Nostrum. Onze zee."
+}, {
+  id: 5,
+  title: "Verdeel en heers — het geheim van Rome",
+  emoji: "🗺️",
+  text: "Hoe beheerst Rome al die veroverde gebieden? Met \xE9\xE9n geniaal systeem.\n\nEen veroverd gebied buiten Itali\xEB heet een 'provincia'. En elke provincie wordt anders behandeld \u2014 afhankelijk van hoe trouw ze zijn.\n\nSommige steden krijgen het volledige Romeinse recht: ze mogen kiezen, verkozen worden, eigendommen bezitten en trouwen volgens Romeinse wet. Dit zijn de kolonies en de bevoorrechte steden.\n\nAndere steden krijgen het 'Latijns recht' \u2014 gedeeltelijk. Ze hebben geen politieke rechten, maar wel burgerlijke rechten.\n\nEn dan zijn er de onderworpen steden: geen zelfbestuur, geen rechten. Ze moeten gewoon gehoorzamen.\n\nMaar \u2014 en dit is het slimme \u2014 elke stad kan opklimmen of afzakken. Trouw aan Rome wordt beloond. Opstand wordt bestraft. Zo heeft niemand echt reden om samen te spannen.\n\nOm dat systeem te ondersteunen, bouwen de Romeinen een indrukwekkend netwerk van heerbanen \u2014 rechte, geplaveide wegen die dwars door het rijk lopen. Alle wegen leiden naar Rome. Letterlijk.\n\nMet die wegen kunnen legioenen zich razendsnel verplaatsen. En handelaars ook \u2014 want de wegen zijn niet alleen voor soldaten. Ze verbinden het hele rijk."
+}];
+var VOCAB_ITEMS = [{
+  term: "Burgerrecht",
+  def: "De rechten én plichten die bij het Romein-zijn horen (stemmen, belastingen betalen...)"
+}, {
+  term: "Provincia",
+  def: "Een veroverd gebied buiten Italië, bestuurd door Rome"
+}, {
+  term: "Punische oorlogen",
+  def: "Drie grote oorlogen tussen Rome en Carthago (264–146 v.C.)"
+}, {
+  term: "Divide et impera",
+  def: "Latijn voor 'Verdeel en heers' — Rome's bestuursstrategie"
+}, {
+  term: "Latium",
+  def: "Het gebied rond Rome, het eerste dat Rome definitief veroverde"
+}, {
+  term: "Heerbaan",
+  def: "Een Romeinse geplaveide weg voor snelle verplaatsing van het leger"
+}, {
+  term: "Mare Nostrum",
+  def: "Latijn voor 'Onze zee' — de naam die de Romeinen gaven aan de Middellandse Zee"
+}, {
+  term: "Nobilitas",
+  def: "De rijke elite van Rome: patriciërs + rijke plebejers"
+}, {
+  term: "Caliga",
+  def: "De genagelde soldatenschoen van de Romeinse legionair"
+}, {
+  term: "Latijns recht",
+  def: "Gedeeltelijk Romeins recht — burgerlijke rechten maar geen politieke rechten"
+}];
+var QUIZ_QUESTIONS = [{
+  id: 1,
+  type: "mc",
+  question: "Welk volk veroverde Rome omstreeks 390 v.C.?",
+  options: ["De Etrusken", "De Kelten", "De Samnieten", "De Grieken"],
+  correct: 1,
+  explanation: "De Kelten (ook Galliërs genoemd) veroverden Rome omstreeks 390 v.C. — een zware maar tijdelijke nederlaag."
+}, {
+  id: 2,
+  type: "mc",
+  question: "Omstreeks welk jaar regeert Rome over heel Italië ten zuiden van de Po?",
+  options: ["340 v.C.", "290 v.C.", "270 v.C.", "264 v.C."],
+  correct: 2,
+  explanation: "Omstreeks 270 v.C. heeft Rome heel Italië ten zuiden van de rivier de Po onder controle."
+}, {
+  id: 3,
+  type: "tf",
+  question: "De Eerste Punische Oorlog ging over de controle van Sicilië.",
+  correct: true,
+  explanation: "Juist! Rome en Carthago streden in de Eerste Punische Oorlog (264–241 v.C.) om de controle over Sicilië."
+}, {
+  id: 4,
+  type: "mc",
+  question: "Wat was het bijzondere wapen van Hannibal tijdens zijn tocht naar Italië?",
+  options: ["Strijdwagens", "Oorlogsolifanten", "Katapulten", "Zeeschepen"],
+  correct: 1,
+  explanation: "Hannibal gebruikte oorlogsolifanten — vergelijkbaar met een moderne tank!"
+}, {
+  id: 5,
+  type: "mc",
+  question: "Bij welke slag sneuvelden 50.000 Romeinse soldaten op één dag?",
+  options: ["Bij het Trasimeense Meer", "Bij Zama", "Bij Cannae", "Bij Trebia"],
+  correct: 2,
+  explanation: "Bij Cannae (216 v.C.) leed Rome zijn verpletterende nederlaag: 50.000 soldaten op één dag."
+}, {
+  id: 6,
+  type: "tf",
+  question: "Hannibal heeft Rome nooit ingenomen.",
+  correct: true,
+  explanation: "Juist! Ondanks zijn overwinningen kon Hannibal Rome niet innemen — hij had geen versterkingen en de bondgenoten bleven trouw aan Rome."
+}, {
+  id: 7,
+  type: "mc",
+  question: "Welke Romeinse generaal versloeg Hannibal bij Zama?",
+  options: ["Julius Caesar", "Cato de Oudere", "Scipio Africanus", "Pompeius"],
+  correct: 2,
+  explanation: "Scipio 'Africanus' versloeg Hannibal in 202 v.C. bij Zama — zijn bijnaam dankt hij aan deze overwinning in Africa."
+}, {
+  id: 8,
+  type: "fill",
+  question: "Vul in: 'Ceterum censeo Carthaginem esse ___________.'",
+  answer: "delendam",
+  hint: "Het betekent: 'moet worden verwoest'",
+  explanation: "Dit is de beroemde zin van Cato: 'Overigens ben ik van mening dat Carthago verwoest moet worden.'"
+}, {
+  id: 9,
+  type: "mc",
+  question: "Wat betekent 'Divide et impera'?",
+  options: ["Aanvallen en overwinnen", "Verdeel en heers", "Bouwen en verbinden", "Straffen en belonen"],
+  correct: 1,
+  explanation: "Divide et impera = Verdeel en heers. Rome behandelde veroverde gebieden verschillend om samenspanning te voorkomen."
+}, {
+  id: 10,
+  type: "tf",
+  question: "Onderworpen steden hadden geen zelfbestuur en geen Romeinse rechten.",
+  correct: true,
+  explanation: "Juist! Onderworpen steden kregen geen rechten en geen zelfbestuur — de strengste behandeling in het Romeinse systeem."
+}, {
+  id: 11,
+  type: "mc",
+  question: "Waarvoor dienden de Romeinse heerbanen?",
+  options: ["Alleen voor handelaars", "Snelle verplaatsing van het leger, en ook voor handel", "Alleen voor de keizer", "Waterafvoer"],
+  correct: 1,
+  explanation: "De heerbanen waren primair voor het leger, maar ook handelaars en reizigers maakten er gebruik van."
+}, {
+  id: 12,
+  type: "order",
+  question: "Zet de drie fasen van Rome's verovering in de juiste volgorde:",
+  items: ["Rome verovert de Griekse kolonies in Zuid-Italië", "Rome verovert Latium", "Rome verovert de rest van Midden-Italië (Etrusken, Samnieten...)"],
+  correct: [1, 2, 0],
+  explanation: "Eerst Latium, dan Midden-Italië, dan de Griekse kolonies in het zuiden."
+}, {
+  id: 13,
+  type: "mc",
+  question: "Wat was de Carthaagse stad die in 146 v.C. volledig verwoest werd?",
+  options: ["Saguntum", "Cartagena", "Carthago", "Syracuse"],
+  correct: 2,
+  explanation: "Carthago zelf werd in 146 v.C. verwoest tijdens de Derde Punische Oorlog en omgevormd tot de Romeinse provincie 'Africa'."
+}, {
+  id: 14,
+  type: "tf",
+  question: "De Romeinse caliga had 80 tot 90 nagels in de zool.",
+  correct: true,
+  explanation: "Juist! De nagels gaven extra steun bij het stappen én zorgden ervoor dat de schoen niet snel versleet."
+}, {
+  id: 15,
+  type: "mc",
+  question: "Welke keizer dankt zijn bijnaam aan de soldatenschoen?",
+  options: ["Augustus", "Nero", "Caligula", "Trajanus"],
+  correct: 2,
+  explanation: "Als klein jongetje liep hij op mini-caligae door de soldatenkampen. De soldaten gaven hem de bijnaam Caligula = 'kleine caliga'."
+}, {
+  id: 16,
+  type: "mc",
+  question: "Hoelang duurden de drie Punische oorlogen samen (van 264 tot 146 v.C.)?",
+  options: ["Ongeveer 80 jaar", "Ongeveer 118 jaar", "Ongeveer 50 jaar", "Ongeveer 200 jaar"],
+  correct: 1,
+  explanation: "264 – 146 = 118 jaar aan oorlogen tussen Rome en Carthago!"
+}, {
+  id: 17,
+  type: "tf",
+  question: "Steden die opstand pleegden tegen Rome konden worden 'gedegradeerd' naar een lagere categorie rechten.",
+  correct: true,
+  explanation: "Juist! Steden konden bevorderd of gedegradeerd worden — dat hield iedereen trouw aan Rome."
+}, {
+  id: 18,
+  type: "mc",
+  question: "Wat betekent 'Mare Nostrum'?",
+  options: ["Ons leger", "Onze zee", "Onze wegen", "Ons rijk"],
+  correct: 1,
+  explanation: "Mare Nostrum = 'Onze zee'. De Romeinen noemden de Middellandse Zee zo nadat ze de baas werden over het hele gebied."
+}];
+
+// ============================================================
+// STYLES (inline, game-style)
+// ============================================================
+
+var colors = {
+  bg: "#0f0e17",
+  panel: "#1a1a2e",
+  panelLight: "#16213e",
+  accent: "#e94560",
+  gold: "#f5a623",
+  teal: "#00b4d8",
+  green: "#06d6a0",
+  red: "#ef233c",
+  text: "#fffffe",
+  textMuted: "#a8a8b3",
+  border: "#2a2a4a"
+};
+var baseBtn = {
+  border: "none",
+  cursor: "pointer",
+  borderRadius: "12px",
+  fontFamily: "'Trebuchet MS', sans-serif",
+  fontWeight: "700",
+  transition: "all 0.18s ease",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px"
+};
+
+// ============================================================
+// SMALL COMPONENTS
+// ============================================================
+
+function ProgressBar(_ref) {
+  var value = _ref.value,
+    max = _ref.max,
+    _ref$color = _ref.color,
+    color = _ref$color === void 0 ? colors.accent : _ref$color;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: colors.border,
+      borderRadius: "99px",
+      height: "8px",
+      width: "100%"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: "100%",
+      borderRadius: "99px",
+      background: color,
+      width: "".concat(Math.round(value / max * 100), "%"),
+      transition: "width 0.4s ease"
+    }
+  }));
+}
+function Badge(_ref2) {
+  var children = _ref2.children,
+    _ref2$color = _ref2.color,
+    color = _ref2$color === void 0 ? colors.accent : _ref2$color;
+  return /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: color + "22",
+      color: color,
+      border: "1px solid ".concat(color, "44"),
+      borderRadius: "99px",
+      padding: "2px 10px",
+      fontSize: "12px",
+      fontWeight: "700"
+    }
+  }, children);
+}
+function StarScore(_ref3) {
+  var score = _ref3.score,
+    total = _ref3.total;
+  var pct = score / total;
+  var stars = pct >= 0.9 ? 3 : pct >= 0.7 ? 2 : pct >= 0.5 ? 1 : 0;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: "28px",
+      letterSpacing: "4px"
+    }
+  }, [0, 1, 2].map(function (i) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: i,
+      style: {
+        opacity: i < stars ? 1 : 0.2
+      }
+    }, "\u2B50");
+  }));
+}
+
+// ============================================================
+// PHASE 1 — VERHAAL
+// ============================================================
+
+function StoryPhase(_ref4) {
+  var onDone = _ref4.onDone;
+  var _useState = useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    chapterIdx = _useState2[0],
+    setChapterIdx = _useState2[1];
+  var ch = STORY_CHAPTERS[chapterIdx];
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: "680px",
+      margin: "0 auto",
+      padding: "16px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      marginBottom: "24px"
+    }
+  }, /*#__PURE__*/React.createElement(Badge, {
+    color: colors.gold
+  }, "\uD83D\uDCD6 Het Verhaal"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: "8px",
+      color: colors.textMuted,
+      fontSize: "13px"
+    }
+  }, "Hoofdstuk ", chapterIdx + 1, " van ", STORY_CHAPTERS.length), /*#__PURE__*/React.createElement(ProgressBar, {
+    value: chapterIdx + 1,
+    max: STORY_CHAPTERS.length,
+    color: colors.gold
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: colors.panel,
+      borderRadius: "20px",
+      padding: "28px",
+      border: "1px solid ".concat(colors.border),
+      marginBottom: "20px",
+      boxShadow: "0 8px 32px rgba(0,0,0,0.4)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: "40px",
+      marginBottom: "12px",
+      textAlign: "center"
+    }
+  }, ch.emoji), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      color: colors.gold,
+      fontSize: "20px",
+      marginBottom: "16px",
+      textAlign: "center",
+      fontFamily: "'Georgia', serif"
+    }
+  }, ch.title), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: colors.text,
+      lineHeight: "1.8",
+      fontSize: "15px",
+      whiteSpace: "pre-wrap"
+    }
+  }, ch.text)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: "12px",
+      justifyContent: "center",
+      flexWrap: "wrap"
+    }
+  }, chapterIdx > 0 && /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return setChapterIdx(function (i) {
+        return i - 1;
+      });
+    },
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.panelLight,
+      color: colors.textMuted,
+      padding: "12px 24px",
+      fontSize: "14px"
+    })
+  }, "\u2190 Vorige"), chapterIdx < STORY_CHAPTERS.length - 1 ? /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return setChapterIdx(function (i) {
+        return i + 1;
+      });
+    },
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.gold,
+      color: "#0f0e17",
+      padding: "12px 32px",
+      fontSize: "15px"
+    })
+  }, "Volgende \u2192") : /*#__PURE__*/React.createElement("button", {
+    onClick: onDone,
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.accent,
+      color: "#fff",
+      padding: "14px 36px",
+      fontSize: "16px",
+      boxShadow: "0 4px 20px ".concat(colors.accent, "55")
+    })
+  }, "\uD83C\uDF89 Naar het Lesoverzicht \u2192")));
+}
+
+// ============================================================
+// PHASE 2 — LESOVERZICHT (highlight simulation)
+// ============================================================
+
+var LESSON_SECTIONS = [{
+  title: "1. Rome verovert Italië",
+  color: colors.teal,
+  points: [{
+    text: "Omstreeks 390 v.C. veroveren de Kelten Rome — tijdelijk.",
+    important: true
+  }, {
+    text: "Omstreeks 340 v.C. is de heerschappij over Latium definitief.",
+    important: true
+  }, {
+    text: "Veroverde inwoners kunnen het Romeinse burgerrecht krijgen.",
+    important: true
+  }, {
+    text: "Omstreeks 290 v.C.: Etrusken, Samnieten en Umbriërs onderworpen.",
+    important: false
+  }, {
+    text: "Omstreeks 270 v.C.: Rome heerst over heel Italië ten zuiden van de Po.",
+    important: true
+  }]
+}, {
+  title: "2. De Punische Oorlogen (264–146 v.C.)",
+  color: colors.accent,
+  points: [{
+    text: "Eerste Punische Oorlog (264–241 v.C.): Rome wint Sicilië — eerste gebieden buiten Italië.",
+    important: true
+  }, {
+    text: "Tweede Punische Oorlog (218–201 v.C.): Hannibal trekt over de Alpen met olifanten.",
+    important: true
+  }, {
+    text: "Bij Cannae (216 v.C.) sneuvelen 50.000 Romeinse soldaten op één dag.",
+    important: true
+  }, {
+    text: "Scipio 'Africanus' verslaat Hannibal bij Zama (202 v.C.).",
+    important: true
+  }, {
+    text: "Derde Punische Oorlog (149–146 v.C.): Carthago volledig verwoest → provincie Africa.",
+    important: true
+  }, {
+    text: "Cato eindigt elke senaatstoespraak met: 'Ceterum censeo Carthaginem esse delendam.'",
+    important: false
+  }]
+}, {
+  title: "3. Verdeel en heers",
+  color: colors.green,
+  points: [{
+    text: "Veroverd gebied buiten Italië = provincia.",
+    important: true
+  }, {
+    text: "Verschillende gebieden krijgen verschillende behandeling: kolonies, bevoorrechte steden, steden met Latijns recht, verbonden steden, onderworpen steden.",
+    important: true
+  }, {
+    text: "Trouw aan Rome wordt beloond — opstand bestraft. Steden kunnen op- of afklimmen.",
+    important: true
+  }, {
+    text: "Netwerk van heerbanen: snel leger verplaatsen, ook nuttig voor handel.",
+    important: true
+  }, {
+    text: "De caliga: genagelde soldatenschoen met 80–90 nagels.",
+    important: false
+  }, {
+    text: "Keizer Caligula dankt zijn naam aan de mini-caliga die hij als kind droeg.",
+    important: false
+  }]
+}];
+function LessonPhase(_ref5) {
+  var onDone = _ref5.onDone;
+  var _useState3 = useState({}),
+    _useState4 = _slicedToArray(_useState3, 2),
+    highlighted = _useState4[0],
+    setHighlighted = _useState4[1];
+  var totalImportant = LESSON_SECTIONS.flatMap(function (s) {
+    return s.points.filter(function (p) {
+      return p.important;
+    });
+  }).length;
+  var highlightedCount = Object.values(highlighted).filter(Boolean).length;
+  var toggle = function toggle(key) {
+    return setHighlighted(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, key, !prev[key]));
+    });
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: "680px",
+      margin: "0 auto",
+      padding: "16px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      marginBottom: "20px"
+    }
+  }, /*#__PURE__*/React.createElement(Badge, {
+    color: colors.teal
+  }, "\uD83D\uDCDA Lees & Markeer"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "13px",
+      marginTop: "8px"
+    }
+  }, "Tik op de zinnen die je belangrijk vindt om ze te markeren!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: "8px"
+    }
+  }, /*#__PURE__*/React.createElement(ProgressBar, {
+    value: highlightedCount,
+    max: totalImportant,
+    color: colors.teal
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "12px",
+      marginTop: "4px"
+    }
+  }, highlightedCount, " / ", totalImportant, " kernpunten gemarkeerd"))), LESSON_SECTIONS.map(function (section, si) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: si,
+      style: {
+        background: colors.panel,
+        borderRadius: "16px",
+        padding: "20px",
+        marginBottom: "16px",
+        border: "1px solid ".concat(section.color, "33")
+      }
+    }, /*#__PURE__*/React.createElement("h3", {
+      style: {
+        color: section.color,
+        marginBottom: "14px",
+        fontSize: "16px"
+      }
+    }, section.title), section.points.map(function (point, pi) {
+      var key = "".concat(si, "-").concat(pi);
+      var isHighlighted = highlighted[key];
+      return /*#__PURE__*/React.createElement("div", {
+        key: pi,
+        onClick: function onClick() {
+          return toggle(key);
+        },
+        style: {
+          padding: "10px 14px",
+          borderRadius: "10px",
+          marginBottom: "8px",
+          cursor: "pointer",
+          background: isHighlighted ? section.color + "22" : "transparent",
+          border: "2px solid ".concat(isHighlighted ? section.color : "transparent"),
+          color: isHighlighted ? colors.text : colors.textMuted,
+          transition: "all 0.2s ease",
+          fontSize: "14px",
+          lineHeight: "1.5",
+          display: "flex",
+          gap: "10px",
+          alignItems: "flex-start"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: "16px",
+          flexShrink: 0,
+          marginTop: "1px"
+        }
+      }, isHighlighted ? "🖊️" : "○"), /*#__PURE__*/React.createElement("span", null, point.text));
+    }));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      marginTop: "8px"
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: onDone,
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.accent,
+      color: "#fff",
+      padding: "14px 36px",
+      fontSize: "16px",
+      boxShadow: "0 4px 20px ".concat(colors.accent, "55")
+    })
+  }, "\uD83E\uDDE0 Naar de Woordenschat \u2192")));
+}
+
+// ============================================================
+// PHASE 3 — WOORDENSCHAT
+// ============================================================
+
+function VocabPhase(_ref6) {
+  var onDone = _ref6.onDone;
+  var _useState5 = useState(function () {
+      var shuffledDefs = [].concat(VOCAB_ITEMS).sort(function () {
+        return Math.random() - 0.5;
+      });
+      return {
+        terms: VOCAB_ITEMS,
+        defs: shuffledDefs
+      };
+    }),
+    _useState6 = _slicedToArray(_useState5, 1),
+    pairs = _useState6[0];
+  var _useState7 = useState({
+      term: null,
+      def: null
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    selected = _useState8[0],
+    setSelected = _useState8[1];
+  var _useState9 = useState([]),
+    _useState0 = _slicedToArray(_useState9, 2),
+    matched = _useState0[0],
+    setMatched = _useState0[1];
+  var _useState1 = useState(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    wrong = _useState10[0],
+    setWrong = _useState10[1];
+  var _useState11 = useState(0),
+    _useState12 = _slicedToArray(_useState11, 2),
+    score = _useState12[0],
+    setScore = _useState12[1];
+  var _useState13 = useState(0),
+    _useState14 = _slicedToArray(_useState13, 2),
+    errors = _useState14[0],
+    setErrors = _useState14[1];
+  var selectTerm = function selectTerm(term) {
+    if (matched.includes(term)) return;
+    setSelected(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        term: term
+      });
+    });
+    if (selected.def) checkMatch(term, selected.def);
+  };
+  var selectDef = function selectDef(def) {
+    if (matched.map(function (t) {
+      var _VOCAB_ITEMS$find;
+      return (_VOCAB_ITEMS$find = VOCAB_ITEMS.find(function (v) {
+        return v.term === t;
+      })) === null || _VOCAB_ITEMS$find === void 0 ? void 0 : _VOCAB_ITEMS$find.def;
+    }).includes(def)) return;
+    setSelected(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, {
+        def: def
+      });
+    });
+    if (selected.term) checkMatch(selected.term, def);
+  };
+  var checkMatch = function checkMatch(term, def) {
+    var _VOCAB_ITEMS$find2;
+    var correct = ((_VOCAB_ITEMS$find2 = VOCAB_ITEMS.find(function (v) {
+      return v.term === term;
+    })) === null || _VOCAB_ITEMS$find2 === void 0 ? void 0 : _VOCAB_ITEMS$find2.def) === def;
+    if (correct) {
+      setMatched(function (prev) {
+        return [].concat(_toConsumableArray(prev), [term]);
+      });
+      setScore(function (s) {
+        return s + 1;
+      });
+      setSelected({
+        term: null,
+        def: null
+      });
+    } else {
+      setErrors(function (e) {
+        return e + 1;
+      });
+      setWrong({
+        term: term,
+        def: def
+      });
+      setTimeout(function () {
+        setWrong(null);
+        setSelected({
+          term: null,
+          def: null
+        });
+      }, 800);
+    }
+  };
+  var done = matched.length === VOCAB_ITEMS.length;
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: "720px",
+      margin: "0 auto",
+      padding: "16px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center",
+      marginBottom: "20px"
+    }
+  }, /*#__PURE__*/React.createElement(Badge, {
+    color: colors.gold
+  }, "\uD83D\uDCD8 Woordenschat"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "13px",
+      marginTop: "8px"
+    }
+  }, "Verbind elk woord met de juiste definitie!"), /*#__PURE__*/React.createElement(ProgressBar, {
+    value: matched.length,
+    max: VOCAB_ITEMS.length,
+    color: colors.gold
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "12px",
+      marginTop: "4px"
+    }
+  }, matched.length, " / ", VOCAB_ITEMS.length, " correct \u2022 ", errors, " fouten")), done ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: colors.panel,
+      borderRadius: "20px",
+      padding: "32px",
+      textAlign: "center",
+      border: "1px solid ".concat(colors.green, "44")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: "48px",
+      marginBottom: "12px"
+    }
+  }, "\uD83C\uDF89"), /*#__PURE__*/React.createElement("h3", {
+    style: {
+      color: colors.green,
+      marginBottom: "8px"
+    }
+  }, "Alle woorden gekend!"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: colors.textMuted,
+      marginBottom: "20px"
+    }
+  }, errors === 0 ? "Perfect! Geen enkele fout!" : "".concat(errors, " fouten gemaakt.")), /*#__PURE__*/React.createElement("button", {
+    onClick: onDone,
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.accent,
+      color: "#fff",
+      padding: "14px 36px",
+      fontSize: "16px"
+    })
+  }, "\uD83C\uDFC6 Naar de Grote Quiz \u2192")) : /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: "12px"
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "12px",
+      marginBottom: "8px",
+      textAlign: "center"
+    }
+  }, "WOORDEN"), pairs.terms.map(function (item) {
+    var isMatched = matched.includes(item.term);
+    var isSel = selected.term === item.term;
+    var isWrong = (wrong === null || wrong === void 0 ? void 0 : wrong.term) === item.term;
+    return /*#__PURE__*/React.createElement("div", {
+      key: item.term,
+      onClick: function onClick() {
+        return selectTerm(item.term);
+      },
+      style: {
+        padding: "12px",
+        borderRadius: "10px",
+        marginBottom: "8px",
+        cursor: isMatched ? "default" : "pointer",
+        background: isMatched ? colors.green + "22" : isWrong ? colors.red + "33" : isSel ? colors.gold + "22" : colors.panelLight,
+        border: "2px solid ".concat(isMatched ? colors.green : isWrong ? colors.red : isSel ? colors.gold : colors.border),
+        color: isMatched ? colors.green : colors.text,
+        fontSize: "14px",
+        fontWeight: "600",
+        transition: "all 0.2s",
+        opacity: isMatched ? 0.5 : 1
+      }
+    }, isMatched ? "✓ " : "", item.term);
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "12px",
+      marginBottom: "8px",
+      textAlign: "center"
+    }
+  }, "DEFINITIES"), pairs.defs.map(function (item) {
+    var isMatched = matched.map(function (t) {
+      var _VOCAB_ITEMS$find3;
+      return (_VOCAB_ITEMS$find3 = VOCAB_ITEMS.find(function (v) {
+        return v.term === t;
+      })) === null || _VOCAB_ITEMS$find3 === void 0 ? void 0 : _VOCAB_ITEMS$find3.def;
+    }).includes(item.def);
+    var isSel = selected.def === item.def;
+    var isWrong = (wrong === null || wrong === void 0 ? void 0 : wrong.def) === item.def;
+    return /*#__PURE__*/React.createElement("div", {
+      key: item.def,
+      onClick: function onClick() {
+        return selectDef(item.def);
+      },
+      style: {
+        padding: "10px",
+        borderRadius: "10px",
+        marginBottom: "8px",
+        cursor: isMatched ? "default" : "pointer",
+        background: isMatched ? colors.green + "22" : isWrong ? colors.red + "33" : isSel ? colors.gold + "22" : colors.panelLight,
+        border: "2px solid ".concat(isMatched ? colors.green : isWrong ? colors.red : isSel ? colors.gold : colors.border),
+        color: isMatched ? colors.green : colors.textMuted,
+        fontSize: "12px",
+        transition: "all 0.2s",
+        opacity: isMatched ? 0.5 : 1,
+        lineHeight: "1.4"
+      }
+    }, item.def);
+  }))));
+}
+
+// ============================================================
+// PHASE 4 — GROTE QUIZ
+// ============================================================
+
+function QuizPhase(_ref7) {
+  var onDone = _ref7.onDone;
+  var _useState15 = useState(function () {
+      return [].concat(QUIZ_QUESTIONS).sort(function () {
+        return Math.random() - 0.5;
+      });
+    }),
+    _useState16 = _slicedToArray(_useState15, 1),
+    questions = _useState16[0];
+  var _useState17 = useState(0),
+    _useState18 = _slicedToArray(_useState17, 2),
+    idx = _useState18[0],
+    setIdx = _useState18[1];
+  var _useState19 = useState(null),
+    _useState20 = _slicedToArray(_useState19, 2),
+    answered = _useState20[0],
+    setAnswered = _useState20[1]; // null | {correct, selected}
+  var _useState21 = useState(0),
+    _useState22 = _slicedToArray(_useState21, 2),
+    score = _useState22[0],
+    setScore = _useState22[1];
+  var _useState23 = useState(""),
+    _useState24 = _slicedToArray(_useState23, 2),
+    fillValue = _useState24[0],
+    setFillValue = _useState24[1];
+  var _useState25 = useState(null),
+    _useState26 = _slicedToArray(_useState25, 2),
+    orderItems = _useState26[0],
+    setOrderItems = _useState26[1];
+  var _useState27 = useState(false),
+    _useState28 = _slicedToArray(_useState27, 2),
+    finished = _useState28[0],
+    setFinished = _useState28[1];
+  var _useState29 = useState([]),
+    _useState30 = _slicedToArray(_useState29, 2),
+    answers = _useState30[0],
+    setAnswers = _useState30[1];
+  var q = questions[idx];
+  useEffect(function () {
+    if ((q === null || q === void 0 ? void 0 : q.type) === "order") {
+      setOrderItems(_toConsumableArray(q.items).sort(function () {
+        return Math.random() - 0.5;
+      }));
+    }
+    setFillValue("");
+  }, [idx]);
+  var submit = function submit(isCorrect, selected) {
+    setAnswered({
+      correct: isCorrect,
+      selected: selected
+    });
+    setAnswers(function (prev) {
+      return [].concat(_toConsumableArray(prev), [{
+        q: q,
+        isCorrect: isCorrect
+      }]);
+    });
+    if (isCorrect) setScore(function (s) {
+      return s + 1;
+    });
+  };
+  var next = function next() {
+    if (idx + 1 >= questions.length) {
+      setFinished(true);
+    } else {
+      setIdx(function (i) {
+        return i + 1;
+      });
+      setAnswered(null);
+    }
+  };
+  var checkFill = function checkFill() {
+    var isCorrect = fillValue.trim().toLowerCase() === q.answer.toLowerCase();
+    submit(isCorrect, fillValue);
+  };
+  var moveOrder = function moveOrder(from, to) {
+    if (answered) return;
+    var arr = _toConsumableArray(orderItems);
+    var _arr$splice = arr.splice(from, 1),
+      _arr$splice2 = _slicedToArray(_arr$splice, 1),
+      item = _arr$splice2[0];
+    arr.splice(to, 0, item);
+    setOrderItems(arr);
+  };
+  var checkOrder = function checkOrder() {
+    var isCorrect = q.correct.every(function (correctIdx, pos) {
+      return orderItems[pos] === q.items[correctIdx];
+    });
+    submit(isCorrect, orderItems);
+  };
+  if (finished) {
+    var pct = Math.round(score / questions.length * 100);
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        maxWidth: "500px",
+        margin: "0 auto",
+        padding: "16px",
+        textAlign: "center"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: colors.panel,
+        borderRadius: "24px",
+        padding: "36px",
+        border: "1px solid ".concat(colors.accent, "44")
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: "56px",
+        marginBottom: "8px"
+      }
+    }, pct >= 90 ? "🏆" : pct >= 70 ? "🎉" : pct >= 50 ? "👍" : "💪"), /*#__PURE__*/React.createElement(StarScore, {
+      score: score,
+      total: questions.length
+    }), /*#__PURE__*/React.createElement("h2", {
+      style: {
+        color: colors.gold,
+        margin: "16px 0 8px",
+        fontSize: "24px"
+      }
+    }, score, " / ", questions.length), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: "48px",
+        fontWeight: "900",
+        color: pct >= 70 ? colors.green : colors.accent,
+        marginBottom: "8px"
+      }
+    }, pct, "%"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: colors.textMuted,
+        marginBottom: "24px"
+      }
+    }, pct >= 90 ? "Uitstekend! Je kent Rome als een echte historicus!" : pct >= 70 ? "Goed gedaan! Nog een paar details te leren." : pct >= 50 ? "Niet slecht! Lees het verhaal nog eens." : "Nog wat oefenen — Rome is veroverd met doorzettingsvermogen!"), /*#__PURE__*/React.createElement("button", {
+      onClick: onDone,
+      style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+        background: colors.accent,
+        color: "#fff",
+        padding: "14px 32px",
+        fontSize: "15px"
+      })
+    }, "\u21A9 Opnieuw beginnen")));
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: "600px",
+      margin: "0 auto",
+      padding: "16px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: "16px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: "8px"
+    }
+  }, /*#__PURE__*/React.createElement(Badge, {
+    color: colors.accent
+  }, "\u26A1 Grote Quiz"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: colors.gold,
+      fontWeight: "700"
+    }
+  }, score, " \u2B50 | ", idx + 1, "/", questions.length)), /*#__PURE__*/React.createElement(ProgressBar, {
+    value: idx,
+    max: questions.length,
+    color: colors.accent
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: colors.panel,
+      borderRadius: "20px",
+      padding: "24px",
+      border: "1px solid ".concat(colors.border),
+      marginBottom: "16px",
+      boxShadow: "0 8px 24px rgba(0,0,0,0.3)"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: "12px"
+    }
+  }, /*#__PURE__*/React.createElement(Badge, {
+    color: q.type === "mc" ? colors.teal : q.type === "tf" ? colors.gold : q.type === "fill" ? colors.green : colors.accent
+  }, q.type === "mc" ? "Meerkeuze" : q.type === "tf" ? "Juist / Fout" : q.type === "fill" ? "Invullen" : "Volgorde")), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: colors.text,
+      fontSize: "16px",
+      lineHeight: "1.6",
+      marginBottom: "20px"
+    }
+  }, q.question), q.type === "mc" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "10px"
+    }
+  }, q.options.map(function (opt, i) {
+    var bg = colors.panelLight;
+    var border = colors.border;
+    var color = colors.text;
+    if (answered) {
+      if (i === q.correct) {
+        bg = colors.green + "22";
+        border = colors.green;
+        color = colors.green;
+      } else if (i === answered.selected) {
+        bg = colors.red + "22";
+        border = colors.red;
+        color = colors.red;
+      }
+    }
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      disabled: !!answered,
+      onClick: function onClick() {
+        return submit(i === q.correct, i);
+      },
+      style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+        justifyContent: "flex-start",
+        background: bg,
+        border: "2px solid ".concat(border),
+        color: color,
+        padding: "13px 16px",
+        fontSize: "14px",
+        borderRadius: "12px",
+        cursor: answered ? "default" : "pointer"
+      })
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        opacity: 0.5,
+        minWidth: "24px"
+      }
+    }, ["A", "B", "C", "D"][i], "."), opt);
+  })), q.type === "tf" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: "12px"
+    }
+  }, [true, false].map(function (val) {
+    var bg = colors.panelLight;
+    var border = colors.border;
+    var color = colors.text;
+    if (answered) {
+      if (val === q.correct) {
+        bg = colors.green + "22";
+        border = colors.green;
+        color = colors.green;
+      } else if (val === answered.selected) {
+        bg = colors.red + "22";
+        border = colors.red;
+        color = colors.red;
+      }
+    }
+    return /*#__PURE__*/React.createElement("button", {
+      key: String(val),
+      disabled: !!answered,
+      onClick: function onClick() {
+        return submit(val === q.correct, val);
+      },
+      style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+        flex: 1,
+        padding: "16px",
+        background: bg,
+        border: "2px solid ".concat(border),
+        color: color,
+        fontSize: "16px",
+        fontWeight: "800",
+        cursor: answered ? "default" : "pointer"
+      })
+    }, val ? "✅ Juist" : "❌ Fout");
+  })), q.type === "fill" && /*#__PURE__*/React.createElement("div", null, q.hint && /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "12px",
+      marginBottom: "8px"
+    }
+  }, "\uD83D\uDCA1 ", q.hint), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: "10px"
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    value: fillValue,
+    onChange: function onChange(e) {
+      return setFillValue(e.target.value);
+    },
+    onKeyDown: function onKeyDown(e) {
+      return e.key === "Enter" && !answered && fillValue && checkFill();
+    },
+    disabled: !!answered,
+    placeholder: "Jouw antwoord...",
+    style: {
+      flex: 1,
+      background: colors.panelLight,
+      border: "2px solid ".concat(answered ? answered.correct ? colors.green : colors.red : colors.border),
+      borderRadius: "10px",
+      padding: "12px 14px",
+      color: colors.text,
+      fontSize: "15px",
+      outline: "none"
+    }
+  }), !answered && /*#__PURE__*/React.createElement("button", {
+    onClick: checkFill,
+    disabled: !fillValue,
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.teal,
+      color: "#fff",
+      padding: "12px 20px",
+      fontSize: "14px",
+      opacity: fillValue ? 1 : 0.5
+    })
+  }, "OK"))), q.type === "order" && orderItems && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "12px",
+      marginBottom: "10px"
+    }
+  }, "Gebruik de pijlen om de volgorde aan te passen:"), orderItems.map(function (item, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: item,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        background: answered ? q.correct[i] !== undefined && orderItems[i] === q.items[q.correct[i]] ? colors.green + "22" : colors.red + "22" : colors.panelLight,
+        border: "2px solid ".concat(answered ? q.correct[i] !== undefined && orderItems[i] === q.items[q.correct[i]] ? colors.green : colors.red : colors.border),
+        borderRadius: "10px",
+        padding: "10px 12px",
+        marginBottom: "8px"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: colors.gold,
+        fontWeight: "800",
+        minWidth: "20px"
+      }
+    }, i + 1, "."), /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 1,
+        color: colors.text,
+        fontSize: "13px"
+      }
+    }, item), !answered && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: "2px"
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return i > 0 && moveOrder(i, i - 1);
+      },
+      disabled: i === 0,
+      style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+        background: "transparent",
+        color: colors.textMuted,
+        padding: "2px 6px",
+        fontSize: "12px",
+        opacity: i === 0 ? 0.3 : 1
+      })
+    }, "\u25B2"), /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return i < orderItems.length - 1 && moveOrder(i, i + 1);
+      },
+      disabled: i === orderItems.length - 1,
+      style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+        background: "transparent",
+        color: colors.textMuted,
+        padding: "2px 6px",
+        fontSize: "12px",
+        opacity: i === orderItems.length - 1 ? 0.3 : 1
+      })
+    }, "\u25BC")));
+  }), !answered && /*#__PURE__*/React.createElement("button", {
+    onClick: checkOrder,
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.teal,
+      color: "#fff",
+      padding: "12px 24px",
+      fontSize: "14px",
+      marginTop: "8px"
+    })
+  }, "\u2713 Controleer volgorde")), answered && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: "16px",
+      padding: "14px 16px",
+      borderRadius: "12px",
+      background: answered.correct ? colors.green + "15" : colors.red + "15",
+      border: "1px solid ".concat(answered.correct ? colors.green : colors.red, "44")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: "700",
+      color: answered.correct ? colors.green : colors.red,
+      marginBottom: "4px"
+    }
+  }, answered.correct ? "✅ Correct!" : "❌ Niet juist"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: colors.textMuted,
+      fontSize: "13px",
+      lineHeight: "1.5"
+    }
+  }, q.explanation))), answered && /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center"
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: next,
+    style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+      background: colors.accent,
+      color: "#fff",
+      padding: "13px 36px",
+      fontSize: "15px",
+      boxShadow: "0 4px 16px ".concat(colors.accent, "44")
+    })
+  }, idx + 1 >= questions.length ? "🏁 Resultaten bekijken" : "Volgende vraag →")));
+}
+
+// ============================================================
+// MAIN APP
+// ============================================================
+
+var PHASES = [{
+  id: "story",
+  label: "Verhaal",
+  emoji: "🎬",
+  color: colors.gold
+}, {
+  id: "lesson",
+  label: "Les",
+  emoji: "📚",
+  color: colors.teal
+}, {
+  id: "vocab",
+  label: "Woorden",
+  emoji: "📘",
+  color: colors.gold
+}, {
+  id: "quiz",
+  label: "Quiz",
+  emoji: "⚡",
+  color: colors.accent
+}];
+function App() {
+  var _useState31 = useState("story"),
+    _useState32 = _slicedToArray(_useState31, 2),
+    phase = _useState32[0],
+    setPhase = _useState32[1];
+  var _useState33 = useState(new Set()),
+    _useState34 = _slicedToArray(_useState33, 2),
+    completed = _useState34[0],
+    setCompleted = _useState34[1];
+  var complete = function complete(from, to) {
+    setCompleted(function (prev) {
+      return new Set([].concat(_toConsumableArray(prev), [from]));
+    });
+    setPhase(to);
+  };
+  var phaseOrder = ["story", "lesson", "vocab", "quiz"];
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      minHeight: "100vh",
+      background: colors.bg,
+      fontFamily: "'Trebuchet MS', 'Segoe UI', sans-serif",
+      color: colors.text,
+      paddingBottom: "40px"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: colors.panel,
+      borderBottom: "1px solid ".concat(colors.border),
+      padding: "12px 16px",
+      position: "sticky",
+      top: 0,
+      zIndex: 100
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      maxWidth: "680px",
+      margin: "0 auto"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: "11px",
+      color: colors.textMuted,
+      marginBottom: "6px",
+      letterSpacing: "2px"
+    }
+  }, "GESCHIEDENIS \xB7 LES 15"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: "800",
+      fontSize: "16px",
+      color: colors.gold,
+      marginBottom: "10px"
+    }
+  }, "\uD83C\uDFDB\uFE0F Rome wordt machtig"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: "6px",
+      overflowX: "auto"
+    }
+  }, PHASES.map(function (p) {
+    var isActive = phase === p.id;
+    var isDone = completed.has(p.id);
+    var phaseIdx = phaseOrder.indexOf(p.id);
+    var currentIdx = phaseOrder.indexOf(phase);
+    var isUnlocked = phaseIdx <= currentIdx || isDone;
+    return /*#__PURE__*/React.createElement("button", {
+      key: p.id,
+      onClick: function onClick() {
+        return isUnlocked && setPhase(p.id);
+      },
+      style: _objectSpread(_objectSpread({}, baseBtn), {}, {
+        background: isActive ? p.color : isDone ? p.color + "22" : colors.panelLight,
+        color: isActive ? "#0f0e17" : isDone ? p.color : colors.textMuted,
+        border: "1px solid ".concat(isActive ? p.color : isDone ? p.color + "44" : colors.border),
+        padding: "6px 12px",
+        fontSize: "12px",
+        opacity: isUnlocked ? 1 : 0.4,
+        cursor: isUnlocked ? "pointer" : "not-allowed",
+        flexShrink: 0
+      })
+    }, isDone && !isActive ? "✓ " : p.emoji + " ", p.label);
+  })))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      paddingTop: "24px"
+    }
+  }, phase === "story" && /*#__PURE__*/React.createElement(StoryPhase, {
+    onDone: function onDone() {
+      return complete("story", "lesson");
+    }
+  }), phase === "lesson" && /*#__PURE__*/React.createElement(LessonPhase, {
+    onDone: function onDone() {
+      return complete("lesson", "vocab");
+    }
+  }), phase === "vocab" && /*#__PURE__*/React.createElement(VocabPhase, {
+    onDone: function onDone() {
+      return complete("vocab", "quiz");
+    }
+  }), phase === "quiz" && /*#__PURE__*/React.createElement(QuizPhase, {
+    onDone: function onDone() {
+      complete("quiz", "story");
+      setCompleted(new Set());
+    }
+  })));
+}
+var root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>

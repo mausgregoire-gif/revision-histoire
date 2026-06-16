@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>💰 Les 19 — De economie van het Rijk</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:#0f0e17;color:#fffffe;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+button{font-family:inherit;}
+#root{background:#0f0e17;min-height:100vh;color:#fffffe;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+var _React = React,
+  useState = _React.useState,
+  useEffect = _React.useEffect,
+  useRef = _React.useRef;
+var COLORS = {
+  bg: "#0f0e17",
+  card: "#1a1828",
+  cardLight: "#242236",
+  gold: "#f5c842",
+  blue: "#4fc3f7",
+  purple: "#b388ff",
+  green: "#69f0ae",
+  red: "#ff5252",
+  orange: "#ffab40",
+  pink: "#f48fb1",
+  teal: "#26c6da",
+  amber: "#ffca28",
+  text: "#fffffe",
+  textMuted: "#a7a9be",
+  accent: "#1D9E75"
+};
+var PHASES = ["🎬 Verhaal", "📚 Lees & Markeer", "📘 Woordenschat", "⚡ Grote Quiz"];
+
+// ─── VERHAAL DATA ────────────────────────────────────────────────
+var verhaalChapters = [{
+  id: 1,
+  emoji: "🌾",
+  title: "Het latifundium van meester Gaius",
+  color: COLORS.amber,
+  text: ["Mijn naam is Titus. Ik was slaaf. Nu ben ik vrij. Maar vrijheid maakt je niet rijk — dat leer je snel in Rome.", "🌾 Ik ben geboren op een latifundium — een gigantisch domein ergens in het zuiden van Italië. Zover je kon kijken: wijnstokken, olijfbomen, graanvelden.", "De eigenaar heette Gaius. We zagen hem zelden. Hij woonde in de villa, het grote huis in het midden van het domein. Wij sliepen in een schuur.", "Op het domein werkten ook vrije boeren — kleine lui die hun eigen grond waren kwijtgeraakt aan Gaius. 'Op vriendelijke wijze door aankoop', zei hij. 😬 Wij wisten beter.", "95 % van de inwoners van het Rijk werkte in de landbouw. Lage opbrengsten, veel handenarbeid. Geen machines. Alleen ruggen en handen.", "Op een dag stuurde Gaius me weg. Naar de mijnen. 'Je bent sterk,' zei hij. 'Dat hebben ze nodig.' ⛏️"]
+}, {
+  id: 2,
+  emoji: "⛏️",
+  title: "Diep in de aarde — het geheim van het ijs",
+  color: COLORS.purple,
+  text: ["De mijnen waren anders. Donker. Nat. De Romeinen hadden koper, zilver en lood nodig — voor munten, waterleidingen, scheepsrompen.", "⛏️ We hakten dag en nacht. Lood was overal. In de lucht die we inademden. In het water dat we dronken.", "Wat wij niet wisten: het lood steeg op in de atmosfeer. En reisde. Ver. Tot in het ijs van Groenland. 🧊", "Duizend jaar later boren wetenschappers 400 meter diep in dat ijs. Ze vinden onze looddeeltjes. Ze weten precies wanneer de economie van Rome op haar hoogtepunt was.", "🔬 De uitstoot is het hoogst in de 1e eeuw v.C., de 1e eeuw en de 2e eeuw. Wij hebben — zonder het te weten — een spoor nagelaten voor de toekomst.", "Onwaarschijnlijk? Ja. Maar waar. Nieuwe wetenschap verandert onze kennis van het verleden. ✨"]
+}, {
+  id: 3,
+  emoji: "🚢",
+  title: "Ostia — het hart van de wereld",
+  color: COLORS.teal,
+  text: ["Na de mijnen werd ik vrijgelaten. Ik trok naar Rome — en naar Ostia, de haven aan de Tiber. 🚢", "Ostia was waanzinnig. Schepen uit Egypte met graan, uit Spanje met olijfolie, uit het Oosten met zijde, specerijen, edelstenen.", "🌍 Rome was gegroeid van 200.000 naar 1 miljoen inwoners in de 1e eeuw v.C. De stad verslond alles. Graan, wijn, olie — enorm veel.", "De keizers betaalden veel van die goederen zelf — goedkoop of zelfs gratis voor de bevolking. Betaald met belastingen uit de provincies. Slim systeem. Of handig voor de keizer. 👑", "En vanuit Rome vertrokken ook goederen: naar de legioenen aan de grenzen. Graan, wijn, leer, metalen. Overal waar troepen stonden, bloeide de lokale economie.", "Ik verkoop nu amphoren op de kade van Ostia. 🏺 Klein werk. Maar ik heb de hele machine gezien — van het latifundium tot de haven. Rome is niet één stad. Rome is een systeem. En ik maak er deel van uit."]
+}];
+
+// ─── LEES & MARKEER DATA ─────────────────────────────────────────
+var leesData = [{
+  title: "1️⃣ De landbouw als motor van de economie",
+  color: COLORS.amber,
+  paragraphs: [{
+    text: "Meer dan 95 % van de inwoners van het Romeinse Rijk werkt in de landbouw. Er is sprake van een landbouwsamenleving. De landbouw is arbeidsintensief: de opbrengsten zijn laag en er is veel handenarbeid nodig.",
+    keywords: ["95 %", "landbouwsamenleving", "arbeidsintensief", "handenarbeid"]
+  }, {
+    text: "Rijke Romeinen verwerven uitgestrekte domeinen: de latifundia. Ze telen er wijn, olijfolie en graan. Op die domeinen werken slaven én kleine boeren. De villa is het centrale gebouw op een latifundium.",
+    keywords: ["latifundia", "wijn", "olijfolie", "graan", "villa"]
+  }, {
+    text: "Slaven werken ook in de mijnen. De Romeinen ontginnen koper, zilver en lood. Looddeeltjes in het ijs van Groenland bewijzen dat de economie haar hoogtepunt bereikt van de 1e eeuw v.C. tot de 2e eeuw.",
+    keywords: ["mijnen", "koper", "zilver", "lood", "Groenland"]
+  }]
+}, {
+  title: "2️⃣ Rome wordt het wereldhandelscentrum",
+  color: COLORS.teal,
+  paragraphs: [{
+    text: "De Romeinse verovering is aanvankelijk een ramp voor overwonnen gebieden: moorden, plunderingen, schatting, uitbuiting. Vanaf het einde van de 1e eeuw verbetert de situatie.",
+    keywords: ["verovering", "plunderingen", "schatting", "uitbuiting"]
+  }, {
+    text: "Provincies worden belangrijke leveranciers van Rome. De stad groeit van 200.000 naar 1 miljoen inwoners en verbruikt enorm veel graan, wijn en olijfolie. De keizers zorgen dat deze producten goedkoop of gratis beschikbaar zijn, bekostigd via belastingopbrengsten.",
+    keywords: ["leveranciers", "1 miljoen", "belastingopbrengsten", "gratis"]
+  }]
+}, {
+  title: "3️⃣ Handel binnen en buiten het Rijk",
+  color: COLORS.accent,
+  paragraphs: [{
+    text: "Vanuit Rome vertrekken goederen naar de Romeinse legioenen aan de grenzen: graan, wijn, olie, azijn, metalen, leder. De aanwezigheid van troepen is goed voor de lokale economie.",
+    keywords: ["legioenen", "grenzen", "lokale economie"]
+  }, {
+    text: "Rome drijft ook handel buiten het Rijk. Uit het Oosten voert het in: zijde, specerijen, edelstenen, goud. Ostia is de haven van Rome, gelegen aan de monding van de Tiber.",
+    keywords: ["zijde", "specerijen", "edelstenen", "Ostia"]
+  }]
+}];
+
+// ─── WOORDENSCHAT ────────────────────────────────────────────────
+var woordenschat = [{
+  nl: "Latifundium",
+  fr: "Uitgestrekt landbouwdomein van de rijken"
+}, {
+  nl: "Villa",
+  fr: "Hoofdgebouw op een latifundium"
+}, {
+  nl: "Landbouwsamenleving",
+  fr: "Samenleving waar landbouw de basis is"
+}, {
+  nl: "Teelt",
+  fr: "Het verbouwen van een gewas (wijn, graan…)"
+}, {
+  nl: "Provincie",
+  fr: "Veroverd gebied buiten Italië"
+}, {
+  nl: "Schatting",
+  fr: "Belasting die overwonnen gebieden betalen"
+}, {
+  nl: "Ostia",
+  fr: "Haven van Rome aan de Tibermonding"
+}, {
+  nl: "Legioenen",
+  fr: "Groepen Romeinse soldaten aan de grenzen"
+}, {
+  nl: "Looduitstoot",
+  fr: "Vervuiling als bewijs van economische groei"
+}, {
+  nl: "Leveranciers",
+  fr: "Provincies die producten leveren aan Rome"
+}];
+
+// ─── QUIZ DATA ────────────────────────────────────────────────────
+var quizQuestions = [{
+  type: "mc",
+  question: "Hoeveel procent van de Romeinse bevolking werkte in de landbouw? 🌾",
+  options: ["Meer dan 50 %", "Meer dan 75 %", "Meer dan 95 %", "Precies 100 %"],
+  answer: 2,
+  uitleg: "Meer dan 95 % werkte in de landbouw. Rome was een echte landbouwsamenleving!"
+}, {
+  type: "mc",
+  question: "Wat is een latifundium? 🏡",
+  options: ["Een Romeins theater", "Een uitgestrekt landbouwdomein van rijke Romeinen", "Een soort belasting", "De haven van Rome"],
+  answer: 1,
+  uitleg: "Een latifundium is een groot domein van rijke Romeinen, waar wijn, olijfolie en graan worden geteeld."
+}, {
+  type: "mc",
+  question: "Welk gebouw staat centraal op een latifundium? 🏛️",
+  options: ["De tempel", "De arena", "De villa", "De mijn"],
+  answer: 2,
+  uitleg: "De villa is het centrale gebouw op een latifundium. De eigenaar of zijn vertegenwoordiger woont er."
+}, {
+  type: "mc",
+  question: "Welke drie gewassen worden op de latifundia geteeld? 🍇",
+  options: ["Tarwe, rijst en katoen", "Wijn, olijfolie en graan", "Groenten, fruit en kruiden", "Suiker, cacao en specerijen"],
+  answer: 1,
+  uitleg: "Op de latifundia worden voornamelijk wijn, olijfolie en graan geteeld."
+}, {
+  type: "tf",
+  question: "Op een latifundium werkten alleen slaven. 🔗",
+  answer: false,
+  uitleg: "Fout! Naast slaven werkten er ook kleine (vrije) boeren op de latifundia. Zij konden de concurrentie met grote domeinen niet aan."
+}, {
+  type: "mc",
+  question: "Welke metalen werden in de Romeinse mijnen gewonnen? ⛏️",
+  options: ["Goud, ijzer en brons", "Koper, zilver en lood", "Tin, zink en nikkel", "Platina, diamant en robijn"],
+  answer: 1,
+  uitleg: "In de mijnen werden koper, zilver en lood gewonnen. Lood was essentieel voor waterleidingen en munten."
+}, {
+  type: "mc",
+  question: "Wat bewijzen looddeeltjes in het ijs van Groenland? 🧊",
+  options: ["Dat de Romeinen in Groenland woonden", "Dat het klimaat vroeger warmer was", "Wanneer de Romeinse economie op haar hoogtepunt was", "Dat de Romeinen ijsbergen gebruikten"],
+  answer: 2,
+  uitleg: "Looduitstoot uit de mijnbouw steeg op in de atmosfeer en bevroor in het ijs van Groenland. Wetenschappers meten zo wanneer de economie bloeide: 1e eeuw v.C. tot de 2e eeuw."
+}, {
+  type: "tf",
+  question: "De Romeinse verovering was meteen goed voor de overwonnen gebieden. 🏹",
+  answer: false,
+  uitleg: "Fout! Aanvankelijk was het een ramp: moorden, plunderingen, schatting, beste landbouwgronden ingepalmd. Pas vanaf het einde van de 1e eeuw verbeterde de situatie."
+}, {
+  type: "order",
+  question: "Zet in de juiste chronologische volgorde wat er met een veroverd gebied gebeurt: 📅",
+  items: ["Provincie wordt leverancier van Rome", "Moorden en plunderingen", "Uitbuiting door bestuurders"],
+  answer: [1, 2, 0],
+  uitleg: "Eerst: moorden en plunderingen → dan: uitbuiting door bestuurders → uiteindelijk: provincie wordt leverancier. Dit duurt tot het einde van de 1e eeuw."
+}, {
+  type: "mc",
+  question: "Hoeveel inwoners had Rome in de 1e eeuw? 🏙️",
+  options: ["100.000", "500.000", "1 miljoen", "5 miljoen"],
+  answer: 2,
+  uitleg: "Rome groeide in de 1e eeuw v.C. van ongeveer 200.000 naar 1 miljoen inwoners!"
+}, {
+  type: "mc",
+  question: "Hoe bekostigden de keizers het goedkope of gratis graan voor de bevolking? 💰",
+  options: ["Via giften van rijke burgers", "Via belastingopbrengsten uit de provincies", "Via winst op de gladiatorenspelen", "Via mijnen in Rome zelf"],
+  answer: 1,
+  uitleg: "De keizers bekostigden het gratis of goedkope voedsel via de belastingopbrengsten uit de veroverde provincies."
+}, {
+  type: "mc",
+  question: "Wat is Ostia? 🚢",
+  options: ["Een Romeinse generaal", "Een provincie in het Oosten", "De haven van Rome aan de Tibermonding", "Een soort Romeinse munt"],
+  answer: 2,
+  uitleg: "Ostia is de haven van Rome, gelegen aan de monding van de Tiber. Alle handelsschepen kwamen hier aan."
+}, {
+  type: "tf",
+  question: "De aanwezigheid van Romeinse legioenen was goed voor de lokale economie. ⚔️",
+  answer: true,
+  uitleg: "Juist! Troepen bestelden voedsel en gebruiksvoorwerpen ter plaatse. Dat stimuleerde de lokale economie van grensgebieden."
+}, {
+  type: "mc",
+  question: "Welke producten voerde Rome in uit het Oosten? 🌏",
+  options: ["Graan, wijn en olijfolie", "Leder, tin en vee", "Zijde, specerijen en edelstenen", "Hout, brons en papyrus"],
+  answer: 2,
+  uitleg: "Uit het Oosten (Indië, Arabië, China) importeerde Rome luxeproducten: zijde, specerijen, edelstenen, goud en reukwaren."
+}, {
+  type: "mc",
+  question: "Waarom konden kleine boeren niet concurreren met de latifundia? 😟",
+  options: ["Ze mochten niet dezelfde gewassen telen", "Latifundia gebruikten goedkopere slavenarbeid en waren veel groter", "Kleine boeren mochten niet naar de markt", "De keizers verboden kleine boerderijen"],
+  answer: 1,
+  uitleg: "Grote domeinen met slavenarbeid produceerden goedkoper en in grotere hoeveelheden. Kleine boeren konden de concurrentie niet aan en moesten op een domein gaan werken of naar Rome vertrekken."
+}, {
+  type: "order",
+  question: "Rangschik van meest naar minst verhandeld vanuit Rome naar de legioenen: 🏹",
+  items: ["Leder en metalen", "Graan, wijn en olie", "Vissaus en azijn"],
+  answer: [1, 2, 0],
+  uitleg: "Graan, wijn en olie waren de basisproducten. Vissaus (garum) en azijn kwamen daarna. Leder en metalen voor uitrusting waren ook essentieel maar minder in volume."
+}, {
+  type: "tf",
+  question: "Wetenschappelijk onderzoek in het heden kan onze kennis van het verleden veranderen. 🔬",
+  answer: true,
+  uitleg: "Juist! Het voorbeeld van de looddeeltjes in het Groenlandse ijs toont dit perfect: nieuwe methodes geven ons nieuwe informatie over de Romeinse economie."
+}];
+
+// ─── SHUFFLE ─────────────────────────────────────────────────────
+function shuffle(arr) {
+  var a = _toConsumableArray(arr);
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [a[j], a[i]];
+    a[i] = _ref[0];
+    a[j] = _ref[1];
+  }
+  return a;
+}
+
+// ════════════════════════════════════════════════════════════════
+// MAIN APP
+// ════════════════════════════════════════════════════════════════
+function App() {
+  var _useState = useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    phase = _useState2[0],
+    setPhase = _useState2[1];
+  var _useState3 = useState([true, false, false, false]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    unlocked = _useState4[0],
+    setUnlocked = _useState4[1];
+  function unlock(idx) {
+    setUnlocked(function (u) {
+      var n = _toConsumableArray(u);
+      n[idx] = true;
+      return n;
+    });
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.bg,
+      minHeight: "100vh",
+      fontFamily: "'Segoe UI', sans-serif",
+      color: COLORS.text
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#13121f",
+      padding: "12px 16px",
+      borderBottom: "2px solid ".concat(COLORS.accent, "40")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: COLORS.accent,
+      fontWeight: 700,
+      letterSpacing: 2,
+      textTransform: "uppercase"
+    }
+  }, "\uD83C\uDFDB\uFE0F Les 19 \u2014 Geschiedenis"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 19,
+      fontWeight: 900,
+      marginTop: 2
+    }
+  }, "De economie van het Romeinse Rijk")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 4,
+      padding: "10px 10px 0",
+      overflowX: "auto"
+    }
+  }, PHASES.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return unlocked[i] && setPhase(i);
+      },
+      style: {
+        flex: "0 0 auto",
+        padding: "8px 12px",
+        borderRadius: 10,
+        border: "none",
+        fontWeight: 700,
+        fontSize: 12,
+        cursor: unlocked[i] ? "pointer" : "not-allowed",
+        background: phase === i ? COLORS.accent : unlocked[i] ? COLORS.cardLight : "#1a1828",
+        color: phase === i ? "#fff" : unlocked[i] ? COLORS.text : COLORS.textMuted,
+        opacity: unlocked[i] ? 1 : 0.5,
+        transition: "all 0.2s",
+        whiteSpace: "nowrap"
+      }
+    }, p);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "12px 12px 40px"
+    }
+  }, phase === 0 && /*#__PURE__*/React.createElement(VerhaalPhase, {
+    onComplete: function onComplete() {
+      unlock(1);
+      setPhase(1);
+    }
+  }), phase === 1 && /*#__PURE__*/React.createElement(LeesPhase, {
+    onComplete: function onComplete() {
+      unlock(2);
+      setPhase(2);
+    }
+  }), phase === 2 && /*#__PURE__*/React.createElement(WoordenschatPhase, {
+    onComplete: function onComplete() {
+      unlock(3);
+      setPhase(3);
+    }
+  }), phase === 3 && /*#__PURE__*/React.createElement(QuizPhase, null)));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 1 — VERHAAL
+// ════════════════════════════════════════════════════════════════
+function VerhaalPhase(_ref2) {
+  var onComplete = _ref2.onComplete;
+  var _useState5 = useState(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    chapter = _useState6[0],
+    setChapter = _useState6[1];
+  var _useState7 = useState(0),
+    _useState8 = _slicedToArray(_useState7, 2),
+    lineIdx = _useState8[0],
+    setLineIdx = _useState8[1];
+  var _useState9 = useState(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    done = _useState0[0],
+    setDone = _useState0[1];
+  var ch = verhaalChapters[chapter];
+  var lines = ch.text;
+  function next() {
+    if (lineIdx < lines.length - 1) {
+      setLineIdx(lineIdx + 1);
+    } else if (chapter < verhaalChapters.length - 1) {
+      setChapter(chapter + 1);
+      setLineIdx(0);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDFC6"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.accent,
+        marginTop: 12
+      }
+    }, "Verhaal klaar!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Je kent de context. Klaar voor de echte theorie?"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.accent,
+      onClick: onComplete
+    }, "\uD83D\uDCDA Naar Lees & Markeer \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 8,
+      marginBottom: 16
+    }
+  }, verhaalChapters.map(function (c, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        setChapter(i);
+        setLineIdx(0);
+      },
+      style: {
+        flex: 1,
+        padding: "8px 4px",
+        borderRadius: 10,
+        border: "2px solid ".concat(i <= chapter ? c.color : "#333"),
+        background: i === chapter ? c.color + "22" : "transparent",
+        color: i <= chapter ? c.color : COLORS.textMuted,
+        fontSize: 18,
+        cursor: "pointer"
+      }
+    }, c.emoji);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: ch.color + "18",
+      border: "2px solid ".concat(ch.color),
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 16,
+      minHeight: 200
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: ch.color,
+      fontWeight: 800,
+      fontSize: 15,
+      marginBottom: 12
+    }
+  }, ch.emoji, " Hoofdstuk ", chapter + 1, ": ", ch.title), lines.slice(0, lineIdx + 1).map(function (line, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        color: i === lineIdx ? COLORS.text : COLORS.textMuted,
+        fontSize: i === lineIdx ? 16 : 14,
+        marginBottom: 8,
+        lineHeight: 1.6,
+        transition: "all 0.3s"
+      }
+    }, line);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Hoofdstuk ", chapter + 1, "/3"), /*#__PURE__*/React.createElement("span", null, lineIdx + 1, "/", lines.length)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: ch.color,
+      height: 6,
+      borderRadius: 99,
+      width: "".concat((chapter * 6 + lineIdx + 1) / 18 * 100, "%"),
+      transition: "width 0.3s"
+    }
+  }))), /*#__PURE__*/React.createElement(Btn, {
+    color: ch.color,
+    onClick: next
+  }, lineIdx < lines.length - 1 ? "Volgende ›" : chapter < 2 ? "Volgend hoofdstuk ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 2 — LEES & MARKEER
+// ════════════════════════════════════════════════════════════════
+function LeesPhase(_ref3) {
+  var onComplete = _ref3.onComplete;
+  var _useState1 = useState(0),
+    _useState10 = _slicedToArray(_useState1, 2),
+    section = _useState10[0],
+    setSection = _useState10[1];
+  var _useState11 = useState({}),
+    _useState12 = _slicedToArray(_useState11, 2),
+    marked = _useState12[0],
+    setMarked = _useState12[1];
+  var _useState13 = useState(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    done = _useState14[0],
+    setDone = _useState14[1];
+  var sec = leesData[section];
+  var allKeywords = sec.paragraphs.flatMap(function (p) {
+    return p.keywords;
+  });
+  var markedCount = allKeywords.filter(function (k) {
+    return marked["".concat(section, "-").concat(k)];
+  }).length;
+  function toggleMark(key) {
+    setMarked(function (m) {
+      return _objectSpread(_objectSpread({}, m), {}, _defineProperty({}, key, !m[key]));
+    });
+  }
+  function nextSection() {
+    if (section < leesData.length - 1) {
+      setSection(section + 1);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.blue,
+        marginTop: 12
+      }
+    }, "Theorie bekeken!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Nu de woordenschat instuderen!"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.purple,
+      onClick: onComplete
+    }, "\uD83D\uDCD8 Naar Woordenschat \u2192"));
+  }
+  var tabLabels = ["Landbouw", "Handel", "Import/Export"];
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 14
+    }
+  }, leesData.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return setSection(i);
+      },
+      style: {
+        flex: 1,
+        padding: "8px 4px",
+        borderRadius: 10,
+        border: "2px solid ".concat(i <= section ? s.color : "#333"),
+        background: i === section ? s.color + "22" : "transparent",
+        color: i === section ? s.color : COLORS.textMuted,
+        fontSize: 11,
+        fontWeight: 700,
+        cursor: "pointer"
+      }
+    }, tabLabels[i]);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: sec.color + "18",
+      border: "2px solid ".concat(sec.color),
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: sec.color,
+      fontWeight: 800,
+      fontSize: 16,
+      marginBottom: 14
+    }
+  }, sec.title), sec.paragraphs.map(function (para, pIdx) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: pIdx,
+      style: {
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14,
+        lineHeight: 1.8,
+        color: COLORS.text,
+        marginBottom: 8
+      }
+    }, para.text.split(new RegExp("(".concat(para.keywords.map(function (k) {
+      return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join("|"), ")"), "gi")).map(function (part, i) {
+      var matchedKw = para.keywords.find(function (k) {
+        return k.toLowerCase() === part.toLowerCase();
+      });
+      if (matchedKw) {
+        var key = "".concat(section, "-").concat(matchedKw);
+        var isMarked = marked[key];
+        return /*#__PURE__*/React.createElement("span", {
+          key: i,
+          onClick: function onClick() {
+            return toggleMark(key);
+          },
+          style: {
+            background: isMarked ? sec.color : sec.color + "33",
+            color: isMarked ? COLORS.bg : sec.color,
+            borderRadius: 4,
+            padding: "1px 5px",
+            cursor: "pointer",
+            fontWeight: 700,
+            fontSize: 14,
+            transition: "all 0.2s",
+            border: "1px solid ".concat(sec.color)
+          }
+        }, part);
+      }
+      return /*#__PURE__*/React.createElement("span", {
+        key: i
+      }, part);
+    })));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: sec.color,
+      marginTop: 8
+    }
+  }, "\uD83D\uDC46 Tik op de gekleurde woorden om ze te markeren! (", markedCount, "/", allKeywords.length, ")")), /*#__PURE__*/React.createElement(Btn, {
+    color: sec.color,
+    onClick: nextSection
+  }, section < leesData.length - 1 ? "Volgende sectie ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 3 — WOORDENSCHAT MEMORY
+// ════════════════════════════════════════════════════════════════
+function WoordenschatPhase(_ref4) {
+  var onComplete = _ref4.onComplete;
+  var _useState15 = useState(function () {
+      var pairs = woordenschat.map(function (w, i) {
+        return [{
+          id: "nl-".concat(i),
+          text: w.nl,
+          pairId: i,
+          type: "nl"
+        }, {
+          id: "fr-".concat(i),
+          text: w.fr,
+          pairId: i,
+          type: "fr"
+        }];
+      }).flat();
+      return shuffle(pairs);
+    }),
+    _useState16 = _slicedToArray(_useState15, 1),
+    cards = _useState16[0];
+  var _useState17 = useState([]),
+    _useState18 = _slicedToArray(_useState17, 2),
+    selected = _useState18[0],
+    setSelected = _useState18[1];
+  var _useState19 = useState([]),
+    _useState20 = _slicedToArray(_useState19, 2),
+    matched = _useState20[0],
+    setMatched = _useState20[1];
+  var _useState21 = useState([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    wrong = _useState22[0],
+    setWrong = _useState22[1];
+  var _useState23 = useState(0),
+    _useState24 = _slicedToArray(_useState23, 2),
+    score = _useState24[0],
+    setScore = _useState24[1];
+  var _useState25 = useState(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    done = _useState26[0],
+    setDone = _useState26[1];
+  function selectCard(card) {
+    if (matched.includes(card.pairId)) return;
+    if (selected.find(function (c) {
+      return c.id === card.id;
+    })) return;
+    if (wrong.length > 0) {
+      setWrong([]);
+      setSelected([]);
+      return;
+    }
+    if (selected.length === 1) {
+      var first = selected[0];
+      if (first.pairId === card.pairId && first.type !== card.type) {
+        var newMatched = [].concat(_toConsumableArray(matched), [card.pairId]);
+        setMatched(newMatched);
+        setScore(function (s) {
+          return s + 1;
+        });
+        setSelected([]);
+        if (newMatched.length === woordenschat.length) setDone(true);
+      } else {
+        setWrong([first.id, card.id]);
+        setSelected([first, card]);
+        setTimeout(function () {
+          setWrong([]);
+          setSelected([]);
+        }, 900);
+      }
+    } else {
+      setSelected([card]);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDF89"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.accent,
+        marginTop: 12
+      }
+    }, "Alle woorden gevonden!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Score: ", score, "/", woordenschat.length, " \u2728"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: onComplete
+    }, "\u26A1 Naar de Grote Quiz \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: COLORS.accent,
+      fontSize: 16
+    }
+  }, "\uD83D\uDCD8 Memory Match"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: COLORS.gold,
+      fontWeight: 700
+    }
+  }, matched.length, "/", woordenschat.length, " \u2713")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 14
+    }
+  }, "Koppel elk woord aan zijn betekenis!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 8
+    }
+  }, cards.map(function (card) {
+    var isMatched = matched.includes(card.pairId);
+    var isSelected = selected.find(function (c) {
+      return c.id === card.id;
+    });
+    var isWrong = wrong.includes(card.id);
+    var color = card.type === "nl" ? COLORS.accent : COLORS.amber;
+    return /*#__PURE__*/React.createElement("button", {
+      key: card.id,
+      onClick: function onClick() {
+        return selectCard(card);
+      },
+      style: {
+        padding: "12px 8px",
+        borderRadius: 12,
+        border: "2px solid ".concat(isWrong ? COLORS.red : isMatched ? COLORS.green : isSelected ? color : color + "44"),
+        background: isWrong ? COLORS.red + "22" : isMatched ? COLORS.green + "22" : isSelected ? color + "22" : COLORS.card,
+        color: isMatched ? COLORS.green : isWrong ? COLORS.red : isSelected ? color : COLORS.text,
+        cursor: isMatched ? "default" : "pointer",
+        fontWeight: 700,
+        fontSize: 12,
+        textAlign: "center",
+        lineHeight: 1.3,
+        minHeight: 60,
+        transition: "all 0.15s",
+        opacity: isMatched ? 0.6 : 1
+      }
+    }, isMatched ? "✓ " : "", card.text);
+  })));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 4 — GROTE QUIZ
+// ════════════════════════════════════════════════════════════════
+function QuizPhase() {
+  var _useState27 = useState(function () {
+      return shuffle(quizQuestions);
+    }),
+    _useState28 = _slicedToArray(_useState27, 1),
+    questions = _useState28[0];
+  var _useState29 = useState(0),
+    _useState30 = _slicedToArray(_useState29, 2),
+    idx = _useState30[0],
+    setIdx = _useState30[1];
+  var _useState31 = useState(null),
+    _useState32 = _slicedToArray(_useState31, 2),
+    answered = _useState32[0],
+    setAnswered = _useState32[1];
+  var _useState33 = useState(0),
+    _useState34 = _slicedToArray(_useState33, 2),
+    score = _useState34[0],
+    setScore = _useState34[1];
+  var _useState35 = useState(false),
+    _useState36 = _slicedToArray(_useState35, 2),
+    done = _useState36[0],
+    setDone = _useState36[1];
+  var _useState37 = useState(null),
+    _useState38 = _slicedToArray(_useState37, 2),
+    orderItems = _useState38[0],
+    setOrderItems = _useState38[1];
+  var q = questions[idx];
+  useEffect(function () {
+    if ((q === null || q === void 0 ? void 0 : q.type) === "order") {
+      setOrderItems(shuffle(_toConsumableArray(q.items)));
+    } else {
+      setOrderItems(null);
+    }
+  }, [idx]);
+  function checkMC(optIdx) {
+    if (answered !== null) return;
+    var correct = optIdx === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkTF(val) {
+    if (answered !== null) return;
+    var correct = val === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkOrder() {
+    if (answered !== null) return;
+    var correct = q.answer.every(function (a, i) {
+      return q.items[a] === orderItems[i];
+    });
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function moveItem(from, to) {
+    if (answered !== null) return;
+    var items = _toConsumableArray(orderItems);
+    var _items$splice = items.splice(from, 1),
+      _items$splice2 = _slicedToArray(_items$splice, 1),
+      item = _items$splice2[0];
+    items.splice(to, 0, item);
+    setOrderItems(items);
+  }
+  function next() {
+    if (idx < questions.length - 1) {
+      setIdx(idx + 1);
+      setAnswered(null);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    var pct = Math.round(score / questions.length * 100);
+    var medal = pct >= 90 ? "🥇" : pct >= 70 ? "🥈" : pct >= 50 ? "🥉" : "📚";
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 30
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 70
+      }
+    }, medal), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 28,
+        fontWeight: 900,
+        color: COLORS.gold,
+        marginTop: 8
+      }
+    }, score, "/", questions.length), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 16,
+        color: COLORS.textMuted,
+        marginTop: 6
+      }
+    }, pct, "%"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 16,
+        fontSize: 16,
+        color: pct >= 70 ? COLORS.green : COLORS.orange
+      }
+    }, pct >= 90 ? "🔥 Uitstekend! Jij kent de Romeinse economie van binnen en van buiten!" : pct >= 70 ? "👍 Goed gedaan! Nog een beetje herhalen!" : pct >= 50 ? "💪 Niet slecht! Lees de theorie nog eens." : "📖 Herhaal de lessen en probeer opnieuw!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 24
+      }
+    }, /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: function onClick() {
+        setIdx(0);
+        setAnswered(null);
+        setScore(0);
+        setDone(false);
+      }
+    }, "\uD83D\uDD04 Opnieuw spelen")));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Vraag ", idx + 1, "/", questions.length), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: COLORS.gold
+    }
+  }, "\u2B50 ", score, " punten")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "linear-gradient(90deg, ".concat(COLORS.accent, ", ").concat(COLORS.teal, ")"),
+      height: 6,
+      borderRadius: 99,
+      width: "".concat(idx / questions.length * 100, "%"),
+      transition: "width 0.3s"
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 14,
+      border: "2px solid #2a2840"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      textTransform: "uppercase",
+      letterSpacing: 1
+    }
+  }, q.type === "mc" ? "Meerkeuze" : q.type === "tf" ? "Juist / Fout" : "Volgorde"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      lineHeight: 1.4
+    }
+  }, q.question)), q.type === "mc" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gap: 8,
+      marginBottom: 14
+    }
+  }, q.options.map(function (opt, i) {
+    var isCorrect = i === q.answer;
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return checkMC(i);
+      },
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        border: "2px solid ".concat(answered !== null ? isCorrect ? COLORS.green : COLORS.red + "44" : COLORS.accent + "44"),
+        background: answered !== null && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: answered !== null ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        textAlign: "left",
+        cursor: answered === null ? "pointer" : "default",
+        fontWeight: 600,
+        fontSize: 14,
+        transition: "all 0.2s"
+      }
+    }, answered !== null && isCorrect ? "✓ " : "", opt);
+  })), q.type === "tf" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 10,
+      marginBottom: 14
+    }
+  }, [true, false].map(function (val) {
+    var isCorrect = val === q.answer;
+    var chosen = answered !== null;
+    return /*#__PURE__*/React.createElement("button", {
+      key: String(val),
+      onClick: function onClick() {
+        return checkTF(val);
+      },
+      style: {
+        padding: "20px",
+        borderRadius: 14,
+        border: "2px solid ".concat(chosen ? isCorrect ? COLORS.green : COLORS.red : val ? COLORS.green + "55" : COLORS.red + "55"),
+        background: chosen && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: chosen ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        fontSize: 18,
+        fontWeight: 800,
+        cursor: chosen ? "default" : "pointer",
+        transition: "all 0.2s"
+      }
+    }, val ? "✅ JUIST" : "❌ FOUT");
+  })), q.type === "order" && orderItems && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 8
+    }
+  }, "Zet de blokken in de juiste volgorde:"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 8
+    }
+  }, orderItems.map(function (item, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: item,
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        background: answered === "correct" ? COLORS.green + "22" : answered === "wrong" ? COLORS.red + "22" : COLORS.cardLight,
+        border: "2px solid ".concat(answered === "correct" ? COLORS.green : answered === "wrong" ? COLORS.red : COLORS.accent + "55"),
+        color: COLORS.text,
+        fontWeight: 700,
+        display: "flex",
+        alignItems: "center",
+        gap: 10
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: COLORS.accent,
+        fontWeight: 900,
+        fontSize: 18
+      }
+    }, i + 1, "."), item, answered === null && /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginLeft: "auto",
+        display: "flex",
+        gap: 4
+      }
+    }, i > 0 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i - 1);
+      },
+      style: {
+        background: COLORS.accent + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.accent,
+        padding: "4px 8px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25B2"), i < orderItems.length - 1 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i + 1);
+      },
+      style: {
+        background: COLORS.accent + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.accent,
+        padding: "4px 8px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25BC")));
+  })), answered === null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10
+    }
+  }, /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.accent,
+    onClick: checkOrder
+  }, "\u2713 Controleer volgorde"))), answered !== null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: answered === "correct" ? COLORS.green + "22" : COLORS.red + "22",
+      border: "2px solid ".concat(answered === "correct" ? COLORS.green : COLORS.red),
+      borderRadius: 12,
+      padding: 14,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: answered === "correct" ? COLORS.green : COLORS.red,
+      marginBottom: 4
+    }
+  }, answered === "correct" ? "✅ Correct! +1 punt" : "❌ Fout!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: COLORS.text
+    }
+  }, q.uitleg)), answered !== null && /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.gold,
+    onClick: next
+  }, idx < questions.length - 1 ? "Volgende vraag ›" : "Bekijk resultaat 🏆"));
+}
+
+// ─── BUTTON COMPONENT ────────────────────────────────────────────
+function Btn(_ref5) {
+  var color = _ref5.color,
+    onClick = _ref5.onClick,
+    children = _ref5.children;
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    style: {
+      width: "100%",
+      padding: "16px",
+      borderRadius: 14,
+      border: "none",
+      background: color,
+      color: "#0f0e17",
+      fontWeight: 900,
+      fontSize: 16,
+      cursor: "pointer",
+      transition: "opacity 0.2s"
+    },
+    onMouseDown: function onMouseDown(e) {
+      return e.currentTarget.style.opacity = "0.8";
+    },
+    onMouseUp: function onMouseUp(e) {
+      return e.currentTarget.style.opacity = "1";
+    }
+  }, children);
+}
+var root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🇧🇪 Les 31 — Het federale België</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:#0f0e17;color:#fffffe;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+button{font-family:inherit;}
+#root{background:#0f0e17;min-height:100vh;color:#fffffe;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+var _React = React,
+  useState = _React.useState,
+  useEffect = _React.useEffect,
+  useRef = _React.useRef;
+var COLORS = {
+  bg: "#0f0e17",
+  card: "#1a1828",
+  cardLight: "#242236",
+  gold: "#ffca28",
+  red: "#ff5252",
+  orange: "#ff7043",
+  yellow: "#ffca28",
+  green: "#69f0ae",
+  blue: "#4fc3f7",
+  purple: "#b388ff",
+  pink: "#f48fb1",
+  text: "#fffffe",
+  textMuted: "#a7a9be"
+};
+var PHASES = ["🎬 Verhaal", "📚 Lees & Markeer", "📘 Woordenschat", "⚡ Grote Quiz"];
+
+// ─── VERHAAL DATA ────────────────────────────────────────────────
+var verhaalChapters = [{
+  id: 1,
+  emoji: "🤯",
+  title: "Hoeveel regeringen heeft België?!",
+  color: COLORS.orange,
+  text: ["📍 Brussel Centraal. Een vriend uit Nederland stapt van de trein. Hij logeert bij jou voor het weekend.", "Op de taxi zegt hij: 'Ik heb gelezen dat België zeven regeringen heeft. Dat is toch een grap?'", "Jij grijnst. 'Geen grap. Zeven. Eigenlijk zes parlementen ook.' Hij kijkt je aan alsof je gek bent. 😅", "'Maar waarom?!' vraagt hij. Goede vraag. België heeft Vlamingen, Walen, Brusselaars, Duitstaligen. Allemaal met andere talen, andere wensen.", "In een federale staat verdeel je de macht. Niet één regering voor alles, maar meerdere — elk voor hun stuk. 🗺️", "Jouw vriend zucht: 'En wie betaalt dat allemaal?' Jij haalt je schouders op. 'Goede vraag voor de volgende les.' 😄"]
+}, {
+  id: 2,
+  emoji: "🗺️",
+  title: "Jouw school of jouw straat?",
+  color: COLORS.yellow,
+  text: ["Oké, het geheim van België: er zijn TWEE soorten regio's. Gemeenschappen en gewesten. Verwarrend? Blijf hangen. 🧠", "🏫 GEMEENSCHAPPEN gaan over MENSEN. Jouw school in Brussel? Dat beslist de Vlaamse gemeenschap (want je studeert in het Nederlands). Cultuur, onderwijs, kinderbijslag — voor de mensen.", "🛣️ GEWESTEN gaan over GROND. De straat voor jouw huis? Het Brussels Hoofdstedelijk Gewest. Milieu, economie, wegen — voor het grondgebied.", "België heeft DRIE gemeenschappen: Vlaamse, Franse en Duitstalige. En DRIE gewesten: Vlaams, Waals en Brussels.", "🦁 Maar Vlaanderen heeft het slim gedaan: ze hebben hun gewest en gemeenschap samengevoegd. Één Vlaamse regering, één Vlaams Parlement. Simpeler!", "En dan is er nog het federale niveau voor het hele land: het leger ⚔️, de pensioenen 👴, de ziekteverzekering 🏥. Die dingen gelden voor iedere Belg."]
+}, {
+  id: 3,
+  emoji: "🌍",
+  title: "België in Europa",
+  color: COLORS.blue,
+  text: ["Denk je dat zeven regeringen veel is? België is ook lid van de Europese Unie. Nog een niveau erbij! 😂", "Na de Tweede Wereldoorlog (1939-1945) willen de Europese landen nooit meer oorlog. Oplossing: samenwerken. 🤝", "In 1993 wordt de Europese Unie officieel opgericht. België is er vanaf het begin bij — we spelen zelfs een grote rol.", "🏛️ De EU heeft ook drie machten. De EUROPESE COMMISSIE is de uitvoerende macht — zij voeren de beslissingen uit.", "📜 De wetgevende macht is verdeeld: de EUROPESE RAAD (staatshoofden en ministers) én het EUROPEES PARLEMENT (verkozen door de burgers van alle lidstaten).", "En wat beslist de EU? Economie, energie, milieu, vervoer... Grote dingen die landen beter samen aanpakken. 🌱 Brussel is dus niet alleen de hoofdstad van België, maar ook van Europa!"]
+}];
+
+// ─── LEES & MARKEER DATA ─────────────────────────────────────────
+var leesData = [{
+  title: "1️⃣ België is een federale staat",
+  color: COLORS.orange,
+  paragraphs: [{
+    text: "In een federale staat is de macht verdeeld tussen een federale overheid voor het hele land en regionale overheden (deelstaten) die een deel van het land besturen. België probeert zo rekening te houden met Vlamingen, Walen, Franstalige Brusselaars en Duitstaligen.",
+    keywords: ["federale staat", "deelstaten", "federale overheid"]
+  }, {
+    text: "Er zijn drie gemeenschappen: de Vlaamse, de Franse en de Duitstalige gemeenschap. Zij beslissen over onderwijs, cultuur, kinderbijslag en welzijn — alles wat met mensen te maken heeft.",
+    keywords: ["gemeenschappen", "onderwijs", "cultuur"]
+  }, {
+    text: "Er zijn ook drie gewesten: het Vlaams Gewest, het Waals Gewest en het Brussels Hoofdstedelijk Gewest. Zij beslissen over materiële zaken zoals het wegennetwerk, milieu en economie.",
+    keywords: ["gewesten", "wegennetwerk", "milieu", "economie"]
+  }, {
+    text: "Vlaanderen heeft het gewest en de gemeenschap samengevoegd: één Vlaams Parlement en één Vlaamse regering. De federale overheid beslist over het leger, de werklozensteun, de ziekteverzekering en de pensioenen.",
+    keywords: ["Vlaams Parlement", "leger", "pensioenen", "ziekteverzekering"]
+  }]
+}, {
+  title: "2️⃣ België is lid van de Europese Unie",
+  color: COLORS.blue,
+  paragraphs: [{
+    text: "Na de Tweede Wereldoorlog speelt België een belangrijke rol in de Europese samenwerking. Ons land is vanaf het begin, in 1993, lid van de Europese Unie (EU).",
+    keywords: ["Europese Unie", "1993"]
+  }, {
+    text: "De EU beslist over economische zaken, energie, milieu en vervoer. De uitvoerende macht is de Europese Commissie. De wetgevende macht is verdeeld tussen de Europese Raad (staatshoofden en ministers) en het Europees Parlement (verkozen door de burgers).",
+    keywords: ["Europese Commissie", "Europese Raad", "Europees Parlement"]
+  }]
+}];
+
+// ─── WOORDENSCHAT DATA ───────────────────────────────────────────
+var woordenschat = [{
+  nl: "Federale staat",
+  fr: "Macht verdeeld tussen centraal + regio's"
+}, {
+  nl: "Deelstaat",
+  fr: "Regionale overheid (gewest of gemeenschap)"
+}, {
+  nl: "Gemeenschap",
+  fr: "Beslist over mensen: onderwijs, cultuur"
+}, {
+  nl: "Gewest",
+  fr: "Beslist over grond: milieu, economie, wegen"
+}, {
+  nl: "Bevoegdheid",
+  fr: "Wat een overheid mag beslissen"
+}, {
+  nl: "Europese Unie",
+  fr: "Samenwerking 27 Europese landen (sinds 1993)"
+}, {
+  nl: "Europese Commissie",
+  fr: "Uitvoerende macht van de EU"
+}, {
+  nl: "Europees Parlement",
+  fr: "Wetgevende macht, verkozen door burgers EU"
+}, {
+  nl: "Europese Raad",
+  fr: "Staatshoofden + ministers van de lidstaten"
+}, {
+  nl: "Federale overheid",
+  fr: "Leger, pensioenen, ziekteverzekering..."
+}];
+
+// ─── QUIZ DATA ────────────────────────────────────────────────────
+var quizQuestions = [{
+  type: "mc",
+  question: "Wat is een federale staat? 🗺️",
+  options: ["Een land met één centrale regering", "Een land waar de macht verdeeld is tussen een centrale en regionale overheden", "Een land zonder parlement", "Een land dat lid is van de EU"],
+  answer: 1,
+  uitleg: "In een federale staat is de macht verdeeld: een federale overheid voor het hele land + regionale overheden (deelstaten) voor de regio's."
+}, {
+  type: "tf",
+  question: "België heeft drie gemeenschappen en drie gewesten. 🇧🇪",
+  answer: true,
+  uitleg: "Juist! Drie gemeenschappen (Vlaams, Frans, Duitstalig) en drie gewesten (Vlaams, Waals, Brussels Hoofdstedelijk)."
+}, {
+  type: "mc",
+  question: "Waarover beslissen de gemeenschappen? 🏫",
+  options: ["Wegen, milieu en economie", "Het leger en de pensioenen", "Onderwijs, cultuur en kinderbijslag", "De spoorwegen en de post"],
+  answer: 2,
+  uitleg: "Gemeenschappen = mensen. Ze beslissen over onderwijs, cultuur, kinderbijslag en welzijn. Alles wat met personen te maken heeft."
+}, {
+  type: "mc",
+  question: "Waarover beslissen de gewesten? 🛣️",
+  options: ["Onderwijs en cultuur", "Wegennetwerk, milieu en economie", "Ziekteverzekering en werkloosheid", "Buitenlandse politiek"],
+  answer: 1,
+  uitleg: "Gewesten = grondgebied. Ze beslissen over materiële zaken: wegen, milieu, economie. Alles wat met het grondgebied te maken heeft."
+}, {
+  type: "tf",
+  question: "Brussel is een gemeenschap. 🏙️",
+  answer: false,
+  uitleg: "Fout! Brussel is een GEWEST (Brussels Hoofdstedelijk Gewest), geen gemeenschap. De gemeenschappen zijn Vlaams, Frans en Duitstalig."
+}, {
+  type: "mc",
+  question: "Wat beslist de federale overheid? 🇧🇪",
+  options: ["Onderwijs en cultuur", "Wegen en milieu", "Leger, pensioenen en ziekteverzekering", "Kinderbijslag en welzijn"],
+  answer: 2,
+  uitleg: "De federale overheid beslist over zaken die voor alle Belgen gelden: leger, werklozensteun, ziekteverzekering, pensioenen, spoorwegen, post en rechtspraak."
+}, {
+  type: "tf",
+  question: "Vlaanderen heeft zijn gewest en gemeenschap samengevoegd tot één regering en parlement. 🦁",
+  answer: true,
+  uitleg: "Juist! Vlaanderen heeft het vereenvoudigd: één Vlaams Parlement en één Vlaamse regering voor zowel het gewest als de gemeenschap."
+}, {
+  type: "mc",
+  question: "Wanneer werd België lid van de Europese Unie? 🇪🇺",
+  options: ["1945", "1957", "1993", "2004"],
+  answer: 2,
+  uitleg: "België is lid van de EU vanaf 1993, toen de Europese Unie officieel werd opgericht. België speelde een belangrijke rol in de Europese samenwerking na WOII."
+}, {
+  type: "mc",
+  question: "Wat is de uitvoerende macht van de EU? ⚙️",
+  options: ["Het Europees Parlement", "De Europese Raad", "De Europese Commissie", "De Belgische regering"],
+  answer: 2,
+  uitleg: "De Europese Commissie is de uitvoerende macht van de EU. Zij voeren de beslissingen van de EU uit."
+}, {
+  type: "mc",
+  question: "Wie vormt de Europese Raad? 👥",
+  options: ["Burgers van alle EU-landen", "Staatshoofden en ministers van de lidstaten", "Alleen de Europese Commissarissen", "Verkozen Europarlementariërs"],
+  answer: 1,
+  uitleg: "De Europese Raad bestaat uit de staatshoofden en ministers van de EU-lidstaten. Samen met het Europees Parlement vormen ze de wetgevende macht."
+}, {
+  type: "tf",
+  question: "Het Europees Parlement wordt verkozen door de burgers van de EU. 🗳️",
+  answer: true,
+  uitleg: "Juist! Het Europees Parlement is het enige EU-orgaan dat rechtstreeks door de burgers van alle lidstaten wordt verkozen."
+}, {
+  type: "mc",
+  question: "De Duitstalige gemeenschap ligt in welk gewest? 🗺️",
+  options: ["Vlaams Gewest", "Brussels Gewest", "Waals Gewest", "Ze hebben een eigen gewest"],
+  answer: 2,
+  uitleg: "De Duitstalige gemeenschap ligt in het Waals Gewest, in het oosten van België, aan de grens met Duitsland."
+}, {
+  type: "order",
+  question: "Rangschik van het KLEINSTE naar het GROOTSTE bestuursniveau: 🏘️",
+  items: ["Europese Unie", "Gemeente", "Federaal België", "Gewest"],
+  answer: [1, 3, 2, 0],
+  uitleg: "Gemeente (lokaal) → Gewest/Gemeenschap (regionaal) → Federaal België (nationaal) → Europese Unie (Europees)."
+}, {
+  type: "mc",
+  question: "Waarover beslist de EU NIET? 🇪🇺",
+  options: ["Energie", "Milieu", "Het Belgische leger", "Vervoer"],
+  answer: 2,
+  uitleg: "Het Belgische leger is een federale bevoegdheid, niet die van de EU. De EU beslist over economie, energie, milieu en vervoer."
+}, {
+  type: "tf",
+  question: "De Vlaamse en Franse gemeenschap hebben allebei bevoegdheden in Brussel. 🏙️",
+  answer: true,
+  uitleg: "Juist! Brussel is tweetalig. Zowel de Vlaamse als de Franse gemeenschap heeft bevoegdheden in het Brussels Hoofdstedelijk Gewest."
+}, {
+  type: "mc",
+  question: "Hoeveel regeringen telt België in totaal (inclusief EU)? 🤯",
+  options: ["3", "5", "7", "9"],
+  answer: 2,
+  uitleg: "België heeft: 1 federale + 3 gewest- + 3 gemeenschapsregeringen = 7 regeringen. (Vlaanderen telt maar 1 voor beide.) En dan is er nog de EU-Commissie bovenop!"
+}, {
+  type: "mc",
+  question: "Welke school valt onder de bevoegdheid van de Vlaamse gemeenschap? 🏫",
+  options: ["Alleen scholen in Vlaanderen", "Nederlandstalige scholen overal in België", "Alle scholen in België", "Alleen universiteiten"],
+  answer: 1,
+  uitleg: "Gemeenschappen zijn gebaseerd op TAAL, niet op grondgebied. De Vlaamse gemeenschap beslist over alle Nederlandstalige scholen — ook die in Brussel, zoals de school van Gustave!"
+}];
+
+// ─── SHUFFLE ─────────────────────────────────────────────────────
+function shuffle(arr) {
+  var a = _toConsumableArray(arr);
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var _ref = [a[j], a[i]];
+    a[i] = _ref[0];
+    a[j] = _ref[1];
+  }
+  return a;
+}
+
+// ════════════════════════════════════════════════════════════════
+// MAIN APP
+// ════════════════════════════════════════════════════════════════
+function App() {
+  var _useState = useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    phase = _useState2[0],
+    setPhase = _useState2[1];
+  var _useState3 = useState([true, false, false, false]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    unlocked = _useState4[0],
+    setUnlocked = _useState4[1];
+  function unlock(idx) {
+    setUnlocked(function (u) {
+      var n = _toConsumableArray(u);
+      n[idx] = true;
+      return n;
+    });
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.bg,
+      minHeight: "100vh",
+      fontFamily: "'Segoe UI', sans-serif",
+      color: COLORS.text
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#13121f",
+      padding: "12px 16px",
+      borderBottom: "2px solid ".concat(COLORS.orange, "30")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: COLORS.orange,
+      fontWeight: 700,
+      letterSpacing: 2,
+      textTransform: "uppercase"
+    }
+  }, "\uD83C\uDDE7\uD83C\uDDEA Les 31 \u2014 Geschiedenis"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 19,
+      fontWeight: 900,
+      marginTop: 2
+    }
+  }, "Het federale Belgi\xEB")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 4,
+      padding: "10px 10px 0",
+      overflowX: "auto"
+    }
+  }, PHASES.map(function (p, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return unlocked[i] && setPhase(i);
+      },
+      style: {
+        flex: "0 0 auto",
+        padding: "8px 12px",
+        borderRadius: 10,
+        border: "none",
+        fontWeight: 700,
+        fontSize: 12,
+        cursor: unlocked[i] ? "pointer" : "not-allowed",
+        background: phase === i ? COLORS.orange : unlocked[i] ? COLORS.cardLight : "#1a1828",
+        color: phase === i ? COLORS.bg : unlocked[i] ? COLORS.text : COLORS.textMuted,
+        opacity: unlocked[i] ? 1 : 0.5,
+        transition: "all 0.2s",
+        whiteSpace: "nowrap"
+      }
+    }, p);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: "12px 12px 40px"
+    }
+  }, phase === 0 && /*#__PURE__*/React.createElement(VerhaalPhase, {
+    onComplete: function onComplete() {
+      unlock(1);
+      setPhase(1);
+    }
+  }), phase === 1 && /*#__PURE__*/React.createElement(LeesPhase, {
+    onComplete: function onComplete() {
+      unlock(2);
+      setPhase(2);
+    }
+  }), phase === 2 && /*#__PURE__*/React.createElement(WoordenschatPhase, {
+    onComplete: function onComplete() {
+      unlock(3);
+      setPhase(3);
+    }
+  }), phase === 3 && /*#__PURE__*/React.createElement(QuizPhase, null)));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 1 — VERHAAL
+// ════════════════════════════════════════════════════════════════
+function VerhaalPhase(_ref2) {
+  var onComplete = _ref2.onComplete;
+  var _useState5 = useState(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    chapter = _useState6[0],
+    setChapter = _useState6[1];
+  var _useState7 = useState(0),
+    _useState8 = _slicedToArray(_useState7, 2),
+    lineIdx = _useState8[0],
+    setLineIdx = _useState8[1];
+  var _useState9 = useState(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    done = _useState0[0],
+    setDone = _useState0[1];
+  var ch = verhaalChapters[chapter];
+  var lines = ch.text;
+  function next() {
+    if (lineIdx < lines.length - 1) {
+      setLineIdx(lineIdx + 1);
+    } else if (chapter < verhaalChapters.length - 1) {
+      setChapter(chapter + 1);
+      setLineIdx(0);
+    } else {
+      setDone(true);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDFC6"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.gold,
+        marginTop: 12
+      }
+    }, "Verhaal klaar!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Je begrijpt het systeem. Klaar voor de theorie?"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.green,
+      onClick: onComplete
+    }, "\uD83D\uDCDA Naar Lees & Markeer \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 8,
+      marginBottom: 16
+    }
+  }, verhaalChapters.map(function (c, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        setChapter(i);
+        setLineIdx(0);
+      },
+      style: {
+        flex: 1,
+        padding: "8px 4px",
+        borderRadius: 10,
+        border: "2px solid ".concat(i <= chapter ? c.color : "#333"),
+        background: i === chapter ? c.color + "22" : "transparent",
+        color: i <= chapter ? c.color : COLORS.textMuted,
+        fontSize: 18,
+        cursor: "pointer"
+      }
+    }, c.emoji);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: ch.color + "18",
+      border: "2px solid ".concat(ch.color),
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 16,
+      minHeight: 200
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: ch.color,
+      fontWeight: 800,
+      fontSize: 15,
+      marginBottom: 12
+    }
+  }, ch.emoji, " Hoofdstuk ", chapter + 1, ": ", ch.title), lines.slice(0, lineIdx + 1).map(function (line, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        color: i === lineIdx ? COLORS.text : COLORS.textMuted,
+        fontSize: i === lineIdx ? 16 : 14,
+        marginBottom: 8,
+        lineHeight: 1.6,
+        transition: "all 0.3s"
+      }
+    }, line);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 4
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Hoofdstuk ", chapter + 1, "/3"), /*#__PURE__*/React.createElement("span", null, lineIdx + 1, "/", lines.length)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: ch.color,
+      height: 6,
+      borderRadius: 99,
+      width: "".concat((chapter * 6 + lineIdx + 1) / 18 * 100, "%"),
+      transition: "width 0.3s"
+    }
+  }))), /*#__PURE__*/React.createElement(Btn, {
+    color: ch.color,
+    onClick: next
+  }, lineIdx < lines.length - 1 ? "Volgende ›" : chapter < 2 ? "Volgend hoofdstuk ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 2 — LEES & MARKEER
+// ════════════════════════════════════════════════════════════════
+function LeesPhase(_ref3) {
+  var onComplete = _ref3.onComplete;
+  var _useState1 = useState(0),
+    _useState10 = _slicedToArray(_useState1, 2),
+    section = _useState10[0],
+    setSection = _useState10[1];
+  var _useState11 = useState({}),
+    _useState12 = _slicedToArray(_useState11, 2),
+    marked = _useState12[0],
+    setMarked = _useState12[1];
+  var _useState13 = useState(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    done = _useState14[0],
+    setDone = _useState14[1];
+  var sec = leesData[section];
+  var allKeywords = sec.paragraphs.flatMap(function (p) {
+    return p.keywords;
+  });
+  var markedCount = allKeywords.filter(function (k) {
+    return marked["".concat(section, "-").concat(k)];
+  }).length;
+  function toggleMark(key) {
+    setMarked(function (m) {
+      return _objectSpread(_objectSpread({}, m), {}, _defineProperty({}, key, !m[key]));
+    });
+  }
+  function nextSection() {
+    if (section < leesData.length - 1) setSection(section + 1);else setDone(true);
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83D\uDCDA"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.orange,
+        marginTop: 12
+      }
+    }, "Theorie bekeken!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Nu de woordenschat instuderen!"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: onComplete
+    }, "\uD83D\uDCD8 Naar Woordenschat \u2192"));
+  }
+  var tabLabels = ["Federaal", "Europese Unie"];
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 6,
+      marginBottom: 14
+    }
+  }, leesData.map(function (s, i) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return setSection(i);
+      },
+      style: {
+        flex: 1,
+        padding: "8px 4px",
+        borderRadius: 10,
+        border: "2px solid ".concat(i <= section ? s.color : "#333"),
+        background: i === section ? s.color + "22" : "transparent",
+        color: i === section ? s.color : COLORS.textMuted,
+        fontSize: 11,
+        fontWeight: 700,
+        cursor: "pointer"
+      }
+    }, tabLabels[i]);
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: sec.color + "18",
+      border: "2px solid ".concat(sec.color),
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: sec.color,
+      fontWeight: 800,
+      fontSize: 16,
+      marginBottom: 14
+    }
+  }, sec.title), sec.paragraphs.map(function (para, pIdx) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: pIdx,
+      style: {
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 14,
+        lineHeight: 1.8,
+        color: COLORS.text
+      }
+    }, para.text.split(new RegExp("(".concat(para.keywords.map(function (k) {
+      return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join("|"), ")"), "gi")).map(function (part, i) {
+      var matchedKey = para.keywords.find(function (k) {
+        return k.toLowerCase() === part.toLowerCase();
+      });
+      if (matchedKey) {
+        var key = "".concat(section, "-").concat(matchedKey);
+        var isMarked = marked[key];
+        return /*#__PURE__*/React.createElement("span", {
+          key: i,
+          onClick: function onClick() {
+            return toggleMark(key);
+          },
+          style: {
+            background: isMarked ? sec.color : sec.color + "33",
+            color: isMarked ? COLORS.bg : sec.color,
+            borderRadius: 4,
+            padding: "1px 5px",
+            cursor: "pointer",
+            fontWeight: 700,
+            fontSize: 14,
+            transition: "all 0.2s",
+            border: "1px solid ".concat(sec.color)
+          }
+        }, part);
+      }
+      return /*#__PURE__*/React.createElement("span", {
+        key: i
+      }, part);
+    })));
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: sec.color,
+      marginTop: 8
+    }
+  }, "\uD83D\uDC46 Tik op de gekleurde woorden om ze te markeren! (", markedCount, "/", allKeywords.length, ")")), /*#__PURE__*/React.createElement(Btn, {
+    color: sec.color,
+    onClick: nextSection
+  }, section < leesData.length - 1 ? "Volgende sectie ›" : "Klaar! 🎉"));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 3 — WOORDENSCHAT MEMORY
+// ════════════════════════════════════════════════════════════════
+function WoordenschatPhase(_ref4) {
+  var onComplete = _ref4.onComplete;
+  var _useState15 = useState(function () {
+      var pairs = woordenschat.map(function (w, i) {
+        return [{
+          id: "nl-".concat(i),
+          text: w.nl,
+          pairId: i,
+          type: "nl"
+        }, {
+          id: "fr-".concat(i),
+          text: w.fr,
+          pairId: i,
+          type: "fr"
+        }];
+      }).flat();
+      return shuffle(pairs);
+    }),
+    _useState16 = _slicedToArray(_useState15, 1),
+    cards = _useState16[0];
+  var _useState17 = useState([]),
+    _useState18 = _slicedToArray(_useState17, 2),
+    selected = _useState18[0],
+    setSelected = _useState18[1];
+  var _useState19 = useState([]),
+    _useState20 = _slicedToArray(_useState19, 2),
+    matched = _useState20[0],
+    setMatched = _useState20[1];
+  var _useState21 = useState([]),
+    _useState22 = _slicedToArray(_useState21, 2),
+    wrong = _useState22[0],
+    setWrong = _useState22[1];
+  var _useState23 = useState(0),
+    _useState24 = _slicedToArray(_useState23, 2),
+    score = _useState24[0],
+    setScore = _useState24[1];
+  var _useState25 = useState(false),
+    _useState26 = _slicedToArray(_useState25, 2),
+    done = _useState26[0],
+    setDone = _useState26[1];
+  function selectCard(card) {
+    if (matched.includes(card.pairId)) return;
+    if (selected.find(function (c) {
+      return c.id === card.id;
+    })) return;
+    if (wrong.length > 0) {
+      setWrong([]);
+      setSelected([]);
+      return;
+    }
+    if (selected.length === 1) {
+      var first = selected[0];
+      if (first.pairId === card.pairId && first.type !== card.type) {
+        var newMatched = [].concat(_toConsumableArray(matched), [card.pairId]);
+        setMatched(newMatched);
+        setScore(function (s) {
+          return s + 1;
+        });
+        setSelected([]);
+        if (newMatched.length === woordenschat.length) setDone(true);
+      } else {
+        setWrong([first.id, card.id]);
+        setSelected([first, card]);
+        setTimeout(function () {
+          setWrong([]);
+          setSelected([]);
+        }, 900);
+      }
+    } else {
+      setSelected([card]);
+    }
+  }
+  if (done) {
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 40
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 60
+      }
+    }, "\uD83C\uDF89"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 22,
+        fontWeight: 900,
+        color: COLORS.orange,
+        marginTop: 12
+      }
+    }, "Alle woorden gevonden!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        color: COLORS.textMuted,
+        margin: "10px 0 24px"
+      }
+    }, "Score: ", score, "/", woordenschat.length, " \u2728"), /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.gold,
+      onClick: onComplete
+    }, "\u26A1 Naar de Grote Quiz \u2192"));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 12
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: COLORS.orange,
+      fontSize: 16
+    }
+  }, "\uD83D\uDCD8 Memory Match"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: COLORS.gold,
+      fontWeight: 700
+    }
+  }, matched.length, "/", woordenschat.length, " \u2713")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 14
+    }
+  }, "Koppel elk begrip aan zijn definitie!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 8
+    }
+  }, cards.map(function (card) {
+    var isMatched = matched.includes(card.pairId);
+    var isSelected = selected.find(function (c) {
+      return c.id === card.id;
+    });
+    var isWrong = wrong.includes(card.id);
+    var color = card.type === "nl" ? COLORS.orange : COLORS.yellow;
+    return /*#__PURE__*/React.createElement("button", {
+      key: card.id,
+      onClick: function onClick() {
+        return selectCard(card);
+      },
+      style: {
+        padding: "12px 8px",
+        borderRadius: 12,
+        border: "2px solid ".concat(isWrong ? COLORS.red : isMatched ? COLORS.green : isSelected ? color : color + "44"),
+        background: isWrong ? COLORS.red + "22" : isMatched ? COLORS.green + "22" : isSelected ? color + "22" : COLORS.card,
+        color: isMatched ? COLORS.green : isWrong ? COLORS.red : isSelected ? color : COLORS.text,
+        cursor: isMatched ? "default" : "pointer",
+        fontWeight: 700,
+        fontSize: 11,
+        textAlign: "center",
+        lineHeight: 1.3,
+        minHeight: 60,
+        transition: "all 0.15s",
+        opacity: isMatched ? 0.6 : 1
+      }
+    }, isMatched ? "✓ " : "", card.text);
+  })));
+}
+
+// ════════════════════════════════════════════════════════════════
+// PHASE 4 — GROTE QUIZ
+// ════════════════════════════════════════════════════════════════
+function QuizPhase() {
+  var _useState27 = useState(function () {
+      return shuffle(quizQuestions);
+    }),
+    _useState28 = _slicedToArray(_useState27, 1),
+    questions = _useState28[0];
+  var _useState29 = useState(0),
+    _useState30 = _slicedToArray(_useState29, 2),
+    idx = _useState30[0],
+    setIdx = _useState30[1];
+  var _useState31 = useState(null),
+    _useState32 = _slicedToArray(_useState31, 2),
+    answered = _useState32[0],
+    setAnswered = _useState32[1];
+  var _useState33 = useState(0),
+    _useState34 = _slicedToArray(_useState33, 2),
+    score = _useState34[0],
+    setScore = _useState34[1];
+  var _useState35 = useState(false),
+    _useState36 = _slicedToArray(_useState35, 2),
+    done = _useState36[0],
+    setDone = _useState36[1];
+  var _useState37 = useState(null),
+    _useState38 = _slicedToArray(_useState37, 2),
+    orderItems = _useState38[0],
+    setOrderItems = _useState38[1];
+  var q = questions[idx];
+  useEffect(function () {
+    if ((q === null || q === void 0 ? void 0 : q.type) === "order") setOrderItems(shuffle(_toConsumableArray(q.items)));
+  }, [idx]);
+  function checkMC(optIdx) {
+    if (answered !== null) return;
+    var correct = optIdx === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkTF(val) {
+    if (answered !== null) return;
+    var correct = val === q.answer;
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function checkOrder() {
+    if (answered !== null) return;
+    var correct = q.answer.every(function (a, i) {
+      return q.items[a] === orderItems[i];
+    });
+    setAnswered(correct ? "correct" : "wrong");
+    if (correct) setScore(function (s) {
+      return s + 1;
+    });
+  }
+  function moveItem(from, to) {
+    if (answered !== null) return;
+    var items = _toConsumableArray(orderItems);
+    var _items$splice = items.splice(from, 1),
+      _items$splice2 = _slicedToArray(_items$splice, 1),
+      item = _items$splice2[0];
+    items.splice(to, 0, item);
+    setOrderItems(items);
+  }
+  function next() {
+    if (idx < questions.length - 1) {
+      setIdx(idx + 1);
+      setAnswered(null);
+    } else setDone(true);
+  }
+  if (done) {
+    var pct = Math.round(score / questions.length * 100);
+    var medal = pct >= 90 ? "🥇" : pct >= 70 ? "🥈" : pct >= 50 ? "🥉" : "📚";
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        paddingTop: 30
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 70
+      }
+    }, medal), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 28,
+        fontWeight: 900,
+        color: COLORS.gold,
+        marginTop: 8
+      }
+    }, score, "/", questions.length), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 16,
+        color: COLORS.textMuted,
+        marginTop: 6
+      }
+    }, pct, "%"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 16,
+        fontSize: 16,
+        color: pct >= 70 ? COLORS.green : COLORS.orange
+      }
+    }, pct >= 90 ? "🔥 Fantastisch! Jij snapt België beter dan de meeste politici!" : pct >= 70 ? "👍 Goed gedaan! Nog een kleine herhaling!" : pct >= 50 ? "💪 Niet slecht! Lees de theorie nog eens." : "📖 Herhaal de lessen en probeer opnieuw!"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 24
+      }
+    }, /*#__PURE__*/React.createElement(Btn, {
+      color: COLORS.orange,
+      onClick: function onClick() {
+        setIdx(0);
+        setAnswered(null);
+        setScore(0);
+        setDone(false);
+      }
+    }, "\uD83D\uDD04 Opnieuw spelen")));
+  }
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Vraag ", idx + 1, "/", questions.length), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: COLORS.gold
+    }
+  }, "\u2B50 ", score, " punten")), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#2a2840",
+      borderRadius: 99,
+      height: 6,
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "linear-gradient(90deg, ".concat(COLORS.orange, ", ").concat(COLORS.gold, ")"),
+      height: 6,
+      borderRadius: 99,
+      width: "".concat(idx / questions.length * 100, "%"),
+      transition: "width 0.3s"
+    }
+  })), /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: COLORS.card,
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 14,
+      border: "2px solid #2a2840"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      color: COLORS.textMuted,
+      marginBottom: 6,
+      textTransform: "uppercase",
+      letterSpacing: 1
+    }
+  }, q.type === "mc" ? "Meerkeuze" : q.type === "tf" ? "Juist / Fout" : "Volgorde"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 16,
+      fontWeight: 700,
+      lineHeight: 1.4
+    }
+  }, q.question)), q.type === "mc" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gap: 8,
+      marginBottom: 14
+    }
+  }, q.options.map(function (opt, i) {
+    var isCorrect = i === q.answer;
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      onClick: function onClick() {
+        return checkMC(i);
+      },
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        border: "2px solid ".concat(answered !== null ? isCorrect ? COLORS.green : COLORS.red + "44" : COLORS.orange + "44"),
+        background: answered !== null && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: answered !== null ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        textAlign: "left",
+        cursor: answered === null ? "pointer" : "default",
+        fontWeight: 600,
+        fontSize: 14,
+        transition: "all 0.2s"
+      }
+    }, answered !== null && isCorrect ? "✓ " : "", opt);
+  })), q.type === "tf" && /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr",
+      gap: 10,
+      marginBottom: 14
+    }
+  }, [true, false].map(function (val) {
+    var isCorrect = val === q.answer;
+    var chosen = answered !== null;
+    return /*#__PURE__*/React.createElement("button", {
+      key: String(val),
+      onClick: function onClick() {
+        return checkTF(val);
+      },
+      style: {
+        padding: "20px",
+        borderRadius: 14,
+        border: "2px solid ".concat(chosen ? isCorrect ? COLORS.green : COLORS.red : val ? COLORS.green + "55" : COLORS.red + "55"),
+        background: chosen && isCorrect ? COLORS.green + "22" : COLORS.cardLight,
+        color: chosen ? isCorrect ? COLORS.green : COLORS.textMuted : COLORS.text,
+        fontSize: 18,
+        fontWeight: 800,
+        cursor: chosen ? "default" : "pointer",
+        transition: "all 0.2s"
+      }
+    }, val ? "✅ JUIST" : "❌ FOUT");
+  })), q.type === "order" && orderItems && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 12,
+      color: COLORS.textMuted,
+      marginBottom: 8
+    }
+  }, "Zet in de juiste volgorde:"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 8
+    }
+  }, orderItems.map(function (item, i) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: item,
+      style: {
+        padding: "14px 16px",
+        borderRadius: 12,
+        background: answered === "correct" ? COLORS.green + "22" : answered === "wrong" ? COLORS.red + "22" : COLORS.cardLight,
+        border: "2px solid ".concat(answered === "correct" ? COLORS.green : answered === "wrong" ? COLORS.red : COLORS.orange + "55"),
+        color: COLORS.text,
+        fontWeight: 700,
+        display: "flex",
+        alignItems: "center",
+        gap: 10
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: COLORS.orange,
+        fontWeight: 900,
+        fontSize: 18
+      }
+    }, i + 1, "."), item, answered === null && /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginLeft: "auto",
+        display: "flex",
+        gap: 4
+      }
+    }, i > 0 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i - 1);
+      },
+      style: {
+        background: COLORS.orange + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.orange,
+        padding: "4px 8px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25B2"), i < orderItems.length - 1 && /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return moveItem(i, i + 1);
+      },
+      style: {
+        background: COLORS.orange + "33",
+        border: "none",
+        borderRadius: 6,
+        color: COLORS.orange,
+        padding: "4px 8px",
+        cursor: "pointer",
+        fontSize: 14
+      }
+    }, "\u25BC")));
+  })), answered === null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 10
+    }
+  }, /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.orange,
+    onClick: checkOrder
+  }, "\u2713 Controleer volgorde"))), answered !== null && /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: answered === "correct" ? COLORS.green + "22" : COLORS.red + "22",
+      border: "2px solid ".concat(answered === "correct" ? COLORS.green : COLORS.red),
+      borderRadius: 12,
+      padding: 14,
+      marginBottom: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: 800,
+      color: answered === "correct" ? COLORS.green : COLORS.red,
+      marginBottom: 4
+    }
+  }, answered === "correct" ? "✅ Correct! +1 punt" : "❌ Fout!"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 13,
+      color: COLORS.text
+    }
+  }, q.uitleg)), answered !== null && /*#__PURE__*/React.createElement(Btn, {
+    color: COLORS.gold,
+    onClick: next
+  }, idx < questions.length - 1 ? "Volgende vraag ›" : "Bekijk resultaat 🏆"));
+}
+
+// ─── BUTTON COMPONENT ────────────────────────────────────────────
+function Btn(_ref5) {
+  var color = _ref5.color,
+    onClick = _ref5.onClick,
+    children = _ref5.children;
+  return /*#__PURE__*/React.createElement("button", {
+    onClick: onClick,
+    style: {
+      width: "100%",
+      padding: "16px",
+      borderRadius: 14,
+      border: "none",
+      background: color,
+      color: "#0f0e17",
+      fontWeight: 900,
+      fontSize: 16,
+      cursor: "pointer",
+      transition: "opacity 0.2s"
+    },
+    onMouseDown: function onMouseDown(e) {
+      return e.currentTarget.style.opacity = "0.8";
+    },
+    onMouseUp: function onMouseUp(e) {
+      return e.currentTarget.style.opacity = "1";
+    }
+  }, children);
+}
+var root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>

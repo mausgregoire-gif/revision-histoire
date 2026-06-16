@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🏛️ Geschiedenis Hub — Gustave</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:#0f0e17;color:#fffffe;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+button{font-family:inherit;}
+#root{background:#0f0e17;min-height:100vh;color:#fffffe;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:#1a1828;}
+::-webkit-scrollbar-thumb{background:#b388ff44;border-radius:2px;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const { useState, useEffect } = React;
+
+const C = {
+  bg:"#0f0e17",card:"#1a1828",cardLight:"#242236",
+  gold:"#f5c842",blue:"#4fc3f7",purple:"#b388ff",
+  green:"#69f0ae",red:"#ff5252",orange:"#ffab40",
+  pink:"#f48fb1",text:"#fffffe",muted:"#a7a9be",
+};
+
+const LESSONS = [
+  { id:"11",    label:"Les 11",    title:"De Griekse Kunst",                        emoji:"🎨", color:"#b388ff", era:"grieks" },
+  { id:"13-14", label:"Les 13–14", title:"Rome: Stadstaat & Republiek",             emoji:"🐺", color:"#f5c842", era:"rome-vroeg" },
+  { id:"15",    label:"Les 15",    title:"Rome wordt machtig",                      emoji:"⚔️", color:"#ff7043", era:"rome-vroeg" },
+  { id:"16",    label:"Les 16",    title:"De veroveringen",                         emoji:"🌍", color:"#26c6da", era:"rome-midden" },
+  { id:"17",    label:"Les 17",    title:"De burgeroorlogen",                       emoji:"⚡", color:"#ef5350", era:"rome-midden" },
+  { id:"18",    label:"Les 18",    title:"Augustus, de eerste keizer",              emoji:"👑", color:"#ab47bc", era:"rome-midden" },
+  { id:"19",    label:"Les 19",    title:"De economie van het Rijk",                emoji:"💰", color:"#66bb6a", era:"rome-rijk" },
+  { id:"20",    label:"Les 20",    title:"De Romeinse Kunst",                       emoji:"🏛️", color:"#42a5f5", era:"rome-rijk" },
+  { id:"22",    label:"Les 22",    title:"De godsdienst bij de Romeinen",           emoji:"✝️", color:"#ec407a", era:"rome-rijk" },
+  { id:"23",    label:"Les 23",    title:"Bloei en verval van het Rijk",            emoji:"📉", color:"#ff7043", era:"rome-laat" },
+  { id:"26",    label:"Les 26",    title:"De Romeinen veroveren Gallië",            emoji:"🛡️", color:"#26a69a", era:"rome-laat" },
+  { id:"30",    label:"Les 30",    title:"De parlementaire democratie",             emoji:"🗳️", color:"#7e57c2", era:"belgie" },
+  { id:"31",    label:"Les 31",    title:"Het federale België",                     emoji:"🇧🇪", color:"#ef5350", era:"belgie" },
+];
+
+const ERA = {
+  grieks:        { label:"Grieks",          color:"#b388ff" },
+  "rome-vroeg":  { label:"Rome: oorsprong", color:"#f5c842" },
+  "rome-midden": { label:"Rome: crisis",    color:"#ff5252" },
+  "rome-rijk":   { label:"Pax Romana",      color:"#69f0ae" },
+  "rome-laat":   { label:"Verval",          color:"#ffab40" },
+  belgie:        { label:"België",          color:"#4fc3f7" },
+};
+
+const Q = [
+  // ─── LES 11 ───────────────────────────────────────────────────
+  {lid:"11",type:"mc",q:"Welke bouwstijl heeft een bladmotief op het kapiteel? 🌿",o:["Dorisch","Ionisch","Korinthisch","Myceens"],a:2,u:"Korinthisch = het meest versierd, met acanthusbladeren!"},
+  {lid:"11",type:"tf",q:"De Griekse tempel was altijd helemaal wit. ⬜",a:false,u:"Fout! Tempels waren KLEURRIJK geschilderd — wit is een mythe!"},
+  {lid:"11",type:"mc",q:"Wat is de functie van het Parthenon? 🏛️",o:["Toegangspoort","Sportstadion","Tempel voor Athena","Marktplaats"],a:2,u:"Het Parthenon is de tempel ter ere van godin Athena."},
+  {lid:"11",type:"order",q:"Griekse beeldhouwkunst: juiste volgorde (oudste eerst)? 📅",items:["Hellenistisch","Archaïsch","Klassiek"],a:[1,2,0],u:"Archaïsch → Klassiek → Hellenistisch"},
+  {lid:"11",type:"tf",q:"Hellenistische beelden zijn statisch en tonen weinig beweging. 🧊",a:false,u:"Fout! Hellenistisch = vol beweging en expressieve emoties!"},
+  {lid:"11",type:"mc",q:"Zwartfigurige stijl = ? 🏺",o:["Rood op zwart","Zwart op rood","Wit op zwart","Blauw op wit"],a:1,u:"Zwartfigurig = zwarte figuren op rode achtergrond."},
+  {lid:"11",type:"mc",q:"Wat is een agora? 🏟️",o:["Een god","Een type kolom","Marktplaats / ontmoetingsplaats","Een soort vaas"],a:2,u:"De agora = hart van de Griekse stad: markt + politiek debat."},
+  {lid:"11",type:"mc",q:"Welk gebouw is de toegangspoort tot de Akropolis? 🚪",o:["Parthenon","Erechtheum","Propyleeën","Nikètempel"],a:2,u:"De Propyleeën zijn de monumentale ingangspoort."},
+  {lid:"11",type:"mc",q:"Wat stelt de Kouros voor? 🗿",o:["Oude wijze man","Naakte jongeman","Geklede vrouw","Griekse god"],a:1,u:"Kouros = naakte jongeman. Korè is het vrouwelijke equivalent."},
+  {lid:"11",type:"tf",q:"In de hellenistische periode maakt soberheid plaats voor praalzucht. 💎",a:true,u:"Juist! Hellenistische kunst = vol overdaad, drama en decoratie."},
+  {lid:"11",type:"mc",q:"Dorische zuilen zijn... 🏗️",o:["Slank met krullen","Zwaar en log zonder voetstuk","Versierd met bladmotief","Altijd de kleinste"],a:1,u:"Dorisch = zwaar, eenvoudig kapiteel, GEEN voetstuk. Meest sober."},
+  {lid:"11",type:"mc",q:"De Discuswerper behoort tot welke periode? 🥏",o:["Archaïsch","Klassiek","Hellenistisch","Myceens"],a:1,u:"De Discuswerper = klassiek meesterwerk: ideale mens, momentopname."},
+  {lid:"11",type:"tf",q:"Het Erechtheum is een tempel voor Athena alleen. 🏛️",a:false,u:"Fout! Het Erechtheum is gewijd aan verschillende goden én koningen."},
+  {lid:"11",type:"mc",q:"Waarom zijn Griekse vazen belangrijk voor historici? 📚",o:["Ze zijn heel duur","Ze tonen dagelijks leven en mythologie","Ze zijn van goud","Ze waren voor de rijken"],a:1,u:"Vazen tonen mythologische taferelen én scènes uit het dagelijks leven."},
+
+  // ─── LES 13-14 ────────────────────────────────────────────────
+  {lid:"13-14",type:"tf",q:"Romulus sticht Rome op 21 april 753 v.C. (mythe). 🐺",a:true,u:"Juist! Wetenschap dateert de eerste nederzettingen op ±1000 v.C."},
+  {lid:"13-14",type:"mc",q:"In welk jaar werd Rome een republiek? 📅",o:["753 v.C.","509 v.C.","286 v.C.","27 v.C."],a:1,u:"509 v.C. — de laatste koning werd verjaagd."},
+  {lid:"13-14",type:"mc",q:"Wat betekent 'pater familias'? 👨‍👩‍👧",o:["Oudste slaaf","Familiehoofd met alle macht","Hogepriester","Eerste consul"],a:1,u:"De pater familias beslist alles: vrouw, kinderen, slaven én meubels."},
+  {lid:"13-14",type:"order",q:"Periodes van Rome (oudste eerst): 🏛️",items:["De Republiek","Het Koninkrijk","Het Keizerrijk"],a:[1,0,2],u:"Koninkrijk → Republiek → Keizerrijk"},
+  {lid:"13-14",type:"tf",q:"Plebejers hadden politieke macht onder het koninkrijk. 🗳️",a:false,u:"Fout! Ze hadden persoonlijke vrijheid maar GEEN politieke macht."},
+  {lid:"13-14",type:"mc",q:"Hoeveel consuls waren er tegelijk? 🏛️",o:["1","2","3","10"],a:1,u:"Altijd 2 consuls, elk voor één jaar — om te veel macht te voorkomen."},
+  {lid:"13-14",type:"mc",q:"Wat is het vetorecht van de volkstribuun? ✋",o:["Oorlog verklaren","Belastingen innen","Senaat blokkeren","Consul kiezen"],a:2,u:"De volkstribuun kon beslissingen van de senaat tegenhouden."},
+  {lid:"13-14",type:"tf",q:"In 286 v.C. waren plebejers en patriciërs politiek gelijk. ⚖️",a:true,u:"Juist! Meer dan 200 jaar strijd (494–286 v.C.) voor gelijkheid."},
+  {lid:"13-14",type:"mc",q:"Welke invloed hadden de Etrusken NIET op Rome? 🤔",o:["Waarzeggerij","Gladiatorenspelen","De democratie","Bouwkunst"],a:2,u:"Democratie komt van de Grieken! Etrusken gaven waarzeggerij, gladiatoren en bouw."},
+  {lid:"13-14",type:"mc",q:"Hoelang mocht een dictator aan de macht blijven? ⏱️",o:["1 jaar","6 maanden","Levenslang","3 jaar"],a:1,u:"Een dictator werd aangesteld in noodsituaties voor max. 6 maanden."},
+  {lid:"13-14",type:"mc",q:"Waarom was de ligging van Rome gunstig? 🗺️",o:["Aan de zee voor piraten","Hoog in de bergen","Heuvels + moerassen beschermden","Grote woestijn rondom"],a:2,u:"Heuvels en moerassen = natuurlijke bescherming. Tiber = ideaal voor handel."},
+  {lid:"13-14",type:"tf",q:"De senaat was de machtigste instelling van de republiek. 💪",a:true,u:"Juist! Senaat beheerde financiën, buitenlandse contacten, eredienst én openbare werken."},
+  {lid:"13-14",type:"mc",q:"Wat vormden families met dezelfde voorvader? 👨‍👩‍👧",o:["Een senaat","Een gens","Een legioen","Een volkstribuun"],a:1,u:"Families met dezelfde voorvader = een gens. Meerdere gentes vormen de Romeinse staat."},
+
+  // ─── LES 15 ───────────────────────────────────────────────────
+  {lid:"15",type:"mc",q:"Welk volk veroverde Rome omstreeks 390 v.C.? 🏹",o:["Etrusken","Kelten","Samnieten","Grieken"],a:1,u:"De Kelten (Galliërs) — tijdelijke maar zware slag voor Rome."},
+  {lid:"15",type:"tf",q:"De Eerste Punische Oorlog ging over Sicilië. ⚓",a:true,u:"Juist! Rome vs Carthago (264–241 v.C.) om Sicilië."},
+  {lid:"15",type:"mc",q:"Wat was het bijzondere wapen van Hannibal? 🐘",o:["Strijdwagens","Oorlogsolifanten","Katapulten","Zeeschepen"],a:1,u:"Oorlogsolifanten — vergelijkbaar met een moderne tank!"},
+  {lid:"15",type:"mc",q:"Bij welke slag sneuvelden 50.000 Romeinen op één dag? ⚔️",o:["Trasimeen","Zama","Cannae","Trebia"],a:2,u:"Cannae (216 v.C.) — Hannibals grootste overwinning."},
+  {lid:"15",type:"mc",q:"Wat betekent 'Divide et impera'? 🧠",o:["Aanvallen en winnen","Verdeel en heers","Bouwen en verbinden","Straffen en belonen"],a:1,u:"Verdeel en heers — Romes slimste bestuursstrategie."},
+  {lid:"15",type:"tf",q:"Hannibal heeft Rome ooit ingenomen. 🏛️",a:false,u:"Fout! Hij won veldslagen maar nam Rome nooit in."},
+  {lid:"15",type:"mc",q:"Wat betekent 'Mare Nostrum'? 🌊",o:["Ons leger","Onze zee","Onze wegen","Ons rijk"],a:1,u:"'Onze zee' = de Middellandse Zee — volledig omringd door Rome."},
+  {lid:"15",type:"mc",q:"Welke keizer dankt zijn bijnaam aan de soldatenschoen? 👶",o:["Augustus","Nero","Caligula","Trajanus"],a:2,u:"Caligula = 'kleine caliga' (soldatenschoen). Als kind bij de troepen."},
+  {lid:"15",type:"mc",q:"Welke Romeinse generaal versloeg Hannibal bij Zama? 🏆",o:["Julius Caesar","Cato de Oudere","Scipio Africanus","Pompeius"],a:2,u:"Scipio Africanus versloeg Hannibal in 202 v.C. bij Zama."},
+  {lid:"15",type:"tf",q:"De Romeine caliga had tientallen nagels in de zool. 👟",a:true,u:"Juist! 80 à 90 nagels gaven extra steun en duurzaamheid."},
+  {lid:"15",type:"mc",q:"Waarvoor dienden de Romeinse heerbanen primair? 🛣️",o:["Alleen voor handelaars","Snelle verplaatsing van het leger","Alleen voor de keizer","Waterafvoer"],a:1,u:"Heerbanen = primair voor het leger. Handelaars profiteerden mee."},
+  {lid:"15",type:"order",q:"Punische Oorlogen: juiste volgorde? ⚔️",items:["Derde Punische Oorlog","Eerste Punische Oorlog","Tweede Punische Oorlog"],a:[1,2,0],u:"1e (264–241) → 2e Hannibal (218–201) → 3e vernietiging Carthago (149–146)"},
+
+  // ─── LES 16 ───────────────────────────────────────────────────
+  {lid:"16",type:"tf",q:"De kleine boer profiteerde van de Punische oorlogen. 🌾",a:false,u:"Fout! Hij verloor alles: braakliggende akkers, schulden, concurrentie."},
+  {lid:"16",type:"mc",q:"Wat zijn 'latifundia'? 🏡",o:["Kleine boerderijen","Grote domeinen van rijken met slaven","Militaire kampen","Marktplaatsen"],a:1,u:"Grote landbouwbedrijven van rijke Romeinen, bewerkt door slaven."},
+  {lid:"16",type:"mc",q:"Wat betekent 'brood en spelen'? 🎭",o:["Een recept","Gratis eten + spektakels om volk rustig te houden","Twee markten","Een wet"],a:1,u:"Panem et circenses: gratis graan + spektakel = sociale rust."},
+  {lid:"16",type:"mc",q:"Wie zijn de 'populares'? 🗳️",o:["Rijke senatoren","Soldaten","Politici voor de volksvergadering","Vrijgekochte slaven"],a:2,u:"Populares willen macht voor het volk. Tegenpolen: optimates (senaat)."},
+  {lid:"16",type:"tf",q:"Tiberius Gracchus werd vermoord in 133 v.C. ⚔️",a:true,u:"Juist! Doodgeslagen op straat — zijn lichaam gegooid in de Tiber."},
+  {lid:"16",type:"tf",q:"De optimates wilden de macht bij het volk houden. 🏛️",a:false,u:"Fout! Optimates = macht bij de SENAAT. Populares = macht bij het volk."},
+  {lid:"16",type:"mc",q:"Wat is een 'proletariër' in Rome? 🏚️",o:["Een soldaat","Een rijke patriciër","Een bezitloze arme","Een vrijgekochte slaaf"],a:2,u:"Bezitloze arme — vaak een vroegere kleine boer die zijn grond verloor."},
+  {lid:"16",type:"mc",q:"Waarom kon een arme plebejer nooit consul worden? 💶",o:["Wet verbood het","Geen Latijn","Campagne kost veel geld","Alleen patriciërs stemden"],a:2,u:"Campagne voeren vereiste veel geld — enkel rijken konden dat betalen."},
+  {lid:"16",type:"tf",q:"Gaius Gracchus werd vermoord in 121 v.C. 🗡️",a:true,u:"Juist! Broer van Tiberius, zelfde lot — 121 v.C."},
+  {lid:"16",type:"mc",q:"Wat zijn 'optimates'? 🏛️",o:["Soldaten die optimaal vechten","Politici die macht willen voor de senaat","Rijke handelaars","Vrijgekochte slaven"],a:1,u:"Optimates = 'de besten' — politici voor de macht van de senaat."},
+  {lid:"16",type:"tf",q:"De nobilitas was een grote groep gewone Romeinen. 👥",a:false,u:"Fout! Nobilitas = KLEINE rijke elite: patriciërs + rijke plebejers."},
+  {lid:"16",type:"mc",q:"Wat kregen Romeinse soldaten na hun dienst? 🌾",o:["Goud en zilver","Een stuk grond","Een slavin","Een consulstitel"],a:1,u:"Soldaten kregen grond na hun dienst — ze werden loyaal aan hun generaal."},
+
+  // ─── LES 17 ───────────────────────────────────────────────────
+  {lid:"17",type:"mc",q:"Waarom was het leger van Marius gevaarlijk voor Rome? ⚠️",o:["Te zwak","Loyaal aan generaal niet aan senaat","Te klein","Weigerden orders"],a:1,u:"Proletariërs vochten voor HUN generaal (grond!) — niet voor Rome."},
+  {lid:"17",type:"tf",q:"Eerste triumviraat = Marius, Sulla en Caesar. 👥",a:false,u:"Fout! = Pompeius, Crassus en Julius Caesar (60 v.C.)."},
+  {lid:"17",type:"mc",q:"Wat deed Caesar toen de senaat hem beval zijn leger te ontbinden? 🌊",o:["Gehoorzaamde","Vluchtte naar Egypte","Stak de Rubico over","Vroeg onderhandelingen"],a:2,u:"Rubico oversteken = oorlogsverklaring. Onomkeerbare stap."},
+  {lid:"17",type:"mc",q:"Wanneer werd Julius Caesar vermoord? 📅",o:["15 maart 44 v.C.","27 v.C.","31 v.C.","509 v.C."],a:0,u:"15 maart 44 v.C. — de Iden van Maart. 23 messteken, ook van Brutus."},
+  {lid:"17",type:"mc",q:"Wat gebeurde bij de slag bij Actium (31 v.C.)? ⚓",o:["Caesar vs Pompeius","Rome vs Carthago","Octavianus verslaat Antonius + Cleopatra","Marius vs Germanen"],a:2,u:"Octavianus wint — Antonius en Cleopatra plegen daarna zelfmoord."},
+  {lid:"17",type:"mc",q:"Wanneer begint het Keizerrijk officieel? 📅",o:["44 v.C.","31 v.C.","27 v.C.","509 v.C."],a:2,u:"27 v.C.: Octavianus krijgt de eretitel Augustus."},
+  {lid:"17",type:"tf",q:"Octavianus noemde zichzelf openlijk 'keizer'. 👑",a:false,u:"Fout! Hij bewaarde de schijn van de republiek — slimme politiek."},
+  {lid:"17",type:"tf",q:"Marcus Antonius huwde Cleopatra. 💘",a:true,u:"Juist! Octavianus gebruikte dit om hem te discrediteren."},
+  {lid:"17",type:"mc",q:"Wat is een proscriptielijst? 📋",o:["Een lijst van wetten","Een lijst van vogelvrijverklaarden","Een lijst van soldaten met grond","Een lijst van consulkandidaten"],a:1,u:"Proscriptielijst = lijst van mensen die mogen worden gedood. Sulla gebruikte dit."},
+  {lid:"17",type:"mc",q:"Aan welke kant stond Sulla? 🏛️",o:["Populares","Optimates","Beide","Geen van beide"],a:1,u:"Sulla = optimates (macht bij de senaat). Marius = populares."},
+  {lid:"17",type:"tf",q:"De republiek bleef officieel bestaan onder Augustus. 🏛️",a:true,u:"Juist! Augustus bewaarde de schijn van de republiek — slim!"},
+  {lid:"17",type:"order",q:"Burgeroorlogen: juiste chronologische volgorde? ⚔️",items:["Slag bij Actium","Caesar steekt de Rubico over","Moord op Caesar"],a:[1,2,0],u:"Rubico (49 v.C.) → Moord Caesar (44 v.C.) → Actium (31 v.C.)"},
+
+  // ─── LES 18 ───────────────────────────────────────────────────
+  {lid:"18",type:"mc",q:"Welke titel betekent 'vader des vaderlands'? 👑",o:["Princeps","Augustus","Pater patriae","Imperator"],a:2,u:"Pater patriae = vader des vaderlands. Gegeven door de senaat."},
+  {lid:"18",type:"tf",q:"Augustus gaf alle macht terug aan de senaat. 🏛️",a:false,u:"Fout! Het was SCHIJN — hij hield alle echte macht in handen."},
+  {lid:"18",type:"mc",q:"Wat is een 'gewapende vrede'? ⚔️",o:["Vrede na oorlog","Vrede gegarandeerd door legioenen","Vrede met wapens vernietigd","Staakt-het-vuren"],a:1,u:"Vrede én veiligheid GEGARANDEERD door militaire aanwezigheid."},
+  {lid:"18",type:"mc",q:"Welke grens lag in het noorden van het Rijk? 🗺️",o:["De Eufraat","De Atlantische Oceaan","De Rijn en de Donau","De Sahara"],a:2,u:"Noord: Rijn + Donau. West: Oceaan. Zuid: woestijn. Oost: Eufraat."},
+  {lid:"18",type:"mc",q:"Welke functie had Augustus NIET? 🏛️",o:["Consul","Volkstribuun","Pontifex maximus","Dictator"],a:3,u:"'Dictator' was te negatief na Caesar. Augustus stapelde andere titels."},
+  {lid:"18",type:"tf",q:"Augustus bestuurde zelf de gevaarlijke grensprovincies. 🏕️",a:true,u:"Juist! Zo controleerde hij de legioenen en dus alle macht."},
+  {lid:"18",type:"mc",q:"Wat betekent 'pontifex maximus'? ⛪",o:["Opperbevelhebber","Hogepriester van Rome","Eerste senator","Vader des vaderlands"],a:1,u:"Hogepriester — zo controleerde Augustus ook de religie."},
+  {lid:"18",type:"tf",q:"Het beeld van Augustus veranderde doorheen de geschiedenis. 🖼️",a:true,u:"Juist! Soms positief (vrede stichter), soms negatief (dictator)."},
+  {lid:"18",type:"mc",q:"Wat betekent 'princeps'? 🥇",o:["Oppergod","Eerste man / voornaamste","Hogepriester","Vader des vaderlands"],a:1,u:"Princeps = 'eerste man'. Augustus noemde zichzelf zo — klinkt bescheidener dan keizer."},
+  {lid:"18",type:"mc",q:"Waarom deelde Augustus gratis graan uit? 🌾",o:["Hij was rijk","Om populair te blijven bij het volk","Wettelijke verplichting","Om slaven te betalen"],a:1,u:"Brood en spelen = klassieke tactiek om het volk tevreden en rustig te houden."},
+  {lid:"18",type:"tf",q:"Augustus was tegelijk volkstribuun én imperator. ⚡",a:true,u:"Juist! Hij combineerde meerdere titels — zo had hij alle macht zonder dictator te heten."},
+  {lid:"18",type:"order",q:"Titels van Augustus in volgorde van belang (hoogste eerst):",items:["Pater patriae","Imperator / princeps","Pontifex maximus"],a:[1,2,0],u:"Imperator (militair) → Pontifex maximus (religie) → Pater patriae (symbolisch)"},
+
+  // ─── LES 19 ───────────────────────────────────────────────────
+  {lid:"19",type:"mc",q:"Hoeveel % van de Romeinen werkte in de landbouw? 🌾",o:[">50%",">75%",">95%","100%"],a:2,u:"Meer dan 95% — Rome was een landbouwsamenleving!"},
+  {lid:"19",type:"mc",q:"Wat is een latifundium? 🏡",o:["Een theater","Groot landbouwdomein van rijken","Een belasting","De haven van Rome"],a:1,u:"Groot domein van rijke Romeinen met wijn, olijfolie en graan."},
+  {lid:"19",type:"mc",q:"Wat bewijzen looddeeltjes in Groenlands ijs? 🧊",o:["Romeinen in Groenland","Klimaat was warmer","Wanneer de economie bloeide","IJsbergen gebruikt"],a:2,u:"Looduitstoot = economische activiteit. Wetenschappers meten zo de bloei van Rome."},
+  {lid:"19",type:"tf",q:"Verovering was meteen goed voor de overwonnen bevolking. 🏹",a:false,u:"Fout! Aanvankelijk: moorden, plunderingen, schatting. Pas later verbeterde het."},
+  {lid:"19",type:"mc",q:"Hoeveel inwoners had Rome op zijn hoogtepunt? 🏙️",o:["100.000","500.000","1 miljoen","5 miljoen"],a:2,u:"Rome groeide tot ±1 miljoen inwoners — enorm voor die tijd!"},
+  {lid:"19",type:"mc",q:"Wat is Ostia? 🚢",o:["Een generaal","Een provincie","De haven van Rome","Een munt"],a:2,u:"Ostia = haven van Rome aan de monding van de Tiber."},
+  {lid:"19",type:"mc",q:"Wat voerde Rome in uit het Oosten? 🌏",o:["Graan en wijn","Leder en tin","Zijde, specerijen en edelstenen","Hout en brons"],a:2,u:"Luxeproducten: zijde, specerijen, edelstenen en goud uit het Oosten."},
+  {lid:"19",type:"tf",q:"Legioenen stimuleerden de lokale economie. ⚔️",a:true,u:"Juist! Soldaten bestelden lokaal voedsel en gebruiksvoorwerpen."},
+  {lid:"19",type:"mc",q:"Welke drie gewassen werden op de latifundia geteeld? 🍇",o:["Tarwe, rijst en katoen","Wijn, olijfolie en graan","Groenten, fruit en kruiden","Suiker, cacao en specerijen"],a:1,u:"Wijn, olijfolie en graan — de drie pijlers van de Romeinse landbouw."},
+  {lid:"19",type:"tf",q:"Rome exporteerde luxeproducten en importeerde graan. 🌾",a:false,u:"Fout! Omgekeerd: Rome IMPORTEERDE graan (uit Egypte) en exporteerde wijn en olijfolie."},
+  {lid:"19",type:"mc",q:"Welke metalen werden in Romeinse mijnen gewonnen? ⛏️",o:["Goud, ijzer en brons","Koper, zilver en lood","Tin, zink en nikkel","Platina en diamant"],a:1,u:"Koper, zilver en lood — lood was essentieel voor waterleidingen."},
+  {lid:"19",type:"mc",q:"Wat is schatting in Romeinse context? 💰",o:["Een Romeins belastingsysteem","Belasting die overwonnen gebieden betalen","Een soort beloning","Een militaire rang"],a:1,u:"Schatting = belasting die veroverde volkeren aan Rome moesten betalen."},
+
+  // ─── LES 20 ───────────────────────────────────────────────────
+  {lid:"20",type:"mc",q:"Eigen Romeinse uitvinding in de bouwkunst? 🏗️",o:["Rondboog","Tongewelf","Kruisgewelf","Koepel"],a:2,u:"Kruisgewelf = eigen Romeinse uitvinding. De rest: van de Etrusken."},
+  {lid:"20",type:"mc",q:"Waarmee maakten de Romeinen beton? 🧱",o:["Hout + klei","Steen + kalk + vulkanisch zand + water","Marmer + kalk","Lood + steen"],a:1,u:"Beton = steen + kalk + vulkanisch zand + water. Revolutionair!"},
+  {lid:"20",type:"mc",q:"Wat is een aquaduct? 💧",o:["Brug over weg","Openbaar badhuis","Open waterleiding op gemetselde bogen","Renbaan"],a:2,u:"Aquaduct = open waterleiding op bogen. Brengt water van ver naar de stad."},
+  {lid:"20",type:"tf",q:"Het Pantheon is een tempel voor één god. 🔵",a:false,u:"Fout! Pantheon = tempel voor ALLE goden. 'Pan' = alles, 'theon' = goden."},
+  {lid:"20",type:"tf",q:"Realisme = mooier afgebeeld dan de werkelijkheid. 🗿",a:false,u:"Fout! Dat is idealisme. Realisme = afgebeeld zoals hij IS, met gebreken."},
+  {lid:"20",type:"mc",q:"Wat zijn thermen? 🛁",o:["Tempel","Gerechtsgebouw","Openbaar badhuis","Renbaan"],a:2,u:"Thermen = openbare badhuizen. Zwemmen, sporten én discussiëren."},
+  {lid:"20",type:"tf",q:"Het amfitheater is halfrond, het theater is ovaal. 🏟️",a:false,u:"Omgekeerd! Amfitheater = OVAAL (gladiatoren). Theater = HALFrond (toneel)."},
+  {lid:"20",type:"mc",q:"Officiële naam van het Colosseum? 🏟️",o:["Theatrum Romanum","Amphitheatrum Flavium","Circus Maximus","Forum Caesaris"],a:1,u:"Officieel: Amphitheatrum Flavium — naar de Flavische keizers."},
+  {lid:"20",type:"mc",q:"Wat is een basilica bij de Romeinen? ⚖️",o:["Een kerk","Een openbaar badhuis","Handelsbeurs én gerechtsgebouw","Een tempel voor alle goden"],a:2,u:"Basilica = overdekt gebouw als handelsbeurs én gerechtsgebouw."},
+  {lid:"20",type:"mc",q:"Wat is een mozaïek? 🎨",o:["Een schilderij op muur","Legwerk van gekleurde steentjes","Een in edelsteen gesneden figuur","Een beeld van hoofd en borst"],a:1,u:"Mozaïek = legwerk van gekleurde steentjes of glas. Vloeren én wanden."},
+  {lid:"20",type:"tf",q:"Bij de Grieken zijn zuilen functioneel. Bij de Romeinen zijn ze esthetisch. 🏛️",a:true,u:"Juist! Grieken: zuilen dragen het dak. Romeinen: zuilen zijn decoratief."},
+  {lid:"20",type:"mc",q:"Wat is een camee? 💎",o:["Een schilderij op muur","Legwerk van steentjes","In edelsteen gesneden sierstuk","Een beeld van hoofd en borst"],a:2,u:"Camee = in reliëf gesneden veelkleurige siersteen — gedragen als juweel."},
+
+  // ─── LES 22 ───────────────────────────────────────────────────
+  {lid:"22",type:"mc",q:"Wat betekent 'polytheïsme'? 🏛️",o:["Geloof in één god","Geloof in meerdere goden","Geen god","Keizer als god"],a:1,u:"Poly = veel, theos = god. Grieken én Romeinen waren polytheïstisch."},
+  {lid:"22",type:"mc",q:"Wat zijn de 'lares'? 🏠",o:["Beschermers van Rome","Priesters","Beschermers van akker en huis","Waarzeggers"],a:2,u:"Lares = huisgoden. Penates = beschermers van de voorraadkamer."},
+  {lid:"22",type:"mc",q:"Welke god waakt over de Romeinse staat? ⚡",o:["Mars","Venus","Jupiter","Vesta"],a:2,u:"Jupiter = oppergod, waakt over de staat én haar wetten."},
+  {lid:"22",type:"mc",q:"Venus = welke Griekse godin? 💘",o:["Athena","Hera","Artemis","Aphrodite"],a:3,u:"Venus = Aphrodite. Mars = Ares. Jupiter = Zeus. Minerva = Athena."},
+  {lid:"22",type:"tf",q:"Vestaalse maagden bewaakten het eeuwige vuur. 🔥",a:true,u:"Juist! Zes maagden hielden het heilige vuur brandend voor 30 jaar."},
+  {lid:"22",type:"mc",q:"Waarom werden christenen vervolgd? ✝️",o:["Geen belastingen","Weigerden te offeren aan goden + keizer","Illegaal in Rome","Geen Latijn"],a:1,u:"Weigering te offeren was politiek onaanvaardbaar voor Rome."},
+  {lid:"22",type:"mc",q:"Wat bepaalde het Edict van Milaan (313)? 📜",o:["Christendom enige godsdienst","Christenen verbannen","Iedereen godsdienstvrijheid","Keizer = god"],a:2,u:"Constantijn gaf IEDEREEN godsdienstvrijheid in 313."},
+  {lid:"22",type:"mc",q:"Welke keizer maakte christendom staatsgodsdienst? 👑",o:["Augustus","Constantijn","Theodosius","Pontius Pilatus"],a:2,u:"Theodosius (einde 4e eeuw) maakte het de enige toegelaten godsdienst."},
+  {lid:"22",type:"mc",q:"Hoe lazen auguren de wil van de goden? 🦅",o:["Door sterren","Door de bijbel","Door vlucht van vogels en bliksem","Door offers aan Jupiter"],a:2,u:"Auguren = waarzeggers die voortekens lazen uit vogelvlucht en bliksem."},
+  {lid:"22",type:"tf",q:"Thuis offerden Romeinen aan het huisaltaar. 🔥",a:true,u:"Juist! De pater familias leidde de offers aan de lares en penates."},
+  {lid:"22",type:"tf",q:"De Romeinen namen goden over van veroverde volkeren. 🌍",a:true,u:"Juist! Isis (Egypte), Mithra (Perzië)... Rome absorbeerde buitenlandse goden."},
+  {lid:"22",type:"mc",q:"De Griekse god Ares = welke Romeinse god? ⚔️",o:["Neptunus","Vulcanus","Mars","Mercurius"],a:2,u:"Ares (Grieks) = Mars (Romeins) — de god van de oorlog."},
+
+  // ─── LES 23 ───────────────────────────────────────────────────
+  {lid:"23",type:"tf",q:"Trajanus was de eerste Romeinse keizer. 👑",a:false,u:"Fout! Trajanus was adoptiekeizer (98–117). Eerste = Augustus (27 v.C.)."},
+  {lid:"23",type:"tf",q:"Hadrianus veroverde zoveel mogelijk nieuwe gebieden. 🗺️",a:false,u:"Fout! Hadrianus beveiligde BESTAANDE grenzen (limes) — geen expansie."},
+  {lid:"23",type:"mc",q:"Hoe lang regeerde een soldatenkeizergemiddeld? ⏱️",o:["1 jaar","3,1 jaar","10 jaar","25 jaar"],a:1,u:"180–284: gemiddeld 3,1 jaar. De meeste werden vermoord!"},
+  {lid:"23",type:"mc",q:"Wat was het viermansbestuur van Diocletianus? 👥",o:["4 consuls","2 keizers + 2 medekeizers","4 senatoren","4 generaals"],a:1,u:"Tetrarchie = 2 keizers + 2 medekeizers, voor west én oost."},
+  {lid:"23",type:"mc",q:"In welk jaar splitste Theodosius het Rijk? 📅",o:["284","337","395","476"],a:2,u:"395: gesplitst in West-Romein Rijk en Oost-Romein Rijk."},
+  {lid:"23",type:"mc",q:"Wie zette in 476 de laatste westerse keizer af? 💥",o:["Attila de Hun","Odoaker","Theodosius","Diocletianus"],a:1,u:"Germaanse generaal Odoaker — officieel einde West-Romein Rijk!"},
+  {lid:"23",type:"tf",q:"Het Oost-Romein Rijk viel ook in 476. 🏛️",a:false,u:"Fout! Bleef bestaan tot 1453 — bijna 1000 jaar langer!"},
+  {lid:"23",type:"mc",q:"Welk volk joeg de Germanen het Rijk in? 🏇",o:["Vikingen","Perzen","Hunnen","Vandalen"],a:2,u:"De Hunnen vielen aan vanuit het oosten — Germanen vluchtten het Rijk in."},
+  {lid:"23",type:"tf",q:"Constantinopel is een andere naam voor Byzantium. 🏙️",a:true,u:"Juist! Constantijn hernoemde Byzantium naar Constantinopel (nu Istanbul)."},
+  {lid:"23",type:"mc",q:"Wat zijn de 'limes'? 🧱",o:["Belastingen van het Rijk","Versterkte grenzen","Aquaducten van Rome","Romeinse wegen"],a:1,u:"Limes = versterkte grenzen die het Rijk beschermden."},
+  {lid:"23",type:"tf",q:"De Pax Romana was een periode van oorlog en chaos. ⚔️",a:false,u:"Fout! Pax Romana = Romeinse vrede — periode van rust en welvaart."},
+  {lid:"23",type:"order",q:"Verval van het Rijk: juiste volgorde? 📉",items:["Einde West-Romein Rijk (476)","Tetrarchie van Diocletianus","Splitsing door Theodosius (395)"],a:[1,2,0],u:"Diocletianus (284) → Splitsing (395) → Val West-Rome (476)"},
+
+  // ─── LES 26 ───────────────────────────────────────────────────
+  {lid:"26",type:"tf",q:"De Galliërs vormden één sterke eenheid tegen Rome. 🛡️",a:false,u:"Fout! Voortdurende stammenconflicten — Caesar: verdeel en heers!"},
+  {lid:"26",type:"mc",q:"Hoe noemt Caesar het volk tussen Seine en Rijn? 🗺️",o:["Galliërs","Belgae","Eburonen","Germanen"],a:1,u:"Belgae — hij beschrijft hen als de dappersten van alle Keltische volkeren!"},
+  {lid:"26",type:"tf",q:"Ambiorix was leider van de Eburonen. 🐺",a:true,u:"Juist! Hij vernietigde zelfs twee complete Romeinse legioenen."},
+  {lid:"26",type:"mc",q:"Wat is een civitas? 🏛️",o:["Een generaal","Een type gebouw","Stamgebied bestuurd door Rome","Een Gallisch wapen"],a:2,u:"Civitas = vroeger stamgebied, nu bestuurd door Rome met eigen hoofdplaats."},
+  {lid:"26",type:"tf",q:"Tongeren (Atuatuca Tungrorum) ontstond uit een Romeins legerkamp. 🏙️",a:true,u:"Juist! Een van de oudste steden van België."},
+  {lid:"26",type:"mc",q:"Wat betekent 'romanisatie'? 🏺",o:["Gallisch naar Rome brengen","Galliërs volledig Romani maken","Nieuwe taal uitvinden","Tempels bouwen"],a:1,u:"Romanisatie = Galliërs volledig Romani maken. Doel: opstanden voorkomen."},
+  {lid:"26",type:"tf",q:"Het Frans is afgeleid van het Latijn. 🇫🇷",a:true,u:"Juist! Door de romanisatie werd Latijn de taal van Gallië → Frans."},
+  {lid:"26",type:"mc",q:"Waaraan herken je een Romeinse stad? 🗺️",o:["Ronde torens","Dambordpatroon + Romani gebouwen","Houten huizen","Grote markten zonder plan"],a:1,u:"Dambordpatroon + thermen, tempels, amfitheaters en aquaducten."},
+  {lid:"26",type:"mc",q:"Wat was de beloning van een nederzetting met de titel 'colonia'? 🏅",o:["Meer soldaten","Minder belastingen","Een eigen tempel","Een eigen consul"],a:1,u:"Colonia = eer én voordeel: veel minder belastingen. Zo stimuleerde Rome romanisatie."},
+  {lid:"26",type:"tf",q:"Er ontstond een Gallo-Romeinse mengcultuur. 🤝",a:true,u:"Juist! Galliërs namen Latijn over, Romeinen namen Gallische kleding en voedsel."},
+  {lid:"26",type:"mc",q:"Welke Gallische gewoonte namen Romeinse soldaten over? 👖",o:["Het dragen van schilden","Het eten van druiven","Het dragen van een halflange broek","Het bouwen van castellums"],a:2,u:"Soldaten droegen de Gallische halflange broek onder hun uniform!"},
+  {lid:"26",type:"order",q:"Caesars verovering van Gallië: juiste volgorde? 🛡️",items:["Vernietiging Eburonen","Verslaan Belgae","Overschrijden Rijn naar Germanië"],a:[1,0,2],u:"Belgae verslagen → Eburonen vernietigd → Rijn overgestoken"},
+
+  // ─── LES 30 ───────────────────────────────────────────────────
+  {lid:"30",type:"mc",q:"Wat betekent 'democratie'? 🏛️",o:["Één man regeert","Het volk heerst","Koning beslist","Rijken regeren"],a:1,u:"Demos = volk, kratein = heersen. Het volk heerst!"},
+  {lid:"30",type:"tf",q:"In 1831 had iedereen in België stemrecht. 🗳️",a:false,u:"Fout! Alleen wie voldoende belastingen betaalde mocht stemmen."},
+  {lid:"30",type:"mc",q:"Welke macht maakt de wetten? 📜",o:["Rechterlijke","Uitvoerende","Wetgevende","Koning"],a:2,u:"Wetgevende macht = het parlement. Het maakt de wetten."},
+  {lid:"30",type:"mc",q:"In welk jaar kregen vrouwen stemrecht in België? 👩",o:["1919","1931","1948","1981"],a:2,u:"1948 — pas 103 jaar na de onafhankelijkheid!"},
+  {lid:"30",type:"tf",q:"België is een directe democratie. 🗳️",a:false,u:"Fout! België = INDIRECTE democratie. Wij kiezen vertegenwoordigers."},
+  {lid:"30",type:"mc",q:"Hoeveel volksvertegenwoordigers telt de Kamer? 🏛️",o:["60","100","150","200"],a:2,u:"150 leden, om de vijf jaar verkozen door alle Belgen."},
+  {lid:"30",type:"tf",q:"In een rechtsstaat is iedereen gelijk voor de wet. 👑",a:true,u:"Juist! Zelfs de koning is niet vrijgesteld van de wet."},
+  {lid:"30",type:"mc",q:"Welke instelling controleert de regering? 🔍",o:["Koning","Het parlement","Rechtbanken","Gemeenten"],a:1,u:"Het parlement controleert de regering — plannen moeten goedgekeurd worden."},
+  {lid:"30",type:"mc",q:"Wat doet de uitvoerende macht? ⚙️",o:["Wetten maken","Wetten uitvoeren","Overtreders bestraffen","Verkiezingen organiseren"],a:1,u:"Uitvoerende macht = de regering. Ze voert de wetten uit."},
+  {lid:"30",type:"tf",q:"De Atheense democratie was direct én voor iedereen. 🏺",a:false,u:"Fout! Direct JA, maar BEPERKT: vrouwen, slaven en metoiken waren uitgesloten."},
+  {lid:"30",type:"mc",q:"Hoelang is een Belgisch parlement aan de macht? ⏱️",o:["2 jaar","4 jaar","5 jaar","6 jaar"],a:2,u:"Om de VIJF jaar kiezen alle Belgen hun volksvertegenwoordigers."},
+  {lid:"30",type:"mc",q:"Wat is de rechterlijke macht? ⚖️",o:["Het parlement","De regering","De rechtbanken","De koning"],a:2,u:"Rechterlijke macht = de rechtbanken. Zij vervolgen en bestraffen overtreders."},
+
+  // ─── LES 31 ───────────────────────────────────────────────────
+  {lid:"31",type:"mc",q:"Wat is een federale staat? 🗺️",o:["Één centrale regering","Macht verdeeld centraal + regionaal","Geen parlement","EU-lid"],a:1,u:"Federaal = macht verdeeld tussen federale overheid en deelstaten."},
+  {lid:"31",type:"tf",q:"België heeft 3 gemeenschappen en 3 gewesten. 🇧🇪",a:true,u:"Juist! 3 gemeenschappen (Vlaams/Frans/Duitstalig) + 3 gewesten (Vlaams/Waals/Brussels)."},
+  {lid:"31",type:"mc",q:"Waarover beslissen de gemeenschappen? 🏫",o:["Wegen + milieu","Leger + pensioenen","Onderwijs + cultuur + kinderbijslag","Post + spoorwegen"],a:2,u:"Gemeenschappen = mensen: onderwijs, cultuur, kinderbijslag, welzijn."},
+  {lid:"31",type:"mc",q:"Waarover beslissen de gewesten? 🛣️",o:["Onderwijs","Leger","Wegennet + milieu + economie","Ziekteverzekering"],a:2,u:"Gewesten = grondgebied: wegen, milieu, ruimtelijke ordening, economie."},
+  {lid:"31",type:"tf",q:"Brussel is een gemeenschap. 🏙️",a:false,u:"Fout! Brussel is een GEWEST (Brussels Hoofdstedelijk Gewest)."},
+  {lid:"31",type:"mc",q:"Wat beslist de federale overheid? 🇧🇪",o:["Onderwijs","Wegen","Leger + pensioenen + ziekteverzekering","Kinderbijslag"],a:2,u:"Federaal = voor alle Belgen: leger, pensioenen, ziekteverzekering."},
+  {lid:"31",type:"mc",q:"Wat is de uitvoerende macht van de EU? ⚙️",o:["Europees Parlement","Europese Raad","Europese Commissie","Belgische regering"],a:2,u:"Europese Commissie = uitvoerende macht van de EU."},
+  {lid:"31",type:"tf",q:"Vlaanderen heeft gewest + gemeenschap samengevoegd. 🦁",a:true,u:"Juist! Één Vlaams Parlement + één Vlaamse regering voor beide."},
+  {lid:"31",type:"mc",q:"De Duitstalige gemeenschap ligt in welk gewest? 🗺️",o:["Vlaams Gewest","Brussels Gewest","Waals Gewest","Eigen gewest"],a:2,u:"De Duitstalige gemeenschap ligt in het Waals Gewest, in het oosten."},
+  {lid:"31",type:"tf",q:"Het Europees Parlement wordt verkozen door EU-burgers. 🗳️",a:true,u:"Juist! Enige EU-orgaan dat rechtstreeks door burgers wordt verkozen."},
+  {lid:"31",type:"mc",q:"Hoeveel regeringen telt België in totaal? 🤯",o:["3","5","7","9"],a:2,u:"1 federaal + 3 gewest + 3 gemeenschap = 7 regeringen (Vlaanderen telt voor 2 als 1)."},
+  {lid:"31",type:"order",q:"Van groot naar klein: welk niveau beslist? 🇧🇪",items:["Gemeenschap / Gewest","Federale overheid","Europese Unie"],a:[2,1,0],u:"EU (supranationaal) → Federaal (nationaal) → Gemeenschap/Gewest (regionaal)"},
+];
+
+const V = [
+  {lid:"11",nl:"Agora",fr:"Marktplaats / ontmoetingsplaats"},
+  {lid:"11",nl:"Kouros",fr:"Naakte jongeman (beeld)"},
+  {lid:"11",nl:"Fronton",fr:"Driehoek aan top van tempel"},
+  {lid:"11",nl:"Kapiteel",fr:"Top van de zuil"},
+  {lid:"11",nl:"Fries",fr:"Versierde band op de tempel"},
+  {lid:"13-14",nl:"Pater familias",fr:"Familiehoofd met alle macht"},
+  {lid:"13-14",nl:"Patriciërs",fr:"Aristocraten / rijke stichtersfamilies"},
+  {lid:"13-14",nl:"Volkstribuun",fr:"Verdediger plebejers met vetorecht"},
+  {lid:"13-14",nl:"Consul",fr:"Hoogste bestuurder (2 stuks, 1 jaar)"},
+  {lid:"13-14",nl:"Republiek",fr:"Bestuur zonder koning (res publica)"},
+  {lid:"15",nl:"Heerbaan",fr:"Geplaveide Romeinse militaire weg"},
+  {lid:"15",nl:"Divide et impera",fr:"Verdeel en heers"},
+  {lid:"15",nl:"Mare Nostrum",fr:"'Onze zee' = Middellandse Zee"},
+  {lid:"15",nl:"Caliga",fr:"Genagelde soldatenschoen"},
+  {lid:"15",nl:"Provincia",fr:"Veroverd gebied buiten Italië"},
+  {lid:"16",nl:"Latifundia",fr:"Grote domeinen van rijken met slaven"},
+  {lid:"16",nl:"Populares",fr:"Politici voor de volksvergadering"},
+  {lid:"16",nl:"Optimates",fr:"Politici voor de senaat"},
+  {lid:"16",nl:"Proletariaat",fr:"Bezitloze armen in Rome"},
+  {lid:"16",nl:"Brood en spelen",fr:"Gratis eten + spektakels voor het volk"},
+  {lid:"17",nl:"Triumviraat",fr:"Bondgenootschap van 3 machtige mannen"},
+  {lid:"17",nl:"Rubico",fr:"Rivier die Caesar overstak = oorlogsverklaring"},
+  {lid:"17",nl:"Burgeroorlog",fr:"Strijd tussen partijen van hetzelfde volk"},
+  {lid:"17",nl:"Proscriptielijst",fr:"Lijst van vogelvrijverklaarden"},
+  {lid:"17",nl:"Slag bij Actium",fr:"Zeeslag 31 v.C.: Octavianus wint"},
+  {lid:"18",nl:"Pater patriae",fr:"Vader des vaderlands"},
+  {lid:"18",nl:"Pontifex maximus",fr:"Hogepriester van Rome"},
+  {lid:"18",nl:"Gewapende vrede",fr:"Vrede gegarandeerd door legioenen"},
+  {lid:"18",nl:"Beeldvorming",fr:"Hoe iemand wordt gezien doorheen de tijd"},
+  {lid:"18",nl:"Princeps",fr:"Eerste man / voornaamste"},
+  {lid:"19",nl:"Latifundium",fr:"Uitgestrekt landbouwdomein"},
+  {lid:"19",nl:"Ostia",fr:"Haven van Rome aan de Tibermonding"},
+  {lid:"19",nl:"Schatting",fr:"Belasting van overwonnen gebieden"},
+  {lid:"19",nl:"Looduitstoot",fr:"Vervuiling als bewijs van economische groei"},
+  {lid:"19",nl:"Leveranciers",fr:"Provincies die producten leveren aan Rome"},
+  {lid:"20",nl:"Kruisgewelf",fr:"Eigen Romeinse uitvinding"},
+  {lid:"20",nl:"Aquaduct",fr:"Open waterleiding op gemetselde bogen"},
+  {lid:"20",nl:"Bas-reliëf",fr:"Afbeelding die uit steen naar voren springt"},
+  {lid:"20",nl:"Realisme",fr:"Waarheidsgetrouw afgebeeld (met gebreken)"},
+  {lid:"20",nl:"Mozaïek",fr:"Legwerk van gekleurde steentjes/glas"},
+  {lid:"22",nl:"Polytheïsme",fr:"Geloof in meerdere goden"},
+  {lid:"22",nl:"Vestaalse maagd",fr:"Bewaakster van het eeuwige vuur"},
+  {lid:"22",nl:"Augur",fr:"Waarzegger die voortekens leest"},
+  {lid:"22",nl:"Edict van Milaan",fr:"Wet van 313: godsdienstvrijheid"},
+  {lid:"22",nl:"Staatsgodsdienst",fr:"Enige officieel toegelaten godsdienst"},
+  {lid:"23",nl:"Limes",fr:"Versterkte grenzen van het Rijk"},
+  {lid:"23",nl:"Pax Romana",fr:"Periode van Romeine vrede en welvaart"},
+  {lid:"23",nl:"Autocraat",fr:"Alleenheerser met veel macht"},
+  {lid:"23",nl:"Constantinopel",fr:"Nieuwe hoofdstad (= Byzantium)"},
+  {lid:"23",nl:"Soldatenkeizers",fr:"Generaals die zichzelf keizer noemen"},
+  {lid:"26",nl:"Belgae",fr:"Keltische stammen tussen Seine en Rijn"},
+  {lid:"26",nl:"Civitas",fr:"Stamgebied bestuurd door Rome"},
+  {lid:"26",nl:"Romanisatie",fr:"Galliërs volledig Romani maken"},
+  {lid:"26",nl:"Ambiorix",fr:"Leider van de Eburonen"},
+  {lid:"26",nl:"Gallo-Romein",fr:"Mengcultuur van Galliërs en Romeinen"},
+  {lid:"30",nl:"Democratie",fr:"Het volk heerst (demos + kratein)"},
+  {lid:"30",nl:"Grondwet",fr:"De voornaamste wet van een land"},
+  {lid:"30",nl:"Rechtsstaat",fr:"Iedereen is gelijk voor de wet"},
+  {lid:"30",nl:"Wetgevende macht",fr:"Het parlement — maakt de wetten"},
+  {lid:"30",nl:"Stemrecht",fr:"Het recht om te mogen stemmen"},
+  {lid:"31",nl:"Federale staat",fr:"Macht verdeeld centraal + regionaal"},
+  {lid:"31",nl:"Gemeenschap",fr:"Beslist over mensen: onderwijs, cultuur"},
+  {lid:"31",nl:"Gewest",fr:"Beslist over grond: milieu, economie"},
+  {lid:"31",nl:"Europese Commissie",fr:"Uitvoerende macht van de EU"},
+  {lid:"31",nl:"Bevoegdheid",fr:"Wat een overheid mag beslissen"},
+];
+
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function getMeta(id){return LESSONS.find(l=>l.id===id)||LESSONS[0];}
+
+function App(){
+  const [screen,setScreen]=useState("home");
+  const [selA,setSelA]=useState(new Set(LESSONS.map(l=>l.id)));
+  const [selF,setSelF]=useState(new Set(LESSONS.map(l=>l.id)));
+  const [nQuestions,setNQuestions]=useState(20);
+  const [tab,setTab]=useState(null);
+
+  if(screen==="arena") return React.createElement(Arena,{ids:[...selA],n:nQuestions,onBack:()=>setScreen("home")});
+  if(screen==="flash") return React.createElement(Flash,{ids:[...selF],onBack:()=>setScreen("home")});
+
+  function toggle(id,sel,setSel){const s=new Set(sel);if(s.has(id)){if(s.size>1)s.delete(id);}else s.add(id);setSel(s);}
+  function toggleAll(sel,setSel){if(sel.size===LESSONS.length)setSel(new Set([LESSONS[0].id]));else setSel(new Set(LESSONS.map(l=>l.id)));}
+
+  const availQ=Q.filter(q=>selA.has(q.lid)).length;
+  const maxN=Math.min(availQ,[20,40,60].filter(n=>n<=availQ).pop()||20);
+
+  return React.createElement("div",{style:{background:C.bg,minHeight:"100vh",fontFamily:"'Segoe UI',sans-serif",color:C.text}},
+    // Header
+    React.createElement("div",{style:{background:"linear-gradient(135deg,#13121f,#1e1a3a)",padding:"22px 16px 18px",textAlign:"center",borderBottom:`3px solid ${C.gold}40`}},
+      React.createElement("div",{style:{fontSize:36}},"🏛️"),
+      React.createElement("div",{style:{fontSize:22,fontWeight:900,color:C.gold,marginTop:4}},"GESCHIEDENIS HUB"),
+      React.createElement("div",{style:{fontSize:12,color:C.muted,marginTop:4}},`Gustave · ${LESSONS.length} lessen · ${Q.length} vragen · ${V.length} woorden`)
+    ),
+    React.createElement("div",{style:{padding:"14px 12px 60px"}},
+      // Tijdlijn
+      React.createElement("div",{style:{fontSize:11,color:C.muted,fontWeight:700,letterSpacing:2,textTransform:"uppercase",marginBottom:8}},"Tijdlijn"),
+      React.createElement("div",{style:{overflowX:"auto",display:"flex",gap:8,marginBottom:18,paddingBottom:4}},
+        ...Object.entries(ERA).map(([era,meta])=>{
+          const ls=LESSONS.filter(l=>l.era===era);
+          return React.createElement("div",{key:era,style:{flex:"0 0 auto",background:meta.color+"18",border:`2px solid ${meta.color}50`,borderRadius:12,padding:"8px 12px",minWidth:110}},
+            React.createElement("div",{style:{fontSize:10,color:meta.color,fontWeight:800,marginBottom:4,textTransform:"uppercase"}},meta.label),
+            ...ls.map(l=>React.createElement("div",{key:l.id,style:{fontSize:11,color:C.text,marginBottom:2}},`${l.emoji} ${l.label}`))
+          );
+        })
+      ),
+      // Arena card
+      React.createElement("div",{style:{background:C.card,borderRadius:16,border:`2px solid ${C.gold}40`,marginBottom:12,overflow:"hidden"}},
+        React.createElement("button",{onClick:()=>setTab(tab==="arena"?null:"arena"),style:{width:"100%",padding:16,background:"none",border:"none",cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:12}},
+          React.createElement("span",{style:{fontSize:32}},"⚡"),
+          React.createElement("div",{style:{flex:1}},
+            React.createElement("div",{style:{fontWeight:900,fontSize:16,color:C.gold}},"Quiz Arena"),
+            React.createElement("div",{style:{fontSize:12,color:C.muted}},`${Q.length} vragen — kies je selectie & aantal`)
+          ),
+          React.createElement("span",{style:{color:C.muted}},tab==="arena"?"▲":"▼")
+        ),
+        tab==="arena" && React.createElement("div",{style:{padding:"0 16px 16px"}},
+          // Lesson selector
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}},
+            React.createElement("div",{style:{fontSize:12,color:C.muted}},`Lessen (${selA.size}/${LESSONS.length}):`),
+            React.createElement("button",{onClick:()=>toggleAll(selA,setSelA),style:{fontSize:11,color:C.gold,background:"none",border:`1px solid ${C.gold}44`,borderRadius:6,padding:"3px 8px",cursor:"pointer"}},selA.size===LESSONS.length?"Geen":"Alles")
+          ),
+          React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:6,marginBottom:14}},
+            ...LESSONS.map(l=>{const on=selA.has(l.id);return React.createElement("button",{key:l.id,onClick:()=>toggle(l.id,selA,setSelA),style:{padding:"5px 9px",borderRadius:8,border:`2px solid ${on?l.color:l.color+"44"}`,background:on?l.color+"22":"transparent",color:on?l.color:C.muted,fontSize:11,fontWeight:700,cursor:"pointer"}},`${l.emoji} ${l.label}`);})
+          ),
+          // N selector
+          React.createElement("div",{style:{fontSize:12,color:C.muted,marginBottom:8}},`Aantal vragen (${availQ} beschikbaar):`),
+          React.createElement("div",{style:{display:"flex",gap:8,marginBottom:14}},
+            ...[20,40,60].map(n=>{
+              const disabled=n>availQ;
+              const active=nQuestions===n&&!disabled;
+              return React.createElement("button",{key:n,onClick:()=>!disabled&&setNQuestions(n),style:{flex:1,padding:"10px",borderRadius:10,border:`2px solid ${active?C.gold:disabled?"#333":C.gold+"44"}`,background:active?C.gold+"33":"transparent",color:active?C.gold:disabled?C.muted+"66":C.muted,fontWeight:900,fontSize:15,cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.4:1}},n);
+            })
+          ),
+          React.createElement(Btn,{color:C.gold,onClick:()=>setScreen("arena")},`⚡ Start ${nQuestions} vragen →`)
+        )
+      ),
+      // Flash card
+      React.createElement("div",{style:{background:C.card,borderRadius:16,border:`2px solid ${C.purple}40`,marginBottom:12,overflow:"hidden"}},
+        React.createElement("button",{onClick:()=>setTab(tab==="flash"?null:"flash"),style:{width:"100%",padding:16,background:"none",border:"none",cursor:"pointer",textAlign:"left",display:"flex",alignItems:"center",gap:12}},
+          React.createElement("span",{style:{fontSize:32}},"📘"),
+          React.createElement("div",{style:{flex:1}},
+            React.createElement("div",{style:{fontWeight:900,fontSize:16,color:C.purple}},"Woorden Flash"),
+            React.createElement("div",{style:{fontSize:12,color:C.muted}},"Flitskaarten — alle lessen door elkaar")
+          ),
+          React.createElement("span",{style:{color:C.muted}},tab==="flash"?"▲":"▼")
+        ),
+        tab==="flash" && React.createElement("div",{style:{padding:"0 16px 16px"}},
+          React.createElement("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}},
+            React.createElement("div",{style:{fontSize:12,color:C.muted}},`Lessen (${selF.size}/${LESSONS.length}):`),
+            React.createElement("button",{onClick:()=>toggleAll(selF,setSelF),style:{fontSize:11,color:C.purple,background:"none",border:`1px solid ${C.purple}44`,borderRadius:6,padding:"3px 8px",cursor:"pointer"}},selF.size===LESSONS.length?"Geen":"Alles")
+          ),
+          React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:6,marginBottom:14}},
+            ...LESSONS.map(l=>{const on=selF.has(l.id);return React.createElement("button",{key:l.id,onClick:()=>toggle(l.id,selF,setSelF),style:{padding:"5px 9px",borderRadius:8,border:`2px solid ${on?l.color:l.color+"44"}`,background:on?l.color+"22":"transparent",color:on?l.color:C.muted,fontSize:11,fontWeight:700,cursor:"pointer"}},`${l.emoji} ${l.label}`);})
+          ),
+          React.createElement(Btn,{color:C.purple,onClick:()=>setScreen("flash")},"📘 Start Woordenflash →")
+        )
+      ),
+      // Stats
+      React.createElement("div",{style:{background:C.card,borderRadius:14,padding:"12px 16px",border:`1px solid #2a2840`,display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,textAlign:"center"}},
+        ...[[LESSONS.length,"Lessen",C.gold],[Q.length,"Vragen",C.orange],[V.length,"Woorden",C.purple]].map(([n,l,col])=>
+          React.createElement("div",{key:l},
+            React.createElement("div",{style:{fontSize:22,fontWeight:900,color:col}},n),
+            React.createElement("div",{style:{fontSize:10,color:C.muted}},l)
+          )
+        )
+      )
+    )
+  );
+}
+
+function Arena({ids,n,onBack}){
+  const [questions]=useState(()=>shuffle(Q.filter(q=>ids.includes(q.lid))).slice(0,n));
+  const [idx,setIdx]=useState(0);
+  const [answered,setAnswered]=useState(null);
+  const [score,setScore]=useState(0);
+  const [done,setDone]=useState(false);
+  const [order,setOrder]=useState(null);
+  const [results,setResults]=useState([]);
+
+  const q=questions[idx];
+  const meta=getMeta(q?.lid);
+
+  useEffect(()=>{if(q?.type==="order")setOrder(shuffle([...q.items]));},[idx]);
+
+  function checkMC(i){if(answered!==null)return;const ok=i===q.a;setAnswered(ok?"correct":"wrong");if(ok)setScore(s=>s+1);setResults(r=>[...r,{ok,lid:q.lid}]);}
+  function checkTF(v){if(answered!==null)return;const ok=v===q.a;setAnswered(ok?"correct":"wrong");if(ok)setScore(s=>s+1);setResults(r=>[...r,{ok,lid:q.lid}]);}
+  function checkOrder(){if(answered!==null)return;const ok=q.a.every((a,i)=>q.items[a]===order[i]);setAnswered(ok?"correct":"wrong");if(ok)setScore(s=>s+1);setResults(r=>[...r,{ok,lid:q.lid}]);}
+  function move(from,to){if(answered!==null)return;const a=[...order];const[x]=a.splice(from,1);a.splice(to,0,x);setOrder(a);}
+  function next(){if(idx<questions.length-1){setIdx(idx+1);setAnswered(null);}else setDone(true);}
+
+  if(done){
+    const pct=Math.round((score/questions.length)*100);
+    const medal=pct>=90?"🥇":pct>=70?"🥈":pct>=50?"🥉":"📚";
+    const byLesson={};
+    results.forEach(r=>{if(!byLesson[r.lid])byLesson[r.lid]={ok:0,total:0};byLesson[r.lid].total++;if(r.ok)byLesson[r.lid].ok++;});
+    return React.createElement("div",{style:{padding:"20px 14px 60px"}},
+      React.createElement("button",{onClick:onBack,style:{background:"none",border:"none",color:C.muted,cursor:"pointer",fontSize:13,marginBottom:16}},"← Hub"),
+      React.createElement("div",{style:{textAlign:"center",marginBottom:24}},
+        React.createElement("div",{style:{fontSize:64}},medal),
+        React.createElement("div",{style:{fontSize:30,fontWeight:900,color:C.gold}},`${score}/${questions.length}`),
+        React.createElement("div",{style:{fontSize:15,color:C.muted}},`${pct}%`),
+        React.createElement("div",{style:{marginTop:10,fontSize:14,color:pct>=70?C.green:C.orange}},
+          pct>=90?"🔥 Indrukwekkend! Je kent de hele geschiedenis!":
+          pct>=70?"👍 Goed gedaan! Bijna perfect!":
+          pct>=50?"💪 Niet slecht! Herhaal de zwakste lessen.":
+          "📖 Bekijk de losse modules en probeer opnieuw!"
+        )
+      ),
+      Object.keys(byLesson).length>1 && React.createElement("div",{style:{background:C.card,borderRadius:14,padding:14,marginBottom:20}},
+        React.createElement("div",{style:{fontSize:11,color:C.muted,fontWeight:700,letterSpacing:2,textTransform:"uppercase",marginBottom:10}},"Score per les"),
+        ...Object.entries(byLesson).map(([lid,data])=>{
+          const lm=getMeta(lid);const p=Math.round((data.ok/data.total)*100);
+          return React.createElement("div",{key:lid,style:{marginBottom:8}},
+            React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12,marginBottom:3}},
+              React.createElement("span",{style:{color:lm.color}},`${lm.emoji} ${lm.label}`),
+              React.createElement("span",{style:{color:p>=70?C.green:C.orange,fontWeight:700}},`${data.ok}/${data.total}`)
+            ),
+            React.createElement("div",{style:{background:"#2a2840",borderRadius:99,height:5}},
+              React.createElement("div",{style:{background:p>=70?C.green:C.orange,height:5,borderRadius:99,width:`${p}%`}})
+            )
+          );
+        })
+      ),
+      React.createElement(Btn,{color:C.gold,onClick:onBack},"🏠 Terug naar hub")
+    );
+  }
+
+  return React.createElement("div",{style:{padding:"12px 12px 60px"}},
+    React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10,marginBottom:12}},
+      React.createElement("button",{onClick:onBack,style:{background:C.cardLight,border:"none",color:C.muted,cursor:"pointer",borderRadius:8,padding:"6px 10px",fontSize:12}},"← Hub"),
+      React.createElement("div",{style:{flex:1,fontSize:11,color:meta.color,fontWeight:700}},`${meta.emoji} ${meta.label}`),
+      React.createElement("div",{style:{fontSize:12,color:C.gold,fontWeight:700}},`⭐ ${score}`)
+    ),
+    React.createElement("div",{style:{display:"flex",justifyContent:"space-between",fontSize:12,color:C.muted,marginBottom:5}},
+      React.createElement("span",null,`Vraag ${idx+1}/${questions.length}`),
+      React.createElement("span",null,`${score}/${idx} goed`)
+    ),
+    React.createElement("div",{style:{background:"#2a2840",borderRadius:99,height:6,marginBottom:14}},
+      React.createElement("div",{style:{background:`linear-gradient(90deg,${C.gold},${C.orange})`,height:6,borderRadius:99,width:`${(idx/questions.length)*100}%`,transition:"width 0.3s"}})
+    ),
+    React.createElement("div",{style:{background:meta.color+"18",border:`1px solid ${meta.color}50`,borderRadius:8,padding:"4px 10px",fontSize:11,color:meta.color,fontWeight:700,marginBottom:12,display:"inline-block"}},`${meta.emoji} ${meta.label}: ${meta.title}`),
+    React.createElement("div",{style:{background:C.card,borderRadius:16,padding:16,marginBottom:12,border:"2px solid #2a2840"}},
+      React.createElement("div",{style:{fontSize:11,color:C.muted,marginBottom:5,textTransform:"uppercase",letterSpacing:1}},
+        q.type==="mc"?"Meerkeuze":q.type==="tf"?"Juist / Fout":"Volgorde"
+      ),
+      React.createElement("div",{style:{fontSize:15,fontWeight:700,lineHeight:1.4,color:"#fffffe"}},q.q)
+    ),
+    q.type==="mc" && React.createElement("div",{style:{display:"grid",gap:8,marginBottom:12}},
+      ...q.o.map((opt,i)=>{const ok=i===q.a;return React.createElement("button",{key:i,onClick:()=>checkMC(i),style:{padding:"13px 14px",borderRadius:12,border:`2px solid ${answered!==null?(ok?C.green:C.red+"44"):meta.color+"44"}`,background:answered!==null&&ok?C.green+"22":C.cardLight,color:answered!==null?(ok?C.green:"#a7a9be"):"#fffffe",textAlign:"left",cursor:answered===null?"pointer":"default",fontWeight:600,fontSize:14}},`${answered!==null&&ok?"✓ ":""}${opt}`);})
+    ),
+    q.type==="tf" && React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:12}},
+      ...[true,false].map(v=>{const ok=v===q.a;return React.createElement("button",{key:String(v),onClick:()=>checkTF(v),style:{padding:18,borderRadius:14,border:`2px solid ${answered!==null?(ok?C.green:C.red):v?C.green+"55":C.red+"55"}`,background:answered!==null&&ok?C.green+"22":C.cardLight,color:answered!==null?(ok?C.green:"#a7a9be"):"#fffffe",fontSize:17,fontWeight:800,cursor:answered===null?"pointer":"default"}},v?"✅ JUIST":"❌ FOUT");})
+    ),
+    q.type==="order"&&order && React.createElement("div",{style:{marginBottom:12}},
+      React.createElement("div",{style:{fontSize:12,color:C.muted,marginBottom:8}},"Zet in de juiste volgorde:"),
+      React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:8}},
+        ...order.map((item,i)=>React.createElement("div",{key:item,style:{padding:"12px 14px",borderRadius:12,background:answered==="correct"?C.green+"22":answered==="wrong"?C.red+"22":C.cardLight,border:`2px solid ${answered==="correct"?C.green:answered==="wrong"?C.red:meta.color+"55"}`,color:"#fffffe",fontWeight:700,display:"flex",alignItems:"center",gap:10,fontSize:13}},
+          React.createElement("span",{style:{color:meta.color,fontWeight:900}},`${i+1}.`),
+          React.createElement("span",{style:{flex:1}},item),
+          answered===null && React.createElement("div",{style:{display:"flex",gap:4}},
+            i>0&&React.createElement("button",{onClick:()=>move(i,i-1),style:{background:meta.color+"33",border:"none",borderRadius:6,color:meta.color,padding:"4px 8px",cursor:"pointer"}},"▲"),
+            i<order.length-1&&React.createElement("button",{onClick:()=>move(i,i+1),style:{background:meta.color+"33",border:"none",borderRadius:6,color:meta.color,padding:"4px 8px",cursor:"pointer"}},"▼")
+          )
+        ))
+      ),
+      answered===null && React.createElement("div",{style:{marginTop:10}},React.createElement(Btn,{color:meta.color,onClick:checkOrder},"✓ Controleer volgorde"))
+    ),
+    answered!==null && React.createElement("div",{style:{background:answered==="correct"?C.green+"22":C.red+"22",border:`2px solid ${answered==="correct"?C.green:C.red}`,borderRadius:12,padding:14,marginBottom:12}},
+      React.createElement("div",{style:{fontWeight:800,color:answered==="correct"?C.green:C.red,marginBottom:4}},answered==="correct"?"✅ Correct! +1 punt":"❌ Fout!"),
+      React.createElement("div",{style:{fontSize:13,color:"#fffffe"}},q.u)
+    ),
+    answered!==null && React.createElement(Btn,{color:C.gold,onClick:next},idx<questions.length-1?"Volgende vraag ›":"Bekijk resultaat 🏆")
+  );
+}
+
+function Flash({ids,onBack}){
+  const [cards]=useState(()=>shuffle(V.filter(v=>ids.includes(v.lid))));
+  const [idx,setIdx]=useState(0);
+  const [flipped,setFlipped]=useState(false);
+  const [known,setKnown]=useState(0);
+  const [unknown,setUnknown]=useState(0);
+  const [done,setDone]=useState(false);
+
+  const card=cards[idx];
+  const meta=getMeta(card?.lid);
+
+  function mark(isKnown){
+    if(isKnown)setKnown(k=>k+1);else setUnknown(u=>u+1);
+    if(idx<cards.length-1){setIdx(i=>i+1);setFlipped(false);}else setDone(true);
+  }
+
+  if(done)return React.createElement("div",{style:{padding:"20px 14px 60px"}},
+    React.createElement("button",{onClick:onBack,style:{background:"none",border:"none",color:C.muted,cursor:"pointer",fontSize:13,marginBottom:16}},"← Hub"),
+    React.createElement("div",{style:{textAlign:"center"}},
+      React.createElement("div",{style:{fontSize:60}},"📘"),
+      React.createElement("div",{style:{fontSize:24,fontWeight:900,color:C.purple,marginTop:10}},`${cards.length} woorden klaar!`),
+      React.createElement("div",{style:{fontSize:14,color:C.muted,marginTop:8}},
+        React.createElement("span",{style:{color:C.green}},`✅ ${known} gekend`),
+        " · ",
+        React.createElement("span",{style:{color:C.red}},`❌ ${unknown} herhalen`)
+      ),
+      React.createElement("div",{style:{marginTop:24}},React.createElement(Btn,{color:C.purple,onClick:onBack},"🏠 Terug naar hub"))
+    )
+  );
+
+  return React.createElement("div",{style:{padding:"12px 12px 60px"}},
+    React.createElement("div",{style:{display:"flex",alignItems:"center",gap:10,marginBottom:12}},
+      React.createElement("button",{onClick:onBack,style:{background:C.cardLight,border:"none",color:C.muted,cursor:"pointer",borderRadius:8,padding:"6px 10px",fontSize:12}},"← Hub"),
+      React.createElement("div",{style:{flex:1,fontSize:11,color:meta.color,fontWeight:700}},`${meta.emoji} ${meta.label}`),
+      React.createElement("div",{style:{fontSize:12,color:C.muted}},`${idx+1}/${cards.length}`)
+    ),
+    React.createElement("div",{style:{background:"#2a2840",borderRadius:99,height:6,marginBottom:14}},
+      React.createElement("div",{style:{background:`linear-gradient(90deg,${C.purple},${C.pink})`,height:6,borderRadius:99,width:`${(idx/cards.length)*100}%`}})
+    ),
+    React.createElement("div",{style:{display:"flex",gap:6,marginBottom:14}},
+      React.createElement("div",{style:{flex:1,background:C.green+"18",border:`1px solid ${C.green}44`,borderRadius:8,padding:6,textAlign:"center",fontSize:12,color:C.green,fontWeight:700}},`✅ ${known}`),
+      React.createElement("div",{style:{flex:1,background:C.red+"18",border:`1px solid ${C.red}44`,borderRadius:8,padding:6,textAlign:"center",fontSize:12,color:C.red,fontWeight:700}},`❌ ${unknown}`)
+    ),
+    React.createElement("button",{onClick:()=>setFlipped(f=>!f),style:{width:"100%",background:flipped?meta.color+"22":C.card,border:`3px solid ${flipped?meta.color:meta.color+"50"}`,borderRadius:20,padding:"32px 20px",cursor:"pointer",marginBottom:14,minHeight:170,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",transition:"all 0.2s"}},
+      React.createElement("div",{style:{fontSize:11,color:meta.color,fontWeight:700,marginBottom:10,letterSpacing:2,textTransform:"uppercase"}},`${flipped?"Betekenis":"Woord"} · ${meta.label}`),
+      React.createElement("div",{style:{fontSize:flipped?15:20,fontWeight:900,color:"#fffffe",textAlign:"center",lineHeight:1.4}},flipped?card.fr:card.nl),
+      !flipped&&React.createElement("div",{style:{marginTop:14,fontSize:11,color:meta.color,opacity:0.7}},"👆 Tik om te omdraaien")
+    ),
+    flipped?React.createElement("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}},
+      React.createElement("button",{onClick:()=>mark(false),style:{padding:16,borderRadius:14,border:`2px solid ${C.red}`,background:C.red+"22",color:C.red,fontWeight:900,fontSize:14,cursor:"pointer"}},"❌ Herhalen"),
+      React.createElement("button",{onClick:()=>mark(true),style:{padding:16,borderRadius:14,border:`2px solid ${C.green}`,background:C.green+"22",color:C.green,fontWeight:900,fontSize:14,cursor:"pointer"}},"✅ Gekend!")
+    ):React.createElement("div",{style:{textAlign:"center",fontSize:12,color:C.muted,padding:"10px 0"}},"Tik op de kaart om de betekenis te zien")
+  );
+}
+
+function Btn({color,onClick,children}){
+  return React.createElement("button",{onClick,style:{width:"100%",padding:16,borderRadius:14,border:"none",background:color,color:"#0f0e17",fontWeight:900,fontSize:15,cursor:"pointer"},
+    onMouseDown:e=>e.currentTarget.style.opacity="0.8",onMouseUp:e=>e.currentTarget.style.opacity="1"},children);
+}
+
+const root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+
+</script>
+</body>
+</html>

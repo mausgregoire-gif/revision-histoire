@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🏛️ Geschiedenis — Gustave</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:#0f0e17;color:#fffffe;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+
+.header{
+  background:linear-gradient(135deg,#13121f,#1e1a3a);
+  padding:28px 16px 22px;
+  text-align:center;
+  border-bottom:3px solid #f5c84240;
+}
+.header-icon{font-size:44px;margin-bottom:6px;}
+.header-title{font-size:26px;font-weight:900;color:#f5c842;letter-spacing:1px;}
+.header-sub{font-size:13px;color:#a7a9be;margin-top:6px;}
+
+.content{padding:16px 12px 60px;}
+
+.section-label{
+  font-size:11px;color:#a7a9be;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  margin:20px 0 10px;
+}
+
+/* HUB CARD */
+.hub-card{
+  display:block;
+  background:linear-gradient(135deg,#1e1a3a,#242236);
+  border:2px solid #f5c84260;
+  border-radius:18px;
+  padding:18px 16px;
+  margin-bottom:8px;
+  display:flex;align-items:center;gap:14px;
+  transition:transform 0.15s,border-color 0.15s;
+  cursor:pointer;
+}
+.hub-card:active{transform:scale(0.98);}
+.hub-card .icon{font-size:36px;flex-shrink:0;}
+.hub-card .info .name{font-size:17px;font-weight:900;color:#f5c842;}
+.hub-card .info .desc{font-size:12px;color:#a7a9be;margin-top:3px;}
+.hub-card .arrow{color:#f5c84280;font-size:20px;margin-left:auto;}
+
+/* ERA SECTION */
+.era-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;padding:4px 10px;
+  border-radius:6px;display:inline-block;
+  margin:16px 0 8px;
+}
+
+/* LESSON CARD */
+.lesson-card{
+  display:flex;align-items:center;gap:12px;
+  background:#1a1828;
+  border:2px solid transparent;
+  border-radius:14px;
+  padding:14px 14px;
+  margin-bottom:8px;
+  cursor:pointer;
+  transition:transform 0.15s,border-color 0.15s,background 0.15s;
+}
+.lesson-card:active{transform:scale(0.98);}
+.lesson-card .emoji{font-size:26px;flex-shrink:0;}
+.lesson-card .info{flex:1;}
+.lesson-card .info .label{font-size:11px;font-weight:700;opacity:0.8;margin-bottom:2px;}
+.lesson-card .info .title{font-size:14px;font-weight:800;}
+.lesson-card .arrow{font-size:16px;color:#a7a9be;flex-shrink:0;}
+
+/* Stats bar */
+.stats{
+  background:#1a1828;border-radius:14px;
+  padding:14px 16px;border:1px solid #2a2840;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:8px;text-align:center;margin-top:20px;
+}
+.stat-num{font-size:22px;font-weight:900;}
+.stat-label{font-size:10px;color:#a7a9be;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-icon">🏛️</div>
+  <div class="header-title">GESCHIEDENIS</div>
+  <div class="header-sub">Gustave · 2de secondaire · alle lessen</div>
+</div>
+
+<div class="content">
+
+  <!-- HUB -->
+  <div class="section-label">Révision transversale</div>
+  <a href="hub.html" class="hub-card">
+    <div class="icon">⚡</div>
+    <div class="info">
+      <div class="name">Révision Hub</div>
+      <div class="desc">Quiz Arena + Woorden Flash — alle lessen door elkaar</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- GRIEKENLAND -->
+  <div class="era-label" style="background:#b388ff22;color:#b388ff;">🏺 Griekenland</div>
+
+  <a href="les11.html" class="lesson-card" style="border-color:#b388ff33;" onmouseover="this.style.borderColor='#b388ff'" onmouseout="this.style.borderColor='#b388ff33'">
+    <div class="emoji">🎨</div>
+    <div class="info">
+      <div class="label" style="color:#b388ff;">Les 11</div>
+      <div class="title">De Griekse Kunst</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- ROME: OORSPRONG -->
+  <div class="era-label" style="background:#f5c84222;color:#f5c842;">🐺 Rome: oorsprong</div>
+
+  <a href="les13-14.html" class="lesson-card" style="border-color:#f5c84233;" onmouseover="this.style.borderColor='#f5c842'" onmouseout="this.style.borderColor='#f5c84233'">
+    <div class="emoji">🐺</div>
+    <div class="info">
+      <div class="label" style="color:#f5c842;">Les 13–14</div>
+      <div class="title">Rome: Stadstaat &amp; Republiek</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a href="les15.html" class="lesson-card" style="border-color:#ff704333;" onmouseover="this.style.borderColor='#ff7043'" onmouseout="this.style.borderColor='#ff704333'">
+    <div class="emoji">⚔️</div>
+    <div class="info">
+      <div class="label" style="color:#ff7043;">Les 15</div>
+      <div class="title">Rome wordt machtig</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- ROME: CRISIS -->
+  <div class="era-label" style="background:#ff525222;color:#ff5252;">⚡ Rome: crisis</div>
+
+  <a href="les16.html" class="lesson-card" style="border-color:#26c6da33;" onmouseover="this.style.borderColor='#26c6da'" onmouseout="this.style.borderColor='#26c6da33'">
+    <div class="emoji">🌍</div>
+    <div class="info">
+      <div class="label" style="color:#26c6da;">Les 16</div>
+      <div class="title">De veroveringen veranderen de samenleving</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a href="les17.html" class="lesson-card" style="border-color:#ef535033;" onmouseover="this.style.borderColor='#ef5350'" onmouseout="this.style.borderColor='#ef535033'">
+    <div class="emoji">⚡</div>
+    <div class="info">
+      <div class="label" style="color:#ef5350;">Les 17</div>
+      <div class="title">De burgeroorlogen</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a href="les18.html" class="lesson-card" style="border-color:#ab47bc33;" onmouseover="this.style.borderColor='#ab47bc'" onmouseout="this.style.borderColor='#ab47bc33'">
+    <div class="emoji">👑</div>
+    <div class="info">
+      <div class="label" style="color:#ab47bc;">Les 18</div>
+      <div class="title">Augustus, de eerste keizer</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- PAX ROMANA -->
+  <div class="era-label" style="background:#69f0ae22;color:#69f0ae;">🌿 Pax Romana</div>
+
+  <a href="les19.html" class="lesson-card" style="border-color:#66bb6a33;" onmouseover="this.style.borderColor='#66bb6a'" onmouseout="this.style.borderColor='#66bb6a33'">
+    <div class="emoji">💰</div>
+    <div class="info">
+      <div class="label" style="color:#66bb6a;">Les 19</div>
+      <div class="title">De economie van het Romeinse Rijk</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a href="les20.html" class="lesson-card" style="border-color:#42a5f533;" onmouseover="this.style.borderColor='#42a5f5'" onmouseout="this.style.borderColor='#42a5f533'">
+    <div class="emoji">🏛️</div>
+    <div class="info">
+      <div class="label" style="color:#42a5f5;">Les 20</div>
+      <div class="title">De Romeinse Kunst</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a href="les22.html" class="lesson-card" style="border-color:#ec407a33;" onmouseover="this.style.borderColor='#ec407a'" onmouseout="this.style.borderColor='#ec407a33'">
+    <div class="emoji">✝️</div>
+    <div class="info">
+      <div class="label" style="color:#ec407a;">Les 22</div>
+      <div class="title">De godsdienst bij de Romeinen</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- VERVAL -->
+  <div class="era-label" style="background:#ffab4022;color:#ffab40;">📉 Verval</div>
+
+  <a href="les23.html" class="lesson-card" style="border-color:#ff704333;" onmouseover="this.style.borderColor='#ff7043'" onmouseout="this.style.borderColor='#ff704333'">
+    <div class="emoji">📉</div>
+    <div class="info">
+      <div class="label" style="color:#ff7043;">Les 23</div>
+      <div class="title">Bloei en verval van het Rijk</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a href="les26.html" class="lesson-card" style="border-color:#26a69a33;" onmouseover="this.style.borderColor='#26a69a'" onmouseout="this.style.borderColor='#26a69a33'">
+    <div class="emoji">🛡️</div>
+    <div class="info">
+      <div class="label" style="color:#26a69a;">Les 26</div>
+      <div class="title">De Romeinen veroveren Gallië</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- BELGIË -->
+  <div class="era-label" style="background:#4fc3f722;color:#4fc3f7;">🇧🇪 België</div>
+
+  <a href="les30.html" class="lesson-card" style="border-color:#7e57c233;" onmouseover="this.style.borderColor='#7e57c2'" onmouseout="this.style.borderColor='#7e57c233'">
+    <div class="emoji">🗳️</div>
+    <div class="info">
+      <div class="label" style="color:#7e57c2;">Les 30</div>
+      <div class="title">De parlementaire democratie</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a href="les31.html" class="lesson-card" style="border-color:#ef535033;" onmouseover="this.style.borderColor='#ef5350'" onmouseout="this.style.borderColor='#ef535033'">
+    <div class="emoji">🇧🇪</div>
+    <div class="info">
+      <div class="label" style="color:#ef5350;">Les 31</div>
+      <div class="title">Het federale België</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div><div class="stat-num" style="color:#f5c842;">13</div><div class="stat-label">Lessen</div></div>
+    <div><div class="stat-num" style="color:#ffab40;">190+</div><div class="stat-label">Vragen</div></div>
+    <div><div class="stat-num" style="color:#b388ff;">130</div><div class="stat-label">Woorden</div></div>
+  </div>
+
+</div>
+</body>
+</html>
