@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Examens de décembre · Gustave</title>
+<style>body{margin:0;background:#0f0e17}button{font-family:inherit}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+</head><body><div id="root"></div><script>
+const h = React.createElement;
+const { useState, useEffect } = React;
+
+const SUB = {
+  hist: { n: 'Histoire', c: '#f25f4c' },
+  ned: { n: 'Néerlandais', c: '#ff8906' },
+  eng: { n: 'Anglais', c: '#3da9fc' },
+  math: { n: 'Math', c: '#7f5af0' },
+  chim: { n: 'Chimie', c: '#2cb67d' },
+  bio: { n: 'Bio', c: '#a3e635' },
+  phys: { n: 'Physique', c: '#22d3ee' },
+  fr: { n: 'Français', c: '#e53170' },
+};
+
+const DAYS = [
+  { d: '2026-11-16', slot: 'après les devoirs, ~18h30', it: [['hist', 1, 'rassembler les cours']] },
+  { d: '2026-11-17', act: 'Escalade 17h–19h' },
+  { d: '2026-11-18', slot: '16h00–17h15', it: [['ned', 1, 'lister la matière']], act: 'Cello 17h30' },
+  { d: '2026-11-19', act: 'Escalade + Notenleer' },
+  { d: '2026-11-20', act: 'Libre · Kafeetje 18h' },
+  { d: '2026-11-21', slot: 'matin + après-midi', it: [['hist', 2], ['eng', 1]] },
+  { d: '2026-11-22', slot: 'matin + après-midi', it: [['math', 2], ['chim', 1]] },
+  { d: '2026-11-23', slot: 'après les devoirs, ~18h30', it: [['ned', 1]] },
+  { d: '2026-11-24', act: 'Escalade 17h–19h' },
+  { d: '2026-11-25', slot: '16h00–17h15', it: [['bio', 1]], act: 'Cello 17h30' },
+  { d: '2026-11-26', act: 'Escalade + Notenleer' },
+  { d: '2026-11-27', act: 'Libre · Kafeetje 18h' },
+  { d: '2026-11-28', slot: 'matin + après-midi', it: [['math', 2], ['bio', 1]] },
+  { d: '2026-11-29', slot: 'matin + après-midi', it: [['eng', 1], ['phys', 1], ['hist', 1]] },
+  { d: '2026-11-30', tag: "Pas cours l'après-midi", slot: '13h30–16h30', it: [['hist', 2], ['ned', 1]] },
+  { d: '2026-12-01', slot: '19h30, après l’escalade', it: [['hist', 1, 'quiz final 20 min']], act: 'Escalade 17h–19h' },
+  { d: '2026-12-02', ex: 'hist', slot: '14h00–17h00', it: [['ned', 2]], act: 'Cello 17h30' },
+  { d: '2026-12-03', ex: 'ned', slot: '14h00–16h30', it: [['eng', 2]], act: 'Escalade + Notenleer' },
+  { d: '2026-12-04', ex: 'eng', act: 'Libre · Kafeetje 18h' },
+  { d: '2026-12-05', slot: 'matin + après-midi', it: [['math', 3], ['phys', 1]] },
+  { d: '2026-12-06', slot: 'matin + après-midi', it: [['math', 2, 'quiz'], ['chim', 1]] },
+  { d: '2026-12-07', ex: 'math', slot: 'après-midi', it: [['chim', 2]], act: 'Cello' },
+  { d: '2026-12-08', ex: 'chim', slot: 'avant 17h', it: [['bio', 2]], act: 'Escalade 17h' },
+  { d: '2026-12-09', ex: 'bio', slot: 'avant 17h30', it: [['phys', 2]], act: 'Cello 17h30' },
+  { d: '2026-12-10', ex: 'phys', slot: 'avant 17h', it: [['fr', 1, 'léger']], act: 'Escalade + Notenleer' },
+  { d: '2026-12-11', ex: 'fr', fin: true },
+];
+
+const WD = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
+const MO = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const pd = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const iso = (t) => t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0');
+const dayDiff = (a, b) => Math.round((pd(b) - pd(a)) / 864e5);
+const WEEKS = [
+  'Semaine 1 · 16 → 22 nov.',
+  'Semaine 2 · 23 → 29 nov.',
+  'Semaine 3 · 30 nov. → 6 déc. · examens',
+  'Semaine 4 · 7 → 11 déc. · examens',
+];
+const weekOf = (s) => Math.floor(dayDiff('2026-11-16', s) / 7);
+
+const KEY = 'gustave-planning-dec-2026';
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } };
+const save = (v) => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} };
+
+const BLOCKS = [];
+DAYS.forEach((day) => (day.it || []).forEach(([s, n]) => {
+  for (let i = 0; i < n; i++) BLOCKS.push({ id: day.d + '|' + s + '|' + i, d: day.d, s });
+}));
+
+const S = {
+  wrap: { background: '#0f0e17', color: '#fffffe', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif', padding: '18px 14px 40px' },
+  inner: { maxWidth: 540, margin: '0 auto' },
+  kicker: { fontSize: 12, letterSpacing: 2, color: '#a7a9be', fontWeight: 700 },
+  h1: { fontSize: 28, margin: '4px 0 14px', fontWeight: 900 },
+  card: { background: '#1a1926', borderRadius: 18, padding: 16, marginBottom: 12, border: '1px solid #2a2838' },
+  big: { fontSize: 44, fontWeight: 900, lineHeight: 1 },
+  barBg: { height: 14, background: '#2a2838', borderRadius: 99, overflow: 'hidden', marginTop: 8 },
+  tabs: { display: 'flex', gap: 8, margin: '6px 0 16px' },
+  tab: { flex: 1, padding: '12px 8px', borderRadius: 14, border: 'none', fontWeight: 800, fontSize: 15, cursor: 'pointer' },
+  week: { fontSize: 13, fontWeight: 800, letterSpacing: 1, color: '#a7a9be', textTransform: 'uppercase', margin: '22px 2px 10px' },
+  day: { display: 'flex', gap: 12, borderRadius: 16, padding: 12, marginBottom: 8 },
+  date: { width: 50, textAlign: 'center', flexShrink: 0 },
+  wd: { fontSize: 12, color: '#a7a9be', fontWeight: 700 },
+  num: { fontSize: 26, fontWeight: 900, lineHeight: 1.1 },
+  mo: { fontSize: 11, color: '#a7a9be' },
+  exam: { display: 'inline-block', color: '#0f0e17', fontWeight: 900, fontSize: 14, padding: '6px 12px', borderRadius: 10, marginBottom: 8, letterSpacing: 0.5 },
+  today: { display: 'inline-block', background: '#fffffe', color: '#0f0e17', fontWeight: 900, fontSize: 11, padding: '3px 8px', borderRadius: 6, marginBottom: 6, marginRight: 6, letterSpacing: 1 },
+  tag: { fontSize: 12, color: '#ffd803', fontWeight: 700, marginBottom: 4 },
+  slot: { fontSize: 13, color: '#a7a9be', marginBottom: 8 },
+  pills: { display: 'flex', flexWrap: 'wrap', gap: 8 },
+  pill: { display: 'flex', alignItems: 'center', gap: 8, border: '2px solid', borderRadius: 12, padding: '10px 12px', fontWeight: 800, fontSize: 14, cursor: 'pointer', textAlign: 'left' },
+  box: { width: 18, height: 18, borderRadius: 5, border: '2px solid currentColor', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, flexShrink: 0 },
+  rest: { fontSize: 14, color: '#a7a9be', paddingTop: 4 },
+  act: { fontSize: 12, color: '#72757e', marginTop: 8 },
+  fin: { fontSize: 18, fontWeight: 900, color: '#ffd803' },
+  rule: { fontSize: 14, color: '#d4d4dc', margin: '6px 0', lineHeight: 1.4 },
+};
+
+function Bar({ value, color }) {
+  return h('div', { style: S.barBg }, h('div', { style: { width: Math.round(value * 100) + '%', height: '100%', background: color, borderRadius: 99, transition: 'width .3s' } }));
+}
+
+function Day({ day, today, done, toggle }) {
+  const dt = pd(day.d);
+  const isToday = day.d === today;
+  const past = day.d < today;
+  const ex = day.ex && SUB[day.ex];
+  const rest = !day.it && !day.ex;
+  return h('div', {
+    id: 'd-' + day.d,
+    style: { ...S.day, opacity: past ? 0.5 : 1, background: rest ? 'transparent' : '#1a1926', border: isToday ? '2px solid #fffffe' : rest ? '1px dashed #2a2838' : '1px solid #2a2838' },
+  },
+    h('div', { style: S.date }, h('div', { style: S.wd }, WD[dt.getDay()]), h('div', { style: S.num }, dt.getDate()), h('div', { style: S.mo }, MO[dt.getMonth()])),
+    h('div', { style: { flex: 1, minWidth: 0 } },
+      isToday && h('div', { style: S.today }, "AUJOURD'HUI"),
+      ex && h('div', null, h('div', { style: { ...S.exam, background: ex.c } }, 'EXAMEN · ' + ex.n.toUpperCase())),
+      day.tag && h('div', { style: S.tag }, day.tag),
+      day.slot && h('div', { style: S.slot }, 'Révision · ' + day.slot),
+      day.it && h('div', { style: S.pills }, day.it.flatMap(([s, n, note]) => Array.from({ length: n }, (_, i) => {
+        const id = day.d + '|' + s + '|' + i;
+        const on = !!done[id];
+        const c = SUB[s].c;
+        return h('button', {
+          key: id, onClick: () => toggle(id),
+          style: { ...S.pill, borderColor: c, background: on ? c : 'transparent', color: on ? '#0f0e17' : '#fffffe' },
+        }, h('span', { style: S.box }, on ? '✓' : ''), SUB[s].n + (n > 1 ? ' ' + (i + 1) + '/' + n : '') + (note && i === 0 ? ' · ' + note : ''));
+      }))),
+      rest && h('div', { style: S.rest }, day.act || 'Libre'),
+      !rest && day.act && h('div', { style: S.act }, '+ ' + day.act),
+      day.fin && h('div', { style: S.fin }, 'Fin des examens 🎉')
+    )
+  );
+}
+
+function Plan({ today, done, toggle }) {
+  const out = [];
+  let w = -1;
+  DAYS.forEach((day) => {
+    const wk = weekOf(day.d);
+    if (wk !== w) { w = wk; out.push(h('div', { key: 'w' + wk, style: S.week }, WEEKS[wk])); }
+    out.push(h(Day, { key: day.d, day, today, done, toggle }));
+  });
+  return h('div', null, out);
+}
+
+function Subjects({ done }) {
+  return h('div', null, Object.keys(SUB).map((k) => {
+    const bl = BLOCKS.filter((b) => b.s === k);
+    const dn = bl.filter((b) => done[b.id]).length;
+    const exd = pd(DAYS.find((x) => x.ex === k).d);
+    const dates = [...new Set(bl.map((b) => b.d))];
+    const c = SUB[k].c;
+    return h('div', { key: k, style: { ...S.card, borderLeft: '6px solid ' + c } },
+      h('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 } },
+        h('div', { style: { fontSize: 20, fontWeight: 900 } }, SUB[k].n),
+        h('div', { style: { fontSize: 13, color: '#a7a9be', fontWeight: 700 } }, 'Examen ' + WD[exd.getDay()] + ' ' + exd.getDate() + ' ' + MO[exd.getMonth()])
+      ),
+      h(Bar, { value: bl.length ? dn / bl.length : 0, color: c }),
+      h('div', { style: { fontSize: 13, color: '#a7a9be', margin: '8px 0' } }, dn + ' / ' + bl.length + ' blocs faits'),
+      h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 6 } }, dates.map((d) => {
+        const t = pd(d);
+        const all = bl.filter((b) => b.d === d).every((b) => done[b.id]);
+        return h('span', { key: d, style: { fontSize: 12, fontWeight: 700, padding: '4px 8px', borderRadius: 8, border: '1px solid ' + c, background: all ? c : 'transparent', color: all ? '#0f0e17' : '#fffffe' } }, WD[t.getDay()] + ' ' + t.getDate() + ' ' + MO[t.getMonth()]);
+      }))
+    );
+  }));
+}
+
+function PlanningExamens() {
+  const [done, setDone] = useState(load);
+  const [tab, setTab] = useState('plan');
+  const today = iso(new Date());
+  useEffect(() => save(done), [done]);
+  const toggle = (id) => setDone((p) => { const n = { ...p }; if (n[id]) delete n[id]; else n[id] = 1; return n; });
+  const total = BLOCKS.length;
+  const nDone = BLOCKS.filter((b) => done[b.id]).length;
+  const next = DAYS.find((x) => x.ex && x.d >= today);
+  const inRange = DAYS.some((x) => x.d === today);
+
+  let countdown = null;
+  if (next) {
+    const dd = dayDiff(today, next.d);
+    const nd = pd(next.d);
+    const sub = SUB[next.ex];
+    countdown = h('div', { style: { ...S.card, display: 'flex', alignItems: 'center', gap: 16, borderLeft: '6px solid ' + sub.c } },
+      h('div', { style: { ...S.big, color: sub.c } }, dd === 0 ? 'Auj.' : 'J-' + dd),
+      h('div', null,
+        h('div', { style: { fontSize: 12, color: '#a7a9be', fontWeight: 700, letterSpacing: 1 } }, 'PROCHAIN EXAMEN'),
+        h('div', { style: { fontSize: 20, fontWeight: 900 } }, sub.n),
+        h('div', { style: { fontSize: 13, color: '#a7a9be' } }, WD[nd.getDay()] + ' ' + nd.getDate() + ' ' + MO[nd.getMonth()])
+      )
+    );
+  } else {
+    countdown = h('div', { style: S.card }, h('div', { style: S.fin }, 'Examens terminés. Bravo 🎉'));
+  }
+
+  const tabBtn = (id, label) => h('button', {
+    onClick: () => setTab(id),
+    style: { ...S.tab, background: tab === id ? '#ffd803' : '#1a1926', color: tab === id ? '#0f0e17' : '#fffffe' },
+  }, label);
+
+  return h('div', { style: S.wrap }, h('div', { style: S.inner },
+    h('div', { style: S.kicker }, 'GUSTAVE · 3E SECONDAIRE'),
+    h('h1', { style: S.h1 }, 'Examens de décembre'),
+    countdown,
+    h('div', { style: S.card },
+      h('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' } },
+        h('div', { style: { fontWeight: 900, fontSize: 16 } }, 'Progression'),
+        h('div', { style: { fontWeight: 900, fontSize: 16, color: '#ffd803' } }, nDone + ' / ' + total + ' blocs')
+      ),
+      h(Bar, { value: nDone / total, color: '#ffd803' })
+    ),
+    h('div', { style: S.tabs },
+      tabBtn('plan', 'Planning'),
+      tabBtn('sub', 'Par matière'),
+      inRange && h('button', {
+        onClick: () => { setTab('plan'); setTimeout(() => { const el = document.getElementById('d-' + today); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 50); },
+        style: { ...S.tab, flex: 'none', background: '#1a1926', color: '#fffffe', border: '1px solid #fffffe' },
+      }, "Aujourd'hui")
+    ),
+    tab === 'plan' ? h(Plan, { today, done, toggle }) : h(Subjects, { done }),
+    h('div', { style: { ...S.card, marginTop: 24 } },
+      h('div', { style: { fontWeight: 900, fontSize: 16, marginBottom: 6 } }, 'Les règles'),
+      h('div', { style: S.rule }, '1 bloc = 20 min de travail · 5 min de pause · 20 min de travail.'),
+      h('div', { style: S.rule }, 'Touche un bloc quand il est fini : il se colore.'),
+      h('div', { style: S.rule }, "Veille d'examen : quiz et questions, pas de nouvelle matière."),
+      h('div', { style: S.rule }, 'Vendredi soir = libre.')
+    )
+  ));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h(PlanningExamens));
+</script></body></html>
