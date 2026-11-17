@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="nl"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e17">
+<title>Geschiedenis 3e jaar · Examen december</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#0f0e17;color:#fffffe;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:520px;margin:0 auto;padding:18px 14px 40px}
+h1{font-size:24px;margin:4px 0 4px;font-weight:800}
+.sub{color:#a7a9be;font-size:14px}
+.count{background:#1a1926;border-radius:14px;padding:14px 16px;margin:16px 0;display:flex;justify-content:space-between;align-items:center}
+.count b{font-size:26px}
+.bar{height:6px;background:#2e2d3d;border-radius:3px;margin-top:8px}
+.bar div{height:6px;border-radius:3px;background:#2cb67d}
+.sec{font-size:12px;color:#a7a9be;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:22px 0 8px}
+a.mod{display:block;text-decoration:none;color:inherit;background:#1a1926;border-radius:0 14px 14px 0;padding:12px 14px;margin-bottom:8px;border-left:5px solid var(--c)}
+a.mod:active{transform:scale(.99)}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.les{font-weight:800;font-size:16px}
+.pg{color:#a7a9be;font-size:12px;white-space:nowrap}
+.ttl{font-size:14px;color:#d8d8e6;margin-top:2px}
+.chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:700;padding:4px 8px;border-radius:8px;border:1px solid #3a3950;color:#a7a9be}
+.chip.ok{border-color:#2cb67d;color:#2cb67d}
+.chip.busy{border-color:#ffd803;color:#ffd803}
+.off{opacity:.45;pointer-events:none}
+details{background:#1a1926;border-radius:14px;padding:12px 14px;margin-bottom:8px}
+summary{font-weight:800;cursor:pointer;font-size:16px}
+details ul{margin:8px 0 0;padding-left:18px;line-height:1.6;font-size:14.5px;color:#d8d8e6}
+details h4{margin:12px 0 2px;font-size:14px;color:#4fc3f7}
+.foot{text-align:center;margin-top:22px}
+.foot a{color:#a7a9be;font-size:14px}
+</style></head><body><div class="wrap">
+<div class="sub">Geschiedenis · 3A</div>
+<h1>Examen december</h1>
+<div class="sub" id="exam">Examen: woensdag 2 december</div>
+<div class="count"><div><div class="sub">Modules volledig afgewerkt</div><div class="bar"><div id="bar" style="width:0"></div></div></div><b id="cnt">0/0</b></div>
+<div id="list"></div>
+<div class="sec">Overzicht</div>
+<details><summary>Overzicht B · De vroege middeleeuwen (p. 49–50)</summary>
+<h4>Ondergang van het West-Romeinse Rijk (5e eeuw)</h4>
+<ul><li>Oorzaken: invallen van 'barbaren', opstandige legioenen, daling bevolking</li><li>Volksverhuizingen (grote rol van de Hunnen) → Germanen (o.a. de Franken) → Germaanse koninkrijken</li></ul>
+<h4>Het Frankische Rijk (5e–9e eeuw)</h4>
+<ul><li>Merovingers (±480) → Chlodovech → doop</li><li>Karolingers (751) → Karel de Grote → 800: keizer</li><li>Bondgenootschap met de paus en de christelijke Kerk</li><li>Cultureel: heropleving onder de Karolingers (abdijen, regel van Benedictus)</li><li>Sociaal: grootgrondbezitters, kleine boeren, tenurehouders op een domein, ambachtslieden en handelaars</li><li>Economisch: landbouw en grondbezit; grote domeinen tussen Loire en Rijn; zelfvoorzienende en gesloten economie; Friese handelaars</li><li>Politiek: koning heeft veel macht; rijk verdeeld in gouwen → ambtenaren: graven, hertogen</li></ul>
+<h4>Verdrag van Verdun (843)</h4>
+<ul><li>West-Francië → Frankrijk; Midden-Francië → valt verder uiteen; Oost-Francië → Duitsland</li><li>9e eeuw: groeiende macht voor graven en hertogen; invallen van de Vikingen</li></ul>
+<h4>Een nieuwe samenleving in West-Europa</h4>
+<ul><li>Romeins + Germaans + christendom</li><li>Latijn = taal van de christelijke Kerk + wetenschap + cultuur</li></ul>
+<h4>Het Oost-Romeinse of Byzantijnse Rijk</h4>
+<ul><li>Hoofdstad Constantinopel, Grieks dominante taal</li><li>Justinianus → codex Romeins recht; tijdelijke herovering van een groot deel van het Middellandse Zeegebied</li><li>Byzantijnse keizer → veel macht, ook over de Kerk</li><li>Einde: 1453 → verovering door de Turken</li></ul>
+</details>
+<div class="foot"><a href="index.html">Modules van vorig jaar (2e jaar) →</a></div>
+</div>
+<script>
+(function(){
+var MODS=[
+ ["A","Over oude en nieuwe dingen","8–13","a","a-oude-en-nieuwe-dingen.html","#4db6ac"],
+ ["B1","De ondergang van het West-Romeinse Rijk","14–19","b1","b1-west-romeinse-rijk.html","#4fc3f7"],
+ ["B2","De Franken, nieuwe heersers in het Westen","20–28","b2","b2-franken.html","#ff8a65"],
+ ["Onderzoek 1","De Franken","29–34","o1","onderzoek1-franken.html","#ffb74d"],
+ ["B3","Het begin van een nieuwe samenleving","35–38","b3","b3-nieuwe-samenleving.html","#81c784"],
+ ["B4","Het Romeinse Rijk houdt stand in het Oosten","39–42","b4","b4-oost-romeinse-rijk.html","#ba68c8"],
+ ["Onderzoek 2","De Vikingen","43–48","o2","onderzoek2-vikingen.html","#64b5f6"],
+ ["C","De standensamenleving","51–59","c","c-standensamenleving.html","#ffd54f"],
+ ["D1","Het leenwezen","60–66","d1","d1-leenwezen.html","#f5a623"],
+ ["D2","Landbouw, handel en nijverheid","67–72","d2","d2-landbouw-handel.html","#7bc950"],
+ ["Onderzoek 3","De Zwarte Dood","73–76","o3","onderzoek3-zwarte-dood.html","#b388ff"],
+ ["D3","De steden treden op de voorgrond","77–86",null,null,"#555"],
+ ["D4","Kerk en christendom","87–95",null,null,"#555"]
+];
+var SECS={0:"A · Inleiding",1:"B · De vroege middeleeuwen (500–900)",7:"C · De standensamenleving",8:"D · De middeleeuwen (900–1450)"};
+var DAG=["zo","ma","di","wo","do","vr","za"];
+function d(ts){var x=new Date(ts);return DAG[x.getDay()]+" "+x.getDate()+"/"+(x.getMonth()+1);}
+function load(id){try{var s=localStorage.getItem("gesch-"+id+"-v1");return s?JSON.parse(s):null;}catch(e){return null;}}
+var html="",done=0,total=0;
+MODS.forEach(function(m,i){
+  if(SECS[i])html+='<div class="sec">'+SECS[i]+'</div>';
+  if(!m[3]){html+='<div class="mod off" style="--c:'+m[5]+';display:block;background:#1a1926;border-radius:0 14px 14px 0;padding:12px 14px;margin-bottom:8px;border-left:5px solid #555"><div class="row"><span class="les">'+m[0]+'</span><span class="pg">p. '+m[2]+'</span></div><div class="ttl">'+m[1]+'</div><div class="chips"><span class="chip">Nog niet gezien in de klas</span></div></div>';return;}
+  total++;
+  var s=load(m[3]),c="";
+  [1,2].forEach(function(r){
+    var l=s&&s.last&&s.last[r];var busy=s&&s.cur&&s.cur.r===r;
+    if(l)c+='<span class="chip ok">Rit '+r+' ✓ '+d(l.ts)+(r===2?' · '+l.score+'/'+l.n:'')+'</span>';
+    else if(busy)c+='<span class="chip busy">Rit '+r+' bezig</span>';
+    else c+='<span class="chip">Rit '+r+'</span>';
+  });
+  if(s&&s.last&&s.last[1]&&s.last[2])done++;
+  html+='<a class="mod" style="--c:'+m[5]+'" href="'+m[4]+'"><div class="row"><span class="les">'+m[0]+'</span><span class="pg">p. '+m[2]+'</span></div><div class="ttl">'+m[1]+'</div><div class="chips">'+c+'</div></a>';
+});
+document.getElementById("list").innerHTML=html;
+document.getElementById("cnt").textContent=done+"/"+total;
+document.getElementById("bar").style.width=(total?done/total*100:0)+"%";
+var ex=new Date(2026,11,2),now=new Date();now.setHours(0,0,0,0);
+var dd=Math.round((ex-now)/864e5);
+if(dd>0)document.getElementById("exam").textContent="Examen: woensdag 2 december · nog "+dd+" dagen";
+else if(dd===0)document.getElementById("exam").textContent="Examen: vandaag. Succes!";
+})();
+</script>
+</body></html>
