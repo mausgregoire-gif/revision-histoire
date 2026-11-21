@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Examens de décembre · Gustave</title>
+<style>body{margin:0;background:#0f0e17}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+</head><body><div id="root"></div><script>
+const h = React.createElement;
+
+const SUB = {
+  hist: { n: 'Histoire', nl: 'Geschiedenis', c: '#f25f4c' },
+  ned: { n: 'Néerlandais', nl: 'Nederlands', c: '#ff8906' },
+  eng: { n: 'Anglais', nl: 'Engels', c: '#3da9fc' },
+  math: { n: 'Math', nl: 'Wiskunde', c: '#7f5af0' },
+  chim: { n: 'Chimie', nl: 'Chemie', c: '#2cb67d' },
+  bio: { n: 'Bio', nl: 'Biologie', c: '#a3e635' },
+  phys: { n: 'Physique', nl: 'Fysica', c: '#22d3ee' },
+  fr: { n: 'Français', nl: 'Frans', c: '#e53170' },
+};
+
+const WEEKS = [
+  { label: 'Semaine 1', days: [
+    { d: '2026-11-30', note: 'Cours jusqu’à 11h50' },
+    { d: '2026-12-01', ex: 'phys', t: '8h45–11h30', room: 'PANO', p: 3 },
+    { d: '2026-12-02', ex: 'hist', t: '8h45–11h30', room: 'L5', p: 3 },
+    { d: '2026-12-03', ex: 'ned', t: '8h45–12h30', room: 'L1 / L5', p: 4 },
+    { d: '2026-12-04', ex: 'eng', t: '8h45–11h30', room: 'L1', p: 3 },
+  ] },
+  { label: 'Semaine 2', days: [
+    { d: '2026-12-07', ex: 'math', t: '8h45–12h30', room: 'L5 / L1', p: 4 },
+    { d: '2026-12-08', ex: 'chim', t: '8h45–11h30', room: 'L5', p: 3 },
+    { d: '2026-12-09', ex: 'bio', t: '8h45–11h30', room: 'AT', p: 3 },
+    { d: '2026-12-10' },
+    { d: '2026-12-11', ex: 'fr', t: '8h45–12h30', room: 'L1', p: 4 },
+  ] },
+  { label: 'Après les examens', days: [
+    { d: '2026-12-14', note: 'Examens de rattrapage (si absent)' },
+    { d: '2026-12-15', note: 'Conseils de classe · pas d’école' },
+    { d: '2026-12-16', note: 'Conseils de classe · pas d’école' },
+    { d: '2026-12-17', note: 'Film + bulletin (voir Smartschool)' },
+    { d: '2026-12-18', note: 'Mentor + consultation des examens' },
+  ] },
+];
+
+const WD = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+const MO = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const pd = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const iso = (t) => t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0');
+const dayDiff = (a, b) => Math.round((pd(b) - pd(a)) / 864e5);
+const EXAMS = WEEKS.flatMap((w) => w.days).filter((x) => x.ex);
+
+const CSS = `
+.xg{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media (max-width:640px){.xg{grid-template-columns:1fr}.xc{flex-direction:row!important;align-items:center;min-height:0!important}.xd{text-align:left!important;width:92px;flex-shrink:0}}
+`;
+
+function Cell({ day, today }) {
+  const t = pd(day.d);
+  const sub = day.ex && SUB[day.ex];
+  const past = day.d < today;
+  const isToday = day.d === today;
+  return h('div', {
+    className: 'xc',
+    style: {
+      display: 'flex', flexDirection: 'column', gap: 10, minHeight: 150, padding: 12, borderRadius: 16,
+      background: sub ? '#1a1926' : 'transparent',
+      border: isToday ? '2px solid #fffffe' : sub ? '1px solid #2a2838' : '1px dashed #2a2838',
+      opacity: past ? 0.45 : 1,
+    },
+  },
+    h('div', { className: 'xd', style: { textAlign: 'center' } },
+      h('div', { style: { fontSize: 12, color: '#a7a9be', fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1 } }, WD[t.getDay()]),
+      h('div', { style: { fontSize: 30, fontWeight: 900, lineHeight: 1.1 } }, t.getDate()),
+      h('div', { style: { fontSize: 12, color: '#a7a9be' } }, MO[t.getMonth()])
+    ),
+    sub
+      ? h('div', { style: { flex: 1, background: sub.c, color: '#0f0e17', borderRadius: 12, padding: '12px 10px', display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' } },
+          h('div', { style: { fontSize: 18, fontWeight: 900 } }, (past ? '✓ ' : '') + sub.n),
+          h('div', { style: { fontSize: 12, fontWeight: 700, opacity: 0.75 } }, sub.nl),
+          h('div', { style: { fontSize: 13, fontWeight: 800, marginTop: 6 } }, day.t),
+          h('div', { style: { fontSize: 11, fontWeight: 700, opacity: 0.75 } }, 'Local ' + day.room + ' · sortie dès ' + (day.p === 3 ? '10h30' : '10h45'))
+        )
+      : h('div', { style: { flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontSize: 13, color: day.note ? (day.d > '2026-12-11' ? '#a7a9be' : '#ffd803') : '#72757e', fontWeight: 700 } }, day.note || 'Pas d’examen'),
+    isToday && h('div', { style: { textAlign: 'center', fontSize: 11, fontWeight: 900, letterSpacing: 1 } }, "AUJOURD'HUI")
+  );
+}
+
+function CalendrierExamens() {
+  const today = iso(new Date());
+  const next = EXAMS.find((x) => x.d >= today);
+  const doneCount = EXAMS.filter((x) => x.d < today).length;
+
+  let top;
+  if (next) {
+    const dd = dayDiff(today, next.d);
+    const s = SUB[next.ex];
+    const t = pd(next.d);
+    top = h('div', { style: { display: 'flex', alignItems: 'center', gap: 16, background: '#1a1926', border: '1px solid #2a2838', borderLeft: '6px solid ' + s.c, borderRadius: 18, padding: 16, marginBottom: 12 } },
+      h('div', { style: { fontSize: 44, fontWeight: 900, color: s.c, lineHeight: 1 } }, dd === 0 ? 'Auj.' : 'J-' + dd),
+      h('div', null,
+        h('div', { style: { fontSize: 12, color: '#a7a9be', fontWeight: 700, letterSpacing: 1 } }, 'PROCHAIN EXAMEN'),
+        h('div', { style: { fontSize: 20, fontWeight: 900 } }, s.n),
+        h('div', { style: { fontSize: 13, color: '#a7a9be' } }, WD[t.getDay()] + ' ' + t.getDate() + ' ' + MO[t.getMonth()])
+      )
+    );
+  } else {
+    top = h('div', { style: { background: '#1a1926', borderRadius: 18, padding: 16, marginBottom: 12, fontSize: 20, fontWeight: 900, color: '#ffd803' } }, 'Examens terminés. Bravo 🎉');
+  }
+
+  return h('div', { style: { background: '#0f0e17', color: '#fffffe', minHeight: '100vh', fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif', padding: '18px 14px 40px' } },
+    h('style', null, CSS),
+    h('div', { style: { maxWidth: 900, margin: '0 auto' } },
+      h('div', { style: { fontSize: 12, letterSpacing: 2, color: '#a7a9be', fontWeight: 700 } }, 'GUSTAVE · 3E SECONDAIRE'),
+      h('h1', { style: { fontSize: 28, margin: '4px 0 14px', fontWeight: 900 } }, 'Examens de décembre'),
+      top,
+      h('div', { style: { background: '#1a1926', border: '1px solid #2a2838', borderRadius: 18, padding: 16, marginBottom: 8 } },
+        h('div', { style: { display: 'flex', justifyContent: 'space-between', fontWeight: 900 } },
+          h('span', null, 'Examens passés'),
+          h('span', { style: { color: '#ffd803' } }, doneCount + ' / ' + EXAMS.length)
+        ),
+        h('div', { style: { display: 'flex', gap: 6, marginTop: 10 } }, EXAMS.map((x) => h('div', { key: x.d, style: { flex: 1, height: 12, borderRadius: 99, background: x.d < today ? SUB[x.ex].c : '#2a2838' } })))
+      ),
+      WEEKS.map((w) => h('div', { key: w.label },
+        h('div', { style: { fontSize: 13, fontWeight: 800, letterSpacing: 1, color: '#a7a9be', textTransform: 'uppercase', margin: '22px 2px 10px' } },
+          w.label + ' · ' + pd(w.days[0].d).getDate() + ' ' + MO[pd(w.days[0].d).getMonth()] + ' → ' + pd(w.days[4].d).getDate() + ' ' + MO[pd(w.days[4].d).getMonth()]),
+        h('div', { className: 'xg' }, w.days.map((day) => h(Cell, { key: day.d, day, today })))
+      )),
+      h('div', { style: { marginTop: 22, fontSize: 13, color: '#72757e', textAlign: 'center' } }, 'Sortie : on peut quitter l’école au plus tôt à 10h30 après un examen de 3 heures, à 10h45 après un examen plus long. Source : horaire officiel 3 NAW.')
+    )
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h(CalendrierExamens));
+</script></body></html>
